@@ -28,27 +28,57 @@
     <Filter Include="IO\Source">
       <UniqueIdentifier>{92f10553-33c0-4f44-9a30-ad41b527aaf5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{a43528ca-4a25-4863-ad87-780add6115fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Header">
+      <UniqueIdentifier>{4a30c66b-d56f-4009-92cd-221b10b4a82b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Source">
+      <UniqueIdentifier>{60904674-7d8c-4b61-8727-66ebe95e8f14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Business\Source\TransitionMap.cpp">
-      <Filter>Business\Source</Filter>
-    </ClCompile>
     <ClCompile Include="UI\Source\ConsoleUI.cpp">
       <Filter>UI\Source</Filter>
     </ClCompile>
     <ClCompile Include="IO\Source\DiskIO.cpp">
       <Filter>IO\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Source\Transition.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\TuringMachineState.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\Source\TuringMachine.cpp">
+      <Filter>Business\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Business\Header\TransitionMap.hpp">
-      <Filter>Business\Header</Filter>
-    </ClInclude>
     <ClInclude Include="UI\Header\ConsoleUI.hpp">
       <Filter>UI\Header</Filter>
     </ClInclude>
     <ClInclude Include="IO\Header\DiskIO.hpp">
       <Filter>IO\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\State.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\HeadDirection.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\MachineType.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\Transition.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\TuringMachineDefinition.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Header\TuringMachine.hpp">
+      <Filter>Business\Header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

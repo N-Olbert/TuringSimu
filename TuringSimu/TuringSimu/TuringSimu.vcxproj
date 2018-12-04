@@ -115,12 +115,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Business\Source\TransitionMap.cpp" />
+    <ClCompile Include="Business\Source\TuringMachine.cpp" />
+    <ClCompile Include="Common\Source\Transition.cpp" />
+    <ClCompile Include="Common\Source\TuringMachineState.cpp" />
     <ClCompile Include="IO\Source\DiskIO.cpp" />
     <ClCompile Include="UI\Source\ConsoleUI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Business\Header\TransitionMap.hpp" />
+    <ClInclude Include="Business\Header\TuringMachine.hpp" />
+    <ClInclude Include="Common\Header\HeadDirection.hpp" />
+    <ClInclude Include="Common\Header\MachineType.hpp" />
+    <ClInclude Include="Common\Header\State.hpp" />
+    <ClInclude Include="Common\Header\Transition.hpp" />
+    <ClInclude Include="Common\Header\TuringMachineDefinition.hpp" />
     <ClInclude Include="IO\Header\DiskIO.hpp" />
     <ClInclude Include="UI\Header\ConsoleUI.hpp" />
   </ItemGroup>
