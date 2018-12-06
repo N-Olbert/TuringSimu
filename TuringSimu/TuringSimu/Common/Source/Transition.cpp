@@ -5,10 +5,10 @@ using namespace ts_common;
 Transition::Transition(State currentState, char currentChar,
 					   char toWrite, State nextState, HeadDirection headDirection)
 {
-	this->currentState = currentState;
+	this->currentState = State{currentState};
 	this->currentChar = currentChar;
 	this->toWrite = toWrite;
-	this->nextState = nextState;
+	this->nextState = State{nextState};
 	this->headDirection = headDirection;
 }
 

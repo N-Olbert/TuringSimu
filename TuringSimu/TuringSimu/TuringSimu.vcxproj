@@ -117,6 +117,8 @@
   <ItemGroup>
     <ClCompile Include="Business\Source\MachineFactory.cpp" />
     <ClCompile Include="Business\Source\TuringMachine.cpp" />
+    <ClCompile Include="Common\Header\BaseComparable.hpp" />
+    <ClCompile Include="Common\Header\State.cpp" />
     <ClCompile Include="Common\Source\Transition.cpp" />
     <ClCompile Include="Common\Source\TuringMachineState.cpp" />
     <ClCompile Include="IO\Source\DiskIO.cpp" />
@@ -125,6 +127,7 @@
   <ItemGroup>
     <ClInclude Include="Business\Header\MachineFactory.hpp" />
     <ClInclude Include="Business\Header\TuringMachine.hpp" />
+    <ClInclude Include="Common\Header\ComparableHelpers.hpp" />
     <ClInclude Include="Common\Header\HeadDirection.hpp" />
     <ClInclude Include="Common\Header\MachineType.hpp" />
     <ClInclude Include="Common\Header\State.hpp" />

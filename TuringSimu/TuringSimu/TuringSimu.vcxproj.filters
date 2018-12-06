@@ -57,6 +57,12 @@
     <ClCompile Include="Business\Source\MachineFactory.cpp">
       <Filter>Business\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Header\BaseComparable.hpp">
+      <Filter>Common\Header</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Header\State.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\Header\ConsoleUI.hpp">
@@ -85,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="Business\Header\MachineFactory.hpp">
       <Filter>Business\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\ComparableHelpers.hpp">
+      <Filter>Common\Header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
