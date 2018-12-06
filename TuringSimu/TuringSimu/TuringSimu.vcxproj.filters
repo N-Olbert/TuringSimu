@@ -37,6 +37,9 @@
     <Filter Include="Common\Source">
       <UniqueIdentifier>{60904674-7d8c-4b61-8727-66ebe95e8f14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="IO\Definitions">
+      <UniqueIdentifier>{bebb4422-9b1d-4200-9ba4-5133b4e028c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\Source\ConsoleUI.cpp">
@@ -60,7 +63,7 @@
     <ClCompile Include="Common\Header\BaseComparable.hpp">
       <Filter>Common\Header</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Header\State.cpp">
+    <ClCompile Include="Common\Source\State.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,5 +98,13 @@
     <ClInclude Include="Common\Header\ComparableHelpers.hpp">
       <Filter>Common\Header</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="IO\FormatDefinitions\BinaryFormatV0.txt">
+      <Filter>IO\Definitions</Filter>
+    </Text>
+    <Text Include="IO\FormatDefinitions\CSVFormatV0.txt">
+      <Filter>IO\Definitions</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -118,7 +118,7 @@
     <ClCompile Include="Business\Source\MachineFactory.cpp" />
     <ClCompile Include="Business\Source\TuringMachine.cpp" />
     <ClCompile Include="Common\Header\BaseComparable.hpp" />
-    <ClCompile Include="Common\Header\State.cpp" />
+    <ClCompile Include="Common\Source\State.cpp" />
     <ClCompile Include="Common\Source\Transition.cpp" />
     <ClCompile Include="Common\Source\TuringMachineState.cpp" />
     <ClCompile Include="IO\Source\DiskIO.cpp" />
@@ -135,6 +135,10 @@
     <ClInclude Include="Common\Header\TuringMachineDefinition.hpp" />
     <ClInclude Include="IO\Header\DiskIO.hpp" />
     <ClInclude Include="UI\Header\ConsoleUI.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="IO\FormatDefinitions\BinaryFormatV0.txt" />
+    <Text Include="IO\FormatDefinitions\CSVFormatV0.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

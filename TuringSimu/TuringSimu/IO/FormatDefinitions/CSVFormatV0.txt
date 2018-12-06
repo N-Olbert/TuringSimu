@@ -5,10 +5,11 @@ parsed to a TuringMachineDefinition */
 TypeOfTM /* defines the type of the TM that is specified in this file. Valid values are 'TM', 'NTM' 
 		 (non deterministic) and 'DTM' (deterministic). 'TM' is interpreted like a DTM.*/
 
-
 /* All following directives mark the start of a certain section and do not need to appear in the exact
 order they are mentioned in this file. To make the directives work the '%'-character is used as a
-meta-character and may not be used as the start AND end character of a state-name. */
+meta-character and may not be used as the start AND end character of a state-name. Directives need to be the only data in a single line.*/
+
+
 
 %states% 
 /*this adds the state "stateName1" to the TM. The optional specifier after the name

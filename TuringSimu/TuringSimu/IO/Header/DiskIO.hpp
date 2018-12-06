@@ -6,12 +6,20 @@
 namespace ts_io
 {
 	using namespace ts_common;
+	enum directive { states, tape, alphabet, startState, finalState, blank, transitions };
 	class DiskIO {
 	public:
-		TuringMachineDefiniton GetTuringMachineDefinitionFromFile(std::string path);
+		static TuringMachineDefiniton GetTuringMachineDefinitionFromFile(std::string path);
 	private:
-		TuringMachineDefiniton GetTuringMachineDefinitionFromCSV(std::string path);
-		TuringMachineDefiniton GetTuringMachineDefinitionFromBinary(std::string path);
+		static TuringMachineDefiniton GetTuringMachineDefinitionFromCSV(std::string path);
+		static TuringMachineDefiniton GetTuringMachineDefinitionFromBinary(std::string path);
+		static bool isDirective(std::string &toTest);
+		static MachineType getType(std::ifstream &in);
+		static std::string getDirectiveString(std::string &directive);
+		static directive switchOnDirectives(std::string &directive);
+		static std::vector<std::string> breakIntoStrings(std::string line);
 	};
+	enum versionNumber {V0};
+	
 }
 #endif // TM_DISKIO
