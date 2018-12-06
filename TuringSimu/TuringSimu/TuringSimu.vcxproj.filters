@@ -54,6 +54,9 @@
     <ClCompile Include="Business\Source\TuringMachine.cpp">
       <Filter>Business\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Business\Source\MachineFactory.cpp">
+      <Filter>Business\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\Header\ConsoleUI.hpp">
@@ -78,6 +81,9 @@
       <Filter>Common\Header</Filter>
     </ClInclude>
     <ClInclude Include="Business\Header\TuringMachine.hpp">
+      <Filter>Business\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Header\MachineFactory.hpp">
       <Filter>Business\Header</Filter>
     </ClInclude>
   </ItemGroup>
