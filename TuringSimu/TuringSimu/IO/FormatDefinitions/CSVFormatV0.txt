@@ -1,0 +1,47 @@
+/* This file shows how a CSVfile must be formatted so that it can be properly
+parsed to a TuringMachineDefinition */
+[versionNumber] /* expected to be of type long at most. If its omitted the most recent version is 
+				 assumed. Valid option here are 0. */
+TypeOfTM /* defines the type of the TM that is specified in this file. Valid values are 'TM', 'NTM' 
+		 (non deterministic) and 'DTM' (deterministic). 'TM' is interpreted like a DTM.*/
+
+
+/* All following directives mark the start of a certain section and do not need to appear in the exact
+order they are mentioned in this file. To make the directives work the '%'-character is used as a
+meta-character and may not be used as the start AND end character of a state-name. */
+
+%states% 
+/*this adds the state "stateName1" to the TM. The optional specifier after the name
+defines the state as a final state if it is 'f' and as non-final if 'n' or no specifier is given. If
+no %startState% directive is given the first state will be treated as the starting state. Each
+state needs to be in a new line*/
+stateName1;[f|n] 
+stateName2;[f|n]
+...
+stateNameN;[f|n]
+
+%startState%
+stateName /*sets the state "stateName" as the starting state of the TM*/
+
+%transitions%
+currentState; transitionCharacter; nextState; characterToWrite; movement
+	/* currentState and nextState are given stateNames of the %states% directive, transitionCharacter
+	and characterToWrite are characters specified in the %tape% and %alphabet% directive. Valid options
+	for movement are 'L' to move the head of the TM to the left, 'S' to let the head stay and 'R'
+	to let it move to the right. If the TM isnt of type NTM the combination of currentState and 
+	transitionCharacter needs to be unique*/
+
+%tape%
+char;someOtherChar;... /*specifies the characters of the tapealphabet. You may only specify the 
+						special characters of the tape here, respecifying the alphabet characters
+						here does not result in an error. If no %blank% directive is found, the
+						first character given will be treated as the blank. This might rise an error,
+						if the first character is part of the input alphabet. This definition may
+						span over several lines*/
+
+%blank%
+blank		/* specifies the blank-symbol of the TM. This does need to reappear in the %tape% directive*/
+
+%alphabet%
+char; otherChar;...	/* specifies the characters of the input alphabet. This definition may span several
+					lines */

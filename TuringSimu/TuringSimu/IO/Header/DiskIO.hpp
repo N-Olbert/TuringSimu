@@ -6,10 +6,12 @@
 namespace ts_io
 {
 	using namespace ts_common;
-	class DiskIO
-	{
-		public:
-			TuringMachineDefiniton GetTuringMachineDefinitionFromCSV(std::string path);
+	class DiskIO {
+	public:
+		TuringMachineDefiniton GetTuringMachineDefinitionFromFile(std::string path);
+	private:
+		TuringMachineDefiniton GetTuringMachineDefinitionFromCSV(std::string path);
+		TuringMachineDefiniton GetTuringMachineDefinitionFromBinary(std::string path);
 	};
 }
 #endif // TM_DISKIO
