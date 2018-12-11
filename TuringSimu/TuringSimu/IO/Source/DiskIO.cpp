@@ -43,13 +43,19 @@ TuringMachineDefiniton DiskIO::GetTuringMachineDefinitionFromCSV(std::string pat
 			std::getline(input, line); //getting the first actual data
 			std::vector<char> tapeAlpha;
 			std::vector<std::string> stateVector;
+			std::vector<std::string> finalStatesVector;
 			while (!input.eof()) {
 				switch (activeDirective) {
 
 				case states:
 				{
 					auto tmp = DiskIO::breakIntoStrings(line);
-					stateVector.insert(stateVector.end(), tmp.begin(), tmp.end());
+					if (tmp.size() > 1) {
+						if (tmp[1].compare("f") == 0) {
+
+						}
+					}
+					stateVector.push_back(tmp[0]);
 				}
 				break;
 				case tape: {
