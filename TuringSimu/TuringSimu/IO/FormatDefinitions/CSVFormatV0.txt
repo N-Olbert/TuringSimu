@@ -1,6 +1,6 @@
 /* This file shows how a CSVfile must be formatted so that it can be properly
 parsed to a TuringMachineDefinition */
-[versionNumber] /* expected to be of type long at most. If its omitted the most recent version is 
+versionNumber /* expected to be of type long at most. If its omitted the most recent version is 
 				 assumed. Valid option here are 0. */
 TypeOfTM /* defines the type of the TM that is specified in this file. Valid values are 'TM', 'NTM' 
 		 (non deterministic) and 'DTM' (deterministic). 'TM' is interpreted like a DTM.*/
