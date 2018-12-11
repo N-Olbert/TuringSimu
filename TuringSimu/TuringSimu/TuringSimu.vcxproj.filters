@@ -34,11 +34,11 @@
     <Filter Include="Common\Header">
       <UniqueIdentifier>{4a30c66b-d56f-4009-92cd-221b10b4a82b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common\Source">
-      <UniqueIdentifier>{60904674-7d8c-4b61-8727-66ebe95e8f14}</UniqueIdentifier>
-    </Filter>
     <Filter Include="IO\Definitions">
       <UniqueIdentifier>{bebb4422-9b1d-4200-9ba4-5133b4e028c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Source">
+      <UniqueIdentifier>{60904674-7d8c-4b61-8727-66ebe95e8f14}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="Common\Source\State.cpp">
       <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Header\AbstractMachineUserinterface.hpp">
+      <Filter>Common\Header</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +102,9 @@
       <Filter>Common\Header</Filter>
     </ClInclude>
     <ClInclude Include="Common\Header\HashSet.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\AbstractMachine.hpp">
       <Filter>Common\Header</Filter>
     </ClInclude>
   </ItemGroup>

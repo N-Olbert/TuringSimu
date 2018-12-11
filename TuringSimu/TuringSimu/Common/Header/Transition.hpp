@@ -4,7 +4,6 @@
 #ifndef TSTMTRANSITION
 namespace ts_common
 {
-	using namespace  ts_common;
 	class Transition
 	{
 		public:
