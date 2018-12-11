@@ -141,6 +141,10 @@
     <Text Include="IO\FormatDefinitions\BinaryFormatV0.txt" />
     <Text Include="IO\FormatDefinitions\CSVFormatV0.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="IO\Testfiles\parseTest1.csv" />
+    <None Include="IO\Testfiles\parseTest2.csv" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -21,7 +21,7 @@ namespace ts_common
 			HashSet<char> alphabet;
 			HashSet<char> tapeAlphabet;
 			char blank;
-			std::unordered_map<std::pair<State, char>, Transition, Hasher<std::pair<State, char>>> transitions;
+			//std::unordered_map<std::pair<State, char>, Transition, Hasher<std::pair<State, char>>> transitions;
 			State beginState;
 	};
 }
