@@ -1,40 +1,41 @@
-#include "State.hpp"
+#include "../Header/State.hpp"
+using namespace ts_common;
 
-ts_common::State::State()
+State::State()
 {
 }
 
-ts_common::State::State(std::string identifer)
+State::State(std::string identifer)
 {
 	this->identifier = identifer;
 }
 
-std::string ts_common::State::GetIdentifier()
+std::string State::GetIdentifier()
 {
 	return this->identifier;
 }
 
-bool ts_common::State::operator==(const State & other) const noexcept
+bool State::operator==(const State & other) const noexcept
 {
 	return this->identifier == other.identifier;
 }
 
-bool ts_common::State::operator!=(const State & other) const noexcept
+bool State::operator!=(const State & other) const noexcept
 {
-	return this->identifier != other.identifier;
+	return !(this->identifier == other.identifier);
 }
 
-bool ts_common::State::operator<(const State& other) const noexcept
+bool State::operator<(const State& other) const noexcept
 {
 	return this->identifier.length() < other.identifier.length();
 }
 
-bool ts_common::State::operator>(const State& other) const noexcept
+bool State::operator>(const State& other) const noexcept
 {
 	return this->identifier.length() > other.identifier.length();
 }
 
-size_t ts_common::State::GetHashCode() const noexcept
+size_t State::GetHashCode() const noexcept
 {
 	return std::hash<std::string>()(this->identifier);
 }

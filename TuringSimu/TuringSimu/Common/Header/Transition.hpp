@@ -8,6 +8,10 @@ namespace ts_common
 	class Transition
 	{
 		public:
+			Transition(State currentState, char currentChar,
+				char toWrite, State nextState, HeadDirection headDirection);
+			virtual ~Transition() {};
+
 			State GetCurrentState() const;
 			char GetCurrentChar() const;
 			char GetToWrite() const;
@@ -21,10 +25,6 @@ namespace ts_common
 			State nextState;
 			HeadDirection headDirection;
 
-		public:
-			Transition(State currentState, char currentChar, 
-					   char toWrite, State nextState, HeadDirection headDirection);
-			virtual ~Transition() {};
 	};
 
 	inline State Transition::GetCurrentState() const

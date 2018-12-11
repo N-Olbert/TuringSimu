@@ -37,8 +37,11 @@
     <Filter Include="Common\Source">
       <UniqueIdentifier>{60904674-7d8c-4b61-8727-66ebe95e8f14}</UniqueIdentifier>
     </Filter>
-    <Filter Include="IO\Definitions">
+    <Filter Include="IO\FormatDefinitions">
       <UniqueIdentifier>{bebb4422-9b1d-4200-9ba4-5133b4e028c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO\Testfiles">
+      <UniqueIdentifier>{6969f68d-12da-4fe9-b195-1091ef40439b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -98,13 +101,24 @@
     <ClInclude Include="Common\Header\ComparableHelpers.hpp">
       <Filter>Common\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Header\HashSet.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="IO\FormatDefinitions\BinaryFormatV0.txt">
-      <Filter>IO\Definitions</Filter>
+      <Filter>IO\FormatDefinitions</Filter>
     </Text>
     <Text Include="IO\FormatDefinitions\CSVFormatV0.txt">
-      <Filter>IO\Definitions</Filter>
+      <Filter>IO\FormatDefinitions</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="IO\Testfiles\parseTest1.csv">
+      <Filter>IO\Testfiles</Filter>
+    </None>
+    <None Include="IO\Testfiles\parseTest2.csv">
+      <Filter>IO\Testfiles</Filter>
+    </None>
   </ItemGroup>
 </Project>
