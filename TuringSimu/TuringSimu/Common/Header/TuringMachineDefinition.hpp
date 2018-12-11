@@ -8,6 +8,7 @@
 #include "Transition.hpp"
 #include <map>
 #include "ComparableHelpers.hpp"
+#include "HashSet.hpp"
 
 namespace ts_common
 {
@@ -15,10 +16,10 @@ namespace ts_common
 	{
 		public:
 			MachineType type;
-			std::unordered_set<State, Hasher<State>, Comparator<State>> states;
-			std::unordered_set<State, Hasher<State>, Comparator<State>> finalStates;
-			std::unordered_set<char> alphabet;
-			std::unordered_set<char> tapeAlphabet;
+			HashSet<State> states;
+			HashSet<State> finalStates;
+			HashSet<char> alphabet;
+			HashSet<char> tapeAlphabet;
 			char blank;
 			std::unordered_map<std::pair<State, char>, Transition, Hasher<std::pair<State, char>>> transitions;
 			State beginState;

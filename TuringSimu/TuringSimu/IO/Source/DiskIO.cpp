@@ -5,11 +5,11 @@
 using namespace ts_common;
 using namespace ts_io;
 
-int main() {
-	DiskIO::GetTuringMachineDefinitionFromFile("alabaster.derpify");
-	throw std::logic_error("Needs to be moved to ConsoleUI.cpp");
-	return 0;
-}
+//int main() {
+//	DiskIO::GetTuringMachineDefinitionFromFile("alabaster.derpify");
+//	throw std::logic_error("Needs to be moved to ConsoleUI.cpp");
+//	return 0;
+//}
 
 TuringMachineDefiniton DiskIO::GetTuringMachineDefinitionFromFile(std::string path) {
 	auto index = path.find_last_of('.');
@@ -43,23 +43,29 @@ TuringMachineDefiniton DiskIO::GetTuringMachineDefinitionFromCSV(std::string pat
 			std::getline(input, line); //getting the first actual data
 			std::vector<char> tapeAlpha;
 			std::vector<std::string> stateVector;
+			std::vector<std::string> finalStatesVector;
 			while (!input.eof()) {
 				switch (activeDirective) {
 
 				case states:
 				{
 					auto tmp = DiskIO::breakIntoStrings(line);
-					stateVector.insert(stateVector.end(), tmp.begin(), tmp.end());
+					if (tmp.size() > 1) {
+						if (tmp[1].compare("f") == 0) {
+
+						}
+					}
+					stateVector.push_back(tmp[0]);
 				}
 				break;
 				case tape: {
 					auto set = DiskIO::breakIntoStrings(line);
-					tmd.tapeAlphabet.insert(set.begin(), set.end());
+					//tmd.tapeAlphabet.insert(set.begin(), set.end());
 				}
 						   break;
 				case alphabet: {
 					auto set = DiskIO::breakIntoStrings(line);
-					tmd.alphabet.insert(set.begin(), set.end());
+					//tmd.alphabet.insert(set.begin(), set.end());
 				}
 							   break;
 				case startState: {
