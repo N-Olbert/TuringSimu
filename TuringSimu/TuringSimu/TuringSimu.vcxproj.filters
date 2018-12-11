@@ -98,6 +98,9 @@
     <ClInclude Include="Common\Header\ComparableHelpers.hpp">
       <Filter>Common\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Common\Header\HashSet.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="IO\FormatDefinitions\BinaryFormatV0.txt">

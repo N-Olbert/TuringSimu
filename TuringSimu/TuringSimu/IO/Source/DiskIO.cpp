@@ -5,11 +5,11 @@
 using namespace ts_common;
 using namespace ts_io;
 
-int main() {
-	DiskIO::GetTuringMachineDefinitionFromFile("alabaster.derpify");
-	throw std::logic_error("Needs to be moved to ConsoleUI.cpp");
-	return 0;
-}
+//int main() {
+//	DiskIO::GetTuringMachineDefinitionFromFile("alabaster.derpify");
+//	throw std::logic_error("Needs to be moved to ConsoleUI.cpp");
+//	return 0;
+//}
 
 TuringMachineDefiniton DiskIO::GetTuringMachineDefinitionFromFile(std::string path) {
 	auto index = path.find_last_of('.');
@@ -60,12 +60,12 @@ TuringMachineDefiniton DiskIO::GetTuringMachineDefinitionFromCSV(std::string pat
 				break;
 				case tape: {
 					auto set = DiskIO::breakIntoStrings(line);
-					tmd.tapeAlphabet.insert(set.begin(), set.end());
+					//tmd.tapeAlphabet.insert(set.begin(), set.end());
 				}
 						   break;
 				case alphabet: {
 					auto set = DiskIO::breakIntoStrings(line);
-					tmd.alphabet.insert(set.begin(), set.end());
+					//tmd.alphabet.insert(set.begin(), set.end());
 				}
 							   break;
 				case startState: {
