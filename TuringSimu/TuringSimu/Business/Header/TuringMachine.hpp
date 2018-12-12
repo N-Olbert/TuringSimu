@@ -14,9 +14,9 @@ namespace ts_business
 			/**
 			 * \brief The definition of the machine
 			 */
-			ts_common::TuringMachineDefiniton definition;
+			ts_common::TuringMachineDefinition definition;
 		public:
-		TuringMachine(AbstactMachineUserinterface* userinterface, ts_common::TuringMachineDefiniton definition)
+		TuringMachine(AbstactMachineUserinterface* userinterface, ts_common::TuringMachineDefinition definition)
 			: AbstractMachine(userinterface)
 		{
 			this->definition = definition;

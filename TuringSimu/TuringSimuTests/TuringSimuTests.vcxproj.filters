@@ -10,31 +10,34 @@
     <Filter Include="Common\Source">
       <UniqueIdentifier>{bd4e2677-3940-428a-b240-d9e59abb5577}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Included">
-      <UniqueIdentifier>{f811a7ee-ccf4-451d-8615-817c392dc2f9}</UniqueIdentifier>
+    <Filter Include="IO">
+      <UniqueIdentifier>{75cce7e0-f4e3-401f-b461-3792287e9ed2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO\TestFiles">
+      <UniqueIdentifier>{4bc9daa1-bb78-4301-8e5a-6742866d2a0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO\Header">
+      <UniqueIdentifier>{68608a56-722e-495e-a39b-15df72fdd5f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO\Sources">
+      <UniqueIdentifier>{170262ef-4d40-4884-93ad-eeaade5a5a1a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\Source\CommonTests.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\TuringSimu\Common\Source\State.cpp">
-      <Filter>Included</Filter>
+    <ClCompile Include="IO\Source\IOTests.cpp">
+      <Filter>IO\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\TuringSimu\Common\Source\Transition.cpp">
-      <Filter>Included</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TuringSimu\Common\Source\TuringMachineState.cpp">
-      <Filter>Included</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TuringSimu\Business\Source\MachineFactory.cpp">
-      <Filter>Included</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TuringSimu\Business\Source\TuringMachine.cpp">
-      <Filter>Included</Filter>
-    </ClCompile>
-    <ClCompile Include="..\TuringSimu\IO\Source\DiskIO.cpp">
-      <Filter>Included</Filter>
-    </ClCompile>
+    <ClCompile Include="TestsMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="IO\TestFiles\parseTest1.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\parseTest2.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
   </ItemGroup>
 </Project>
