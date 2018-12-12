@@ -26,7 +26,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -142,10 +142,6 @@
   <ItemGroup>
     <Text Include="IO\FormatDefinitions\BinaryFormatV0.txt" />
     <Text Include="IO\FormatDefinitions\CSVFormatV0.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="IO\Testfiles\parseTest1.csv" />
-    <None Include="IO\Testfiles\parseTest2.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

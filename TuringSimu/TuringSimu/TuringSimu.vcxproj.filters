@@ -34,9 +34,6 @@
     <Filter Include="Common\Header">
       <UniqueIdentifier>{4a30c66b-d56f-4009-92cd-221b10b4a82b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="IO\Definitions">
-      <UniqueIdentifier>{bebb4422-9b1d-4200-9ba4-5133b4e028c7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common\Source">
       <UniqueIdentifier>{60904674-7d8c-4b61-8727-66ebe95e8f14}</UniqueIdentifier>
     </Filter>
@@ -118,13 +115,5 @@
     <Text Include="IO\FormatDefinitions\CSVFormatV0.txt">
       <Filter>IO\FormatDefinitions</Filter>
     </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="IO\Testfiles\parseTest1.csv">
-      <Filter>IO\Testfiles</Filter>
-    </None>
-    <None Include="IO\Testfiles\parseTest2.csv">
-      <Filter>IO\Testfiles</Filter>
-    </None>
   </ItemGroup>
 </Project>

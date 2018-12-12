@@ -26,7 +26,7 @@ namespace ts_business
 			 * \param definition The definition to check.
 			 * \return true if machine is valid, false otherwise
 			 */
-			static bool IsValidMachineDefiniton(TuringMachineDefiniton& definition);
+			static bool IsValidMachineDefiniton(TuringMachineDefinition& definition);
 	};
 }
 #endif // TM_MACHINEFACTORY

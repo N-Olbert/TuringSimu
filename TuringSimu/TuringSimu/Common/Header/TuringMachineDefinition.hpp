@@ -1,18 +1,15 @@
 #pragma once
 #ifndef  TM_TMDEFINITION
 #define  TM_TMDEFINITION
-#include <unordered_set>
-#include <unordered_map>
 #include "State.hpp"
 #include "MachineType.hpp"
 #include "Transition.hpp"
-#include <map>
-#include "ComparableHelpers.hpp"
 #include "HashSet.hpp"
+#include <vector>
 
 namespace ts_common
 {
-	class TuringMachineDefiniton
+	class TuringMachineDefinition
 	{
 		public:
 			MachineType type;
@@ -26,7 +23,7 @@ namespace ts_common
 			 * \brief The transitions. Must be a vector (not a map) cause we may encounter
 			 * non-determinism which means that we deal with a relation instead of a function
 			 */
-			std::vector<Transition> transitions
+			std::vector<Transition> transitions;
 			State beginState;
 	};
 }
