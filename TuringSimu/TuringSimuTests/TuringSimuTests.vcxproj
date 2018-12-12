@@ -119,13 +119,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\TuringSimu\Business\Source\MachineFactory.cpp" />
-    <ClCompile Include="..\TuringSimu\Business\Source\TuringMachine.cpp" />
-    <ClCompile Include="..\TuringSimu\Common\Source\State.cpp" />
-    <ClCompile Include="..\TuringSimu\Common\Source\Transition.cpp" />
-    <ClCompile Include="..\TuringSimu\Common\Source\TuringMachineState.cpp" />
-    <ClCompile Include="..\TuringSimu\IO\Source\DiskIO.cpp" />
     <ClCompile Include="Common\Source\CommonTests.cpp" />
+    <ClCompile Include="IO\Source\IOTests.cpp" />
+    <ClCompile Include="TestsMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="IO\TestFiles\parseTest1.csv" />
+    <None Include="IO\TestFiles\parseTest2.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TuringSimu\TuringSimu.vcxproj">
+      <Project>{a79deed0-f4dc-4b86-8384-b5b24bc61322}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

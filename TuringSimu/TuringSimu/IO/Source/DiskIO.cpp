@@ -5,29 +5,23 @@
 using namespace ts_common;
 using namespace ts_io;
 
-int main() {
-DiskIO::GetTuringMachineDefinitionFromFile("../Testfiles/parseTest1.csv");
-throw std::logic_error("Needs to be moved to ConsoleUI.cpp");
-return 0;
-}
-
-TuringMachineDefiniton DiskIO::GetTuringMachineDefinitionFromFile(std::string path) {
+TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromFile(std::string path) {
 	auto index = path.find_last_of('.');
 	auto fileExtension = path.substr(index + 1, path.length() - index);
 	std::cout << fileExtension;
 	if (!fileExtension.compare("csv")) {
 		return GetTuringMachineDefinitionFromCSV(path);
 	}
-	TuringMachineDefiniton t;
+	TuringMachineDefinition t;
 	throw std::logic_error("Not implemented yet");
 	return t;
 }
 
-TuringMachineDefiniton DiskIO::GetTuringMachineDefinitionFromCSV(std::string path) {
+TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string path) {
 	bool metBlankDirective = false;
 	bool metStartStateDirective = false;
 	std::ifstream input;
-	TuringMachineDefiniton tmd;
+	TuringMachineDefinition tmd;
 	try {
 		input.open(path);
 		if (input.is_open()) {
@@ -141,7 +135,7 @@ TuringMachineDefiniton DiskIO::GetTuringMachineDefinitionFromCSV(std::string pat
 	return tmd;
 }
 
-TuringMachineDefiniton DiskIO::GetTuringMachineDefinitionFromBinary(std::string path) {
+TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromBinary(std::string path) {
 	//TODO
 	throw std::logic_error("Not implemented yet");
 
