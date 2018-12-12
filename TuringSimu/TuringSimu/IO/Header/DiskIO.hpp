@@ -14,7 +14,7 @@ namespace ts_io
 		static TuringMachineDefinition GetTuringMachineDefinitionFromCSV(std::string path);
 		static TuringMachineDefinition GetTuringMachineDefinitionFromBinary(std::string path);
 		static bool isDirective(std::string &toTest);
-		static MachineType getType(std::ifstream &in);
+		static MachineType getType(std::string &in);
 		static std::string getDirectiveString(std::string &directive);
 		static directive switchOnDirectives(std::string &directive);
 		static std::vector<std::string> breakIntoStrings(std::string line);

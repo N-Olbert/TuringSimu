@@ -28,8 +28,8 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 			std::string line;
 			std::getline(input, line);
 			auto version = std::stoi(line); //TODO redefine later stuff, so it is parsed according to versionnumber
-
-			tmd.type = getType(input);
+			std::getline(input, line);
+			tmd.type = getType(line);
 
 			std::getline(input, line); //initializing the current directive
 			directive activeDirective = switchOnDirectives(line);
@@ -98,7 +98,8 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 				}
 			}
 			if (!metBlankDirective) {
-				tmd.blank = tapeAlpha[0];
+				//tapealpha cant be initialized currently so this needs to be commented out
+				//tmd.blank = tapeAlpha[0];
 			}
 			if (!metStartStateDirective) {
 				tmd.beginState = State{ stateVector[0] };
@@ -147,9 +148,7 @@ bool DiskIO::isDirective(std::string &toTest) {
 }
 
 //method to simulate a switch on strings. returns DTM as default
-MachineType DiskIO::getType(std::ifstream &in) {
-	std::string line;
-	std::getline(in, line);
+MachineType DiskIO::getType(std::string &line) {
 	if (!line.compare("DTM")) {
 		return DTM;
 	} else if (!line.compare("TM")) {
@@ -166,7 +165,7 @@ std::string DiskIO::getDirectiveString(std::string &directive) {
 
 //method to simulate a switch on strings. Throws exception if default case is reached
 directive DiskIO::switchOnDirectives(std::string &directive) {
-	DiskIO::getDirectiveString(directive);
+	directive = DiskIO::getDirectiveString(directive);
 	if (!directive.compare("tape")) {
 		return tape;
 	} else if (!directive.compare("alphabet")) {
