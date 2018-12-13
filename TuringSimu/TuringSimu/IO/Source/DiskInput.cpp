@@ -38,7 +38,7 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 			std::vector<char> tapeAlpha;
 			std::vector<State> stateVector;
 			std::vector<State> finalStatesVector;
-			while (!input.eof()) {
+			while (true) {
 				switch (activeDirective) {
 
 				case states:
@@ -87,12 +87,15 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 				}
 								  break;
 				}
-				std::getline(input, line);
+				if (!input.eof()) {
+					std::getline(input, line);
+				} else break;
 				if (isDirective(line)) {
 					activeDirective = switchOnDirectives(line);
 					std::getline(input, line);
 				}
 			}
+			std::cout << "im here";
 			if (!metBlankDirective) {
 				tmd.blank = tapeAlpha[0];
 			}
@@ -149,7 +152,7 @@ std::string DiskIO::getDirectiveString(std::string &directive) {
 
 //method to simulate a switch on strings. Throws exception if default case is reached
 directive DiskIO::switchOnDirectives(std::string &directive) {
-	DiskIO::getDirectiveString(directive);
+	directive = DiskIO::getDirectiveString(directive);
 	if (directive == "tape") {
 		return tape;
 	} else if (directive == "alphabet") {

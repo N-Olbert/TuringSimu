@@ -5,8 +5,8 @@
 using namespace ts_common;
 using namespace boost::unit_test;
 BOOST_AUTO_TEST_CASE(TestGetTuringMachineDefinitionFromFile) {
-	//filepath is wrong
-	auto tmd = ts_io::DiskIO::GetTuringMachineDefinitionFromFile("../../Testfiles/parseTest1.csv");
+	//filepath is wrong so have an absolute one
+	auto tmd = ts_io::DiskIO::GetTuringMachineDefinitionFromFile("C:/Users/SBG/source/repos/Kraken/TuringSimu/TuringSimu/TuringSimuTests/IO/TestFiles/parseTest1.csv");
 
 	BOOST_REQUIRE(tmd.type == DTM);
 
@@ -18,7 +18,7 @@ BOOST_AUTO_TEST_CASE(TestGetTuringMachineDefinitionFromFile) {
 
 	BOOST_REQUIRE(tmd.finalStates.find(State{ "qe" }) != tmd.finalStates.end());
 
-	/*BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "q0;0;q0;0;R" }));
+	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "q0;0;q0;0;R" }));
 	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "q0;1;q0;1;R" }));
 	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "q0;#;q1;#;L" }));
 	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "q1;0;qa;a;R" }));
@@ -31,10 +31,10 @@ BOOST_AUTO_TEST_CASE(TestGetTuringMachineDefinitionFromFile) {
 	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "qb;#;q1;b;L" }));
 	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "q1;a;q1;a;L" }));
 	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "q1;b;q1;b;L" }));
-	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "q1;#;qe;#;S" }));*/
+	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "q1;#;qe;#;S" }));
 
 	BOOST_REQUIRE(tmd.alphabet.find('1') != tmd.alphabet.end());
-	BOOST_REQUIRE(tmd.alphabet.find('1') != tmd.alphabet.end());
+	BOOST_REQUIRE(tmd.alphabet.find('0') != tmd.alphabet.end());
 
 	BOOST_REQUIRE(tmd.tapeAlphabet.find('1') != tmd.tapeAlphabet.end());
 	BOOST_REQUIRE(tmd.tapeAlphabet.find('0') != tmd.tapeAlphabet.end());
