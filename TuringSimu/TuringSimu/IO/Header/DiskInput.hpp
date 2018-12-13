@@ -17,8 +17,6 @@ namespace ts_io
 		static MachineType getType(std::ifstream &in);
 		static std::string getDirectiveString(std::string &directive);
 		static directive switchOnDirectives(std::string &directive);
-		static std::vector<std::string> breakIntoStrings(std::string line);
-		static HeadDirection getDirection(std::string line);
 	};
 	enum versionNumber {V0};
 	

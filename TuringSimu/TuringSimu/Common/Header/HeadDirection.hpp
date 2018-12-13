@@ -1,5 +1,6 @@
-#pragma once
-#ifndef TS_HEADDIRECTION
+#ifndef TM_HEADDIRECTION
+#define TM_HEADDIRECTION
+#include <string>
 namespace ts_common
 {
 	/*
@@ -22,6 +23,18 @@ namespace ts_common
 		 */
 		Stay
 	};
+
+	inline HeadDirection getDirection(std::string line) {
+		if (line == "R") {
+			return Right;
+		} else if (line == "L") {
+			return Left;
+		} else if (line == "S") {
+			return Stay;
+		}
+		//TODO other handling of bad user input
+		throw std::logic_error("Parse-Error: Unknown Headdirection");
+	}
 }
-#define TS_HEADDIRECTION
+
 #endif

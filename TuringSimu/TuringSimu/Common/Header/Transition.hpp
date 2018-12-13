@@ -1,7 +1,9 @@
 #pragma once
+#ifndef TM_TRANSITION
+#define TM_TRANSITION
 #include "State.hpp"
 #include "HeadDirection.hpp"
-#ifndef TSTMTRANSITION
+
 namespace ts_common
 {
 	class Transition
@@ -9,6 +11,7 @@ namespace ts_common
 		public:
 			Transition(State currentState, char currentChar,
 				char toWrite, State nextState, HeadDirection headDirection);
+			Transition(std::string csvLine);
 			virtual ~Transition() {};
 
 			State GetCurrentState() const;
@@ -51,5 +54,4 @@ namespace ts_common
 		return headDirection;
 	}
 }
-#define TSTMTRANSITION
 #endif

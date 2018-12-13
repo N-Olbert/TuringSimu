@@ -1,20 +1,20 @@
-#include "../../Common/Header/HeadDirection.hpp"
-#include "../Header/DiskIO.hpp"
+#include "../Header/DiskInput.hpp"
 #include <iostream>
 #include <fstream>
+#include "../../Common/Header/Utility.hpp"
+
 using namespace ts_common;
 using namespace ts_io;
 
 TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromFile(std::string path) {
-	auto index = path.find_last_of('.');
-	auto fileExtension = path.substr(index + 1, path.length() - index);
+	auto const index = path.find_last_of('.');
+	auto const fileExtension = path.substr(index + 1, path.length() - index);
 	std::cout << fileExtension;
-	if (!fileExtension.compare("csv")) {
+	if (fileExtension == "csv") {
 		return GetTuringMachineDefinitionFromCSV(path);
 	}
 	TuringMachineDefinition t;
-	throw std::logic_error("Not implemented yet");
-	return t;
+	throw std::logic_error("unsupported File extension");
 }
 
 TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string path) {
@@ -36,32 +36,34 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 
 			std::getline(input, line); //getting the first actual data
 			std::vector<char> tapeAlpha;
-			std::vector<std::string> stateVector;
-			std::vector<std::string> finalStatesVector;
+			std::vector<State> stateVector;
+			std::vector<State> finalStatesVector;
 			while (!input.eof()) {
 				switch (activeDirective) {
 
 				case states:
 				{
-					auto tmp = DiskIO::breakIntoStrings(line);
+					auto tmp = split(line);
 					if (tmp.size() > 1) {
-						if (tmp[1].compare("f") == 0) {
-							finalStatesVector.push_back(tmp[0]);
+						if (tmp[1] == "f") {
+							finalStatesVector.emplace_back(State{ tmp[0] });
 						}
 					}
-					stateVector.push_back(tmp[0]);
+					stateVector.emplace_back(State{ tmp[0] });
 				}
 				break;
 				case tape: {
-					auto vector = DiskIO::breakIntoStrings(line);
+					auto vector = split(line);
 					for (auto c : vector) {
-					//	tmd.tapeAlphabet.emplace(c);
+						tmd.tapeAlphabet.insert(c[0]);
 					}
 				}
 						   break;
 				case alphabet: {
-					auto set = DiskIO::breakIntoStrings(line);
-					//tmd.alphabet.insert(set.begin(), set.end());
+					auto vector = split(line);
+					for (auto c : vector) {
+						tmd.alphabet.insert(c[0]);
+					}
 				}
 							   break;
 				case startState: {
@@ -70,24 +72,18 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 				}
 								 break;
 				case finalState: {
-					finalStatesVector.push_back(breakIntoStrings(line)[0]);
+						//TODO
+					finalStatesVector.emplace_back(State{ split(line)[0] });
 				}
 								 break;
 				case blank: {
-					tmd.blank = breakIntoStrings(line)[0].at(0);
+					tmd.blank = split(line)[0].at(0);
 					metBlankDirective = true;
 				}
 							break;
 				case transitions: {
-					auto result = breakIntoStrings(line);
-					State begin{ result[0] };
-					State after{ result[2] };
-					Transition t{ begin,result[1].at(0),result[3].at(0),after,getDirection(result[4]) };
-					/*auto op = tmd.transitions.emplace(std::pair<State, char>(begin, result[1].at(0)), t);
-					TODO
-					if (!op.second) {
-						std::cout << "Ignoring a duplicate transition " << std::endl;
-					}*/
+					Transition t{ line };
+					tmd.transitions.push_back(t);
 				}
 								  break;
 				}
@@ -104,25 +100,13 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 				tmd.beginState = State{ stateVector[0] };
 			}
 
+			tmd.states.UnionWith(stateVector);
 			//getting rid of vectors
-			for (auto value : stateVector) {
-				auto result = tmd.states.insert(State{ value });
-				if (!result.second) {
-					std::cout << "Ignoring the duplicate state " << value << std::endl;
-				}
-			}
-			for (auto value : finalStatesVector) {
-				auto result = tmd.finalStates.insert(State{ value });
-				if (!result.second) {
-					std::cout << "Ignoring the duplicate state " << value << std::endl;
-				}
-			}
-			for (auto value : tapeAlpha) {
-				auto result = tmd.tapeAlphabet.insert(value);
-				if (!result.second) {
-					std::cout << "Ignoring the duplicate character " << value << std::endl;
-				}
-			}
+			
+			tmd.finalStates.UnionWith(finalStatesVector);
+
+			tmd.tapeAlphabet.UnionWith(tapeAlpha);
+			
 
 		}
 
@@ -131,7 +115,6 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 		input.close();
 	}
 	input.close();
-	throw std::logic_error("Not implemented yet");
 	return tmd;
 }
 
@@ -150,11 +133,11 @@ bool DiskIO::isDirective(std::string &toTest) {
 MachineType DiskIO::getType(std::ifstream &in) {
 	std::string line;
 	std::getline(in, line);
-	if (!line.compare("DTM")) {
+	if (line == "DTM") {
 		return DTM;
-	} else if (!line.compare("TM")) {
+	} else if (line == "TM") {
 		return DTM;
-	} else if (!line.compare("NTM")) {
+	} else if (line == "NTM") {
 		return NTM;
 	}
 	return DTM;
@@ -167,41 +150,19 @@ std::string DiskIO::getDirectiveString(std::string &directive) {
 //method to simulate a switch on strings. Throws exception if default case is reached
 directive DiskIO::switchOnDirectives(std::string &directive) {
 	DiskIO::getDirectiveString(directive);
-	if (!directive.compare("tape")) {
+	if (directive == "tape") {
 		return tape;
-	} else if (!directive.compare("alphabet")) {
+	} else if (directive == "alphabet") {
 		return alphabet;
-	} else if (!directive.compare("states")) {
+	} else if (directive == "states") {
 		return states;
-	} else if (!directive.compare("startState")) {
+	} else if (directive == "startState") {
 		return startState;
-	} else if (!directive.compare("finalState")) {
+	} else if (directive == "finalState") {
 		return finalState;
-	} else if (!directive.compare("blank")) {
+	} else if (directive == "blank") {
 		return blank;
-	} else if (!directive.compare("transitions")) {
+	} else if (directive == "transitions") {
 		return transitions;
 	} else throw std::exception("Not a valid directive");
-}
-
-std::vector<std::string> DiskIO::breakIntoStrings(std::string line) {
-	std::vector<std::string> returnSet;
-	while (line.find(';') != std::string::npos) {
-		int pos = line.find(';');
-		std::string substr = line.substr(0, pos);
-		line.erase(0, pos + 1);
-		returnSet.push_back(substr);
-	}
-	returnSet.push_back(line);
-	return returnSet;
-}
-
-HeadDirection DiskIO::getDirection(std::string line) {
-	if (!line.compare("R")) {
-		return Right;
-	} else if (!line.compare("L")) {
-		return Left;
-	} else if (!line.compare("S")) {
-		return Stay;
-	}
 }
