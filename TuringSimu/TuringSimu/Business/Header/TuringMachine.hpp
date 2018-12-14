@@ -1,7 +1,8 @@
 #pragma once
+#ifndef TS_TURINGMACHINE
 #include "../../Common/Header/TuringMachineDefinition.hpp"
 #include "../../Common/Header/AbstractMachine.hpp"
-#ifndef TS_TURINGMACHINE
+
 using namespace ts_common;
 namespace ts_business
 {
@@ -27,5 +28,5 @@ namespace ts_business
 		~TuringMachine() override;
 	};
 }
-#define TS_TURINGMACHINE
+
 #endif

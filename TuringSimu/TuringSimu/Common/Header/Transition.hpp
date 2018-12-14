@@ -1,14 +1,17 @@
 #pragma once
+#ifndef TM_TRANSITION
+#define TM_TRANSITION
 #include "State.hpp"
 #include "HeadDirection.hpp"
-#ifndef TSTMTRANSITION
+
 namespace ts_common
 {
-	class Transition
+	class Transition:public BaseComparable<Transition>
 	{
 		public:
 			Transition(State currentState, char currentChar,
 				char toWrite, State nextState, HeadDirection headDirection);
+			Transition(std::string csvLine);
 			virtual ~Transition() {};
 
 			State GetCurrentState() const;
@@ -17,6 +20,11 @@ namespace ts_common
 			State GetNextState() const;
 			HeadDirection GetHeadDirection() const;
 
+			bool operator==(const Transition& other) const noexcept override;
+			bool operator!=(const Transition& other) const noexcept override;
+			bool operator<(const Transition& other) const noexcept override;
+			bool operator>(const Transition& other) const noexcept override;
+			size_t GetHashCode() const noexcept override;
 		private:
 			State currentState;
 			char currentChar;
@@ -51,5 +59,4 @@ namespace ts_common
 		return headDirection;
 	}
 }
-#define TSTMTRANSITION
 #endif
