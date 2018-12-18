@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include "../../Common/Header/Utility.hpp"
+#include "../Header/Directives.hpp"
 
 using namespace ts_common;
 using namespace ts_io;
@@ -32,63 +33,68 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 			tmd.type = getType(line);
 
 			std::getline(input, line); //initializing the current directive
+
 			directive activeDirective = switchOnDirectives(line);
 
 			std::getline(input, line); //getting the first actual data
 			std::vector<char> tapeAlpha;
 			std::vector<State> stateVector;
 			std::vector<State> finalStatesVector;
-			while (true) {
-				switch (activeDirective) {
 
-				case states:
-				{
-					auto tmp = split(line);
-					if (tmp.size() > 1) {
-						if (tmp[1] == "f") {
-							finalStatesVector.emplace_back(State{ tmp[0] });
+			while (true) {
+				if (!line.empty()) {
+					switch (activeDirective) {
+
+					case states:
+					{
+						auto tmp = split(line);
+						if (tmp.size() > 1) {
+							if (tmp[1] == "f") {
+								finalStatesVector.emplace_back(State{ tmp[0] });
+							}
+						}
+						stateVector.emplace_back(State{ tmp[0] });
+					}
+					break;
+					case tape: {
+						auto vector = split(line);
+						for (auto c : vector) {
+							tmd.tapeAlphabet.insert(c[0]);
 						}
 					}
-					stateVector.emplace_back(State{ tmp[0] });
-				}
-				break;
-				case tape: {
-					auto vector = split(line);
-					for (auto c : vector) {
-						tmd.tapeAlphabet.insert(c[0]);
-					}
-				}
-						   break;
-				case alphabet: {
-					auto vector = split(line);
-					for (auto c : vector) {
-						tmd.alphabet.insert(c[0]);
-					}
-				}
 							   break;
-				case startState: {
-					tmd.beginState = line;
-					metStartStateDirective = true;
-				}
-								 break;
-				case finalState: {
+					case alphabet: {
+						auto vector = split(line);
+						for (auto c : vector) {
+							tmd.alphabet.insert(c[0]);
+						}
+					}
+								   break;
+					case startState: {
+						tmd.beginState = line;
+						metStartStateDirective = true;
+					}
+									 break;
+					case finalState: {
 						//TODO
-					finalStatesVector.emplace_back(State{ split(line)[0] });
-				}
-								 break;
-				case blank: {
-					tmd.blank = split(line)[0].at(0);
-					metBlankDirective = true;
-				}
-							break;
-				case transitions: {
-					Transition t{ line };
-					tmd.transitions.push_back(t);
-				}
-								  break;
+						finalStatesVector.emplace_back(State{ split(line)[0] });
+					}
+									 break;
+					case blank: {
+						tmd.blank = split(line)[0].at(0);
+						metBlankDirective = true;
+					}
+								break;
+					case transitions: {
+						Transition t{ line };
+						tmd.transitions.push_back(t);
+					}
+									  break;
+					}
 				}
 				if (!input.eof()) {
 					std::getline(input, line);
+
 				} else break;
 				if (isDirective(line)) {
 					activeDirective = switchOnDirectives(line);
@@ -106,11 +112,11 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 
 			tmd.states.UnionWith(stateVector);
 			//getting rid of vectors
-			
+
 			tmd.finalStates.UnionWith(finalStatesVector);
 
 			tmd.tapeAlphabet.UnionWith(tapeAlpha);
-			
+
 
 		}
 
@@ -130,13 +136,16 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromBinary(std::string
 
 //specifies wether a string could be a directive
 bool DiskIO::isDirective(std::string &toTest) {
+	//TODO maybe flesh out and harden it
+	if (toTest.size() < 2)
+		return false;
 	return toTest.front() == '%'&&toTest.back() == '%';
 }
 
 //method to simulate a switch on strings. returns DTM as default
 
 MachineType DiskIO::getType(std::string &line) {
-	if (!line.compare("DTM")) {
+	if (line == ("DTM")) {
 		return DTM;
 	} else if (line == "TM") {
 		return DTM;
@@ -144,29 +153,4 @@ MachineType DiskIO::getType(std::string &line) {
 		return NTM;
 	}
 	return DTM;
-}
-
-std::string DiskIO::getDirectiveString(std::string &directive) {
-	return directive.substr(1, directive.length() - 2);
-}
-
-//method to simulate a switch on strings. Throws exception if default case is reached
-directive DiskIO::switchOnDirectives(std::string &directive) {
-	directive = DiskIO::getDirectiveString(directive);
-
-	if (directive == "tape") {
-		return tape;
-	} else if (directive == "alphabet") {
-		return alphabet;
-	} else if (directive == "states") {
-		return states;
-	} else if (directive == "startState") {
-		return startState;
-	} else if (directive == "finalState") {
-		return finalState;
-	} else if (directive == "blank") {
-		return blank;
-	} else if (directive == "transitions") {
-		return transitions;
-	} else throw std::exception("Not a valid directive");
 }

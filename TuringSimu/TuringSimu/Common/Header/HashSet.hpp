@@ -18,7 +18,15 @@ namespace ts_common
 			}
 			return flag;
 		};
+		std::vector<T> asVector() {
+			std::vector<T> toReturn;
+			for (auto &value : *(this)) {
+				toReturn.push_back(value);
+			}
+			return toReturn;
+		}
 
 	};
+
 }
 #endif // TM_HASHSET

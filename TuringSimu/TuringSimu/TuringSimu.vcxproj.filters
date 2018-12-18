@@ -72,6 +72,9 @@
     <ClCompile Include="IO\Source\DiskIO.cpp">
       <Filter>IO\Source</Filter>
     </ClCompile>
+    <ClCompile Include="IO\Source\Directives.cpp">
+      <Filter>IO\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\Header\ConsoleUI.hpp">
@@ -114,6 +117,9 @@
       <Filter>Common\Header</Filter>
     </ClInclude>
     <ClInclude Include="IO\Header\DiskIO.hpp">
+      <Filter>IO\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Directives.hpp">
       <Filter>IO\Header</Filter>
     </ClInclude>
   </ItemGroup>
