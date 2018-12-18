@@ -2,6 +2,7 @@
 #include "../../../TuringSimu/IO/Header/DiskIO.hpp"
 #include <iostream>
 #include "../../../TuringSimu/Common/Header/Utility.hpp"
+#include "../../../TuringSimu/IO/Header/DiskOutput.hpp"
 using namespace ts_common;
 using namespace boost::unit_test;
 BOOST_AUTO_TEST_CASE(TestGetTuringMachineDefinitionFromFile) {
@@ -47,4 +48,5 @@ BOOST_AUTO_TEST_CASE(TestGetTuringMachineDefinitionFromFile) {
 	BOOST_REQUIRE(tmd.beginState == State{ "q0" });
 
 	BOOST_REQUIRE(tmd.blank == '#');
+	ts_io::saveAsCSV("C:/Users/SBG/Desktop/attempt.csv",tmd);
 }
