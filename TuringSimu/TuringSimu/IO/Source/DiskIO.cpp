@@ -59,7 +59,7 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 					case tape: {
 						auto vector = split(line);
 						for (auto c : vector) {
-							tmd.tapeAlphabet.insert(c[0]);
+							tapeAlpha.push_back(c[0]);
 						}
 					}
 							   break;
@@ -77,7 +77,7 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 									 break;
 					case finalState: {
 						//TODO
-						finalStatesVector.emplace_back(State{ split(line)[0] });
+						finalStatesVector.push_back(State{ split(line)[0] });
 					}
 									 break;
 					case blank: {
@@ -104,7 +104,7 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 			std::cout << "im here";
 			if (!metBlankDirective) {
 				//tapealpha cant be initialized currently so this needs to be commented out
-				//tmd.blank = tapeAlpha[0];
+				tmd.blank = tapeAlpha[0];
 			}
 			if (!metStartStateDirective) {
 				tmd.beginState = State{ stateVector[0] };
@@ -116,6 +116,7 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 			tmd.finalStates.UnionWith(finalStatesVector);
 
 			tmd.tapeAlphabet.UnionWith(tapeAlpha);
+			tmd.tapeAlphabet.insert(tmd.alphabet.begin(), tmd.alphabet.end());
 
 
 		}

@@ -7,7 +7,8 @@ TypeOfTM /* defines the type of the TM that is specified in this file. Valid val
 
 /* All following directives mark the start of a certain section and do not need to appear in the exact
 order they are mentioned in this file. To make the directives work the '%'-character is used as a
-meta-character and may not be used as the start AND end character of a state-name. Directives need to be the only data in a single line.*/
+meta-character and may not be used as the start AND end character of a state-name. Directives need to be 
+the only data in a single line. All empty lines after here pose no problem and are ignored.*/
 
 
 
@@ -38,11 +39,11 @@ char;someOtherChar;... /*specifies the characters of the tapealphabet. You may o
 						here does not result in an error. If no %blank% directive is found, the
 						first character given will be treated as the blank. This might rise an error,
 						if the first character is part of the input alphabet. This definition may
-						span over several lines*/
+						span over several lines. Do not end a line with a trailing semicolon (e.g a;)*/
 
 %blank%
 blank		/* specifies the blank-symbol of the TM. This does need to reappear in the %tape% directive*/
 
 %alphabet%
 char; otherChar;...	/* specifies the characters of the input alphabet. This definition may span several
-					lines */
+					lines. Do not end a line with a trailing semicolon (e.g a;) */
