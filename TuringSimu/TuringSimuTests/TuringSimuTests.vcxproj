@@ -130,6 +130,7 @@
   <ItemGroup>
     <None Include="IO\TestFiles\parseTest1.csv" />
     <None Include="IO\TestFiles\parseTest2.csv" />
+    <None Include="IO\TestFiles\parseTest3.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TuringSimu\TuringSimu.vcxproj">
