@@ -6,8 +6,8 @@
 using namespace ts_common;
 using namespace boost::unit_test;
 BOOST_AUTO_TEST_CASE(ParseCSV_AllSpecified) {
-	//working directory for VisualStudio is the directory in which the .vcxproj lies. So your relative path has
-	//to start there
+	//working directory for VisualStudio is the directory in which the .vcxproj lies.
+	//So your relative path has to start there
 
 	auto tmd = ts_io::DiskIO::GetTuringMachineDefinitionFromFile("./IO/TestFiles/parseTest1.csv");
 
@@ -52,7 +52,7 @@ BOOST_AUTO_TEST_CASE(ParseCSV_AllSpecified) {
 	BOOST_REQUIRE(tmd.beginState == State{ "q0" });
 
 	BOOST_REQUIRE(tmd.blank == '#');
-	ts_io::saveAsCSV("C:/Users/SBG/Desktop/attempt.csv",tmd);
+	ts_io::saveAsCSV("./parseTest1Saved.csv", tmd);
 }
 
 BOOST_AUTO_TEST_CASE(ParseCSV_MinimumSpecified) {
@@ -102,6 +102,7 @@ BOOST_AUTO_TEST_CASE(ParseCSV_MinimumSpecified) {
 	BOOST_REQUIRE(tmd.beginState == State{ "q0" });
 
 	BOOST_REQUIRE(tmd.blank == '#');
+	ts_io::saveAsCSV("./parseTest2Saved.csv", tmd);
 }
 BOOST_AUTO_TEST_CASE(ParseCSV_EmptyLines) {
 	//working directory for VisualStudio is the directory in which the .vcxproj lies. So your relative path has
@@ -150,4 +151,5 @@ BOOST_AUTO_TEST_CASE(ParseCSV_EmptyLines) {
 	BOOST_REQUIRE(tmd.beginState == State{ "q0" });
 
 	BOOST_REQUIRE(tmd.blank == '#');
+	ts_io::saveAsCSV("./parseTest3Saved.csv", tmd);
 }
