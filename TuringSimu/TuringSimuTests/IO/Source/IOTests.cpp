@@ -9,7 +9,7 @@ BOOST_AUTO_TEST_CASE(ParseCSV_AllSpecified) {
 	//working directory for VisualStudio is the directory in which the .vcxproj lies.
 	//So your relative path has to start there
 
-	auto tmd = ts_io::DiskIO::GetTuringMachineDefinitionFromFile("./IO/TestFiles/parseTest1.csv");
+	auto tmd = ts_io::GetTuringMachineDefinitionFromFile("./IO/TestFiles/parseTest1.csv");
 
 	BOOST_REQUIRE(tmd.type == DTM);
 
@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(ParseCSV_MinimumSpecified) {
 	//working directory for VisualStudio is the directory in which the .vcxproj lies. So your relative path has
 	//to start there
 
-	auto tmd = ts_io::DiskIO::GetTuringMachineDefinitionFromFile("./IO/TestFiles/parseTest2.csv");
+	auto tmd = ts_io::GetTuringMachineDefinitionFromFile("./IO/TestFiles/parseTest2.csv");
 
 	BOOST_REQUIRE(tmd.type == DTM);
 
@@ -108,7 +108,7 @@ BOOST_AUTO_TEST_CASE(ParseCSV_EmptyLines) {
 	//working directory for VisualStudio is the directory in which the .vcxproj lies. So your relative path has
 	//to start there
 
-	auto tmd = ts_io::DiskIO::GetTuringMachineDefinitionFromFile("./IO/TestFiles/parseTest3.csv");
+	auto tmd = ts_io::GetTuringMachineDefinitionFromFile("./IO/TestFiles/parseTest3.csv");
 
 	BOOST_REQUIRE(tmd.type == DTM);
 

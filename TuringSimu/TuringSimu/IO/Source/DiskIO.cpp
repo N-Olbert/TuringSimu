@@ -7,18 +7,18 @@
 using namespace ts_common;
 using namespace ts_io;
 
-TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromFile(std::string path) {
+TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string path) {
 	auto const index = path.find_last_of('.');
 	auto const fileExtension = path.substr(index + 1, path.length() - index);
 	std::cout << fileExtension;
 	if (fileExtension == "csv") {
-		return GetTuringMachineDefinitionFromCSV(path);
+		return ts_io_intern::GetTuringMachineDefinitionFromCSV(path);
 	}
 	TuringMachineDefinition t;
 	throw std::logic_error("unsupported File extension");
 }
 
-TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string path) {
+TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::string path) {
 	bool metBlankDirective = false;
 	bool metStartStateDirective = false;
 	std::ifstream input;
@@ -129,14 +129,14 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 	return tmd;
 }
 
-TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromBinary(std::string path) {
+TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromBinary(std::string path) {
 	//TODO
 	throw std::logic_error("Not implemented yet");
 
 }
 
 //specifies wether a string could be a directive
-bool DiskIO::isDirective(std::string &toTest) {
+bool ts_io_intern::isDirective(std::string &toTest) {
 	//TODO maybe flesh out and harden it
 	if (toTest.size() < 2)
 		return false;
@@ -145,7 +145,7 @@ bool DiskIO::isDirective(std::string &toTest) {
 
 //method to simulate a switch on strings. returns DTM as default
 
-MachineType DiskIO::getType(std::string &line) {
+MachineType ts_io_intern::getType(std::string &line) {
 	if (line == ("DTM")) {
 		return DTM;
 	} else if (line == "TM") {

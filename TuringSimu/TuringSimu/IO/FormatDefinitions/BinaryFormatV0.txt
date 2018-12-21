@@ -1,0 +1,25 @@
+To correctly be recognized as a saved Turingmachine from this simulator the fileending has to be 
+".tmsim"
+uint16 -> Versionnumber
+3 characters -> type of TM  (DTM, NTM)
+uint16 -> amount of states
+States are saved like:
+	uint16 -> identifier length
+	that amount of chars -> identifier
+uint16 -> length of identifier of the starting state
+that amount of chars -> the identifier
+uint16 -> amount of final states
+uint16 -> amount of characters in alphabet
+that amount of chars -> characters of the alphabet
+uint16 -> amount of characters in tapealphabet
+that amount of chars -> characters of tapealphabet
+char -> blank symbol
+uint16 -> amount of transitions
+Transitions are saved like:
+	uint16 -> length of currentState identifier
+	that amount of chars -> the identifier
+	char -> current char
+	uint16 -> length of nextState identifier
+	that amount of chars -> that identifier
+	char -> character to write
+	char -> headDirection (L, R or S)

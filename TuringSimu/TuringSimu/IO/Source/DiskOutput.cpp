@@ -17,19 +17,19 @@ void ts_io::saveAsCSV(std::string const filePath, TuringMachineDefinition data) 
 			}
 			out << directiveToString(states);
 			auto v = data.states.asVector();
-			writeToCSVFile<State>(out, v);
+			ts_io_intern::writeToCSVFile<State>(out, v);
 			out << directiveToString(startState);
 			out << data.beginState.GetIdentifier() << std::endl;
 			out << directiveToString(transitions);
-			writeToCSVFile<Transition>(out, data.transitions);
+			ts_io_intern::writeToCSVFile<Transition>(out, data.transitions);
 			out << directiveToString(tape);
 			auto anotherVector = data.tapeAlphabet.asVector();
-			writeToCSVFile<char>(out, anotherVector);
+			ts_io_intern::writeToCSVFile<char>(out, anotherVector);
 			out << directiveToString(blank);
 			out << data.blank << std::endl;
 			out << directiveToString(alphabet);
 			auto yetanothervector = data.alphabet.asVector();
-			writeToCSVFile<char>(out,yetanothervector);
+			ts_io_intern::writeToCSVFile<char>(out, yetanothervector);
 			//leaves a trailing \n which kills inputreading so either harden input or remove it
 		}
 	}
@@ -44,7 +44,7 @@ void ts_io::saveAsBinary(std::string filePath, TuringMachineDefinition data) {
 	throw std::logic_error("Not implemented");
 }
 
-std::string ts_io::stringifyCSV(Transition & t) {
+std::string ts_io_intern::stringifyCSV(Transition & t) {
 	std::string string;
 	auto s = t.GetCurrentState();
 	string.append(stringifyCSV(s));
@@ -70,12 +70,12 @@ std::string ts_io::stringifyCSV(Transition & t) {
 	return string;
 }
 
-std::string ts_io::stringifyCSV(char & c) {
+std::string ts_io_intern::stringifyCSV(char & c) {
 	std::string string;
 	string.push_back(c);
 	return string;
 }
 
-std::string ts_io::stringifyCSV(State & state) {
+std::string ts_io_intern::stringifyCSV(State & state) {
 	return state.GetIdentifier();
 }

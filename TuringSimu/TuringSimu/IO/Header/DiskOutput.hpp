@@ -11,19 +11,22 @@ namespace ts_io {
 	void saveAsCSV(std::string const filePath, TuringMachineDefinition data);
 	void saveAsBinary(std::string filePath, TuringMachineDefinition data);
 
-	
-	std::string stringifyCSV(Transition &t);
-	std::string stringifyCSV(char &c);
-	std::string stringifyCSV(State &state);
+	namespace ts_io_intern {
+		std::string stringifyCSV(Transition &t);
+		std::string stringifyCSV(char &c);
+		std::string stringifyCSV(State &state);
 
-	template <typename T>
-	bool writeToCSVFile(std::ofstream &out, std::vector<T> &toWrite) {
-		if (out.is_open()) {
-			for ( auto & value : toWrite) {
-				auto s = stringifyCSV(value);
-				out << s << '\n';
-			}return true;
-		} else return false;
-	};
+		template <typename T>
+		bool writeToCSVFile(std::ofstream &out, std::vector<T> &toWrite) {
+			if (out.is_open()) {
+				for (auto & value : toWrite) {
+					auto s = stringifyCSV(value);
+					out << s << '\n';
+				}return true;
+			} else return false;
+		};
+
+		
+	}
 }
 #endif
