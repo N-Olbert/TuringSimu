@@ -12,12 +12,14 @@ void ts_io::saveAsCSV(std::string const &filePath, TuringMachineDefinition &data
 
 			if (data.type == DTM) {
 				out << "DTM\n";
+
 				//TODO marker in case we add more tm-types, maybe should be a own method
 			} else {
 				out << "NTM\n";
 			}
 			out << directiveToString(states);
 			auto v = data.states.asVector();
+
 			ts_io_intern::writeToCSVFile<State>(out, v);
 			out << directiveToString(startState);
 			out << data.beginState.GetIdentifier() << std::endl;
@@ -26,6 +28,7 @@ void ts_io::saveAsCSV(std::string const &filePath, TuringMachineDefinition &data
 			out << directiveToString(tape);
 			auto anotherVector = data.tapeAlphabet.asVector();
 			ts_io_intern::writeToCSVFile<char>(out, anotherVector);
+
 			out << directiveToString(blank);
 			out << data.blank << std::endl;
 			out << directiveToString(alphabet);

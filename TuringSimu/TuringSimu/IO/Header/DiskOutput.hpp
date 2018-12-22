@@ -65,7 +65,6 @@ namespace ts_io {
 				writeToBinary(out, element);
 			}
 		}
-
 	}
 }
 #endif

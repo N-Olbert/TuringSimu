@@ -44,6 +44,7 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 
 			while (true) {
 				//skips empty lines
+
 				if (!line.empty()) {
 					switch (activeDirective) {
 
@@ -52,18 +53,19 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 						auto tmp = split(line);
 						if (tmp.size() > 1) {
 							if (tmp[1] == "f") {
+
 								tmd.finalStates.insert(State{ tmp[0] });
 							}
 						}
 						stateVector.emplace_back(State{ tmp[0] });
 						break;
 					}
-
 					case tape: {
 						auto vector = split(line);
 						for (auto c : vector) {
 							tapeAlpha.push_back(c[0]);
 						}
+
 						break;
 					}
 
@@ -190,6 +192,7 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromBinary(std::
 }
 
 //specifies wether a string could be a directive
+
 bool ts_io_intern::isDirective(std::string &toTest) {
 	//TODO maybe flesh out and harden it
 	if (toTest.size() < 2)
@@ -198,7 +201,6 @@ bool ts_io_intern::isDirective(std::string &toTest) {
 }
 
 //method to simulate a switch on strings. returns DTM as default
-
 MachineType ts_io_intern::getType(std::string &line) {
 	if (line == ("DTM")) {
 		return DTM;
@@ -208,6 +210,7 @@ MachineType ts_io_intern::getType(std::string &line) {
 		return NTM;
 	}
 	return DTM;
+
 }
 
 std::string ts_io_intern::readString(std::ifstream& in, char* dest) {

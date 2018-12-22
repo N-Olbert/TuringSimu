@@ -9,7 +9,6 @@ namespace ts_io
 {
 	using namespace ts_common;
 
-
 	/**
 	 * \brief Loads a TM from a file. The only method for endusers
 	 * \param path The path to the save file
@@ -61,6 +60,5 @@ namespace ts_io
 	}
 
 	enum versionNumber { v0 };
-
 }
 #endif // TM_DISKIO

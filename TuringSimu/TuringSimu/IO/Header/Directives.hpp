@@ -6,6 +6,7 @@ namespace ts_io {
 	enum directive { states, tape, alphabet, startState, finalState, blank, transitions };
 
 
+
 	/**
 	 * \brief Since you cannot use a switch-case statement on strings, this method exists
 	 * \param directive The string to switch on
