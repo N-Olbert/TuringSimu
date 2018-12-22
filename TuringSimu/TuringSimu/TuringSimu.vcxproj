@@ -139,7 +139,9 @@
     <ClInclude Include="Common\Header\Transition.hpp" />
     <ClInclude Include="Common\Header\TuringMachineDefinition.hpp" />
     <ClInclude Include="Common\Header\Utility.hpp" />
-    <ClInclude Include="Directives.hpp" />
+
+    <ClInclude Include="IO\Header\Directives.hpp" />
+
     <ClInclude Include="IO\Header\DiskIO.hpp" />
     <ClInclude Include="IO\Header\DiskOutput.hpp" />
     <ClInclude Include="UI\Header\ConsoleUI.hpp" />

@@ -119,7 +119,7 @@
     <ClInclude Include="IO\Header\DiskIO.hpp">
       <Filter>IO\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Directives.hpp">
+    <ClInclude Include="IO\Header\Directives.hpp">
       <Filter>IO\Header</Filter>
     </ClInclude>
   </ItemGroup>

@@ -42,5 +42,8 @@
     <None Include="IO\TestFiles\parseTest3.csv">
       <Filter>IO\TestFiles</Filter>
     </None>
+    <None Include="IO\TestFiles\bin.tmsim">
+      <Filter>IO\TestFiles</Filter>
+    </None>
   </ItemGroup>
 </Project>

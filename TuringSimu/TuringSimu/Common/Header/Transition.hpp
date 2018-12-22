@@ -6,56 +6,56 @@
 
 namespace ts_common
 {
-	class Transition:public BaseComparable<Transition>
-	{
-		public:
-			Transition(State currentState, char currentChar,
-				char toWrite, State nextState, HeadDirection headDirection);
-			Transition(std::string csvLine);
-			virtual ~Transition() {};
+	class Transition :public BaseComparable<Transition> {
+	public:
+		Transition(State currentState, char currentChar,
+			char toWrite, State nextState, HeadDirection headDirection);
 
-			State GetCurrentState() const;
-			char GetCurrentChar() const;
-			char GetToWrite() const;
-			State GetNextState() const;
-			HeadDirection GetHeadDirection() const;
+		/**
+		* \brief Special constructor needed when reading from a csvFile
+		* \param csvLine the line of the .csv representing a Transition
+		* \see CSVFormatV0.txt for additional info
+		*/
+		Transition(std::string csvLine);
+		virtual ~Transition() {};
 
-			bool operator==(const Transition& other) const noexcept override;
-			bool operator!=(const Transition& other) const noexcept override;
-			bool operator<(const Transition& other) const noexcept override;
-			bool operator>(const Transition& other) const noexcept override;
-			size_t GetHashCode() const noexcept override;
-		private:
-			State currentState;
-			char currentChar;
-			char toWrite;
-			State nextState;
-			HeadDirection headDirection;
+		State GetCurrentState() const;
+		char GetCurrentChar() const;
+		char GetToWrite() const;
+		State GetNextState() const;
+		HeadDirection GetHeadDirection() const;
+
+		bool operator==(const Transition& other) const noexcept override;
+		bool operator!=(const Transition& other) const noexcept override;
+		bool operator<(const Transition& other) const noexcept override;
+		bool operator>(const Transition& other) const noexcept override;
+		size_t GetHashCode() const noexcept override;
+	private:
+		State currentState;
+		char currentChar;
+		char toWrite;
+		State nextState;
+		HeadDirection headDirection;
 
 	};
 
-	inline State Transition::GetCurrentState() const
-	{
+	inline State Transition::GetCurrentState() const {
 		return currentState;
 	}
 
-	inline char Transition::GetCurrentChar() const
-	{
+	inline char Transition::GetCurrentChar() const {
 		return currentChar;
 	}
 
-	inline char Transition::GetToWrite() const
-	{
+	inline char Transition::GetToWrite() const {
 		return toWrite;
 	}
 
-	inline State Transition::GetNextState() const
-	{
+	inline State Transition::GetNextState() const {
 		return nextState;
 	}
 
-	inline HeadDirection Transition::GetHeadDirection() const
-	{
+	inline HeadDirection Transition::GetHeadDirection() const {
 		return headDirection;
 	}
 }
