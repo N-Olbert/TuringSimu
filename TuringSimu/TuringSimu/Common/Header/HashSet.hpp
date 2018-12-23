@@ -25,6 +25,10 @@ namespace ts_common
 			}
 			return toReturn;
 		}
+		bool Contains(T item)
+		{
+			return this->count(item) != 0;
+		}
 
 	};
 

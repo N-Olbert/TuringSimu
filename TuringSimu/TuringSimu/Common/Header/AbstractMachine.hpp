@@ -3,6 +3,8 @@
 #define TM_ABSTRACTMACHINE
 #include "AbstractMachineUserinterface.hpp"
 #include <stdexcept>
+#include "BaseTransition.hpp"
+
 namespace ts_common
 {
 	/**
@@ -14,26 +16,33 @@ namespace ts_common
 			/**
 		     * \brief Pointer to the UI which observes the execution of the machine
 		     */
-		    AbstactMachineUserinterface* ui;
+		    AbstractMachineUserinterface* ui;
 
 		protected:
+			/**
+			 * \brief The current state of the machine
+			 */
+			State currentState;
+
 			/**
 			 * \brief Gets the UI which observes the current machine.
 			 * \returns The UI.
 			 */
-			AbstactMachineUserinterface GetUI(){ return *this->ui;}
+			AbstractMachineUserinterface* GetUI() const { return this->ui;}
+
+			/**
+			 * \brief Gets the next transition based on the current state.
+			 * \returns The next transition
+			 */
+			virtual Transition& GetNextTransition() = 0;
 
 		public:
 			/**
 			 * \brief Creates a new instance of the AbstractMachine class.
 			 * \param userinterface The observer of the current machine.
 			 */
-			AbstractMachine(AbstactMachineUserinterface*  userinterface)
+			AbstractMachine(AbstractMachineUserinterface*  userinterface)
 			{
-				if(userinterface == nullptr)
-				{
-					throw std::logic_error("No valid userinterface given.");
-				}
 				this->ui = userinterface;
 			};
 

@@ -60,9 +60,6 @@
     <ClCompile Include="Common\Source\State.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Header\AbstractMachineUserinterface.hpp">
-      <Filter>Common\Header</Filter>
-    </ClCompile>
     <ClCompile Include="IO\Source\DiskOutput.cpp">
       <Filter>IO\Source</Filter>
     </ClCompile>
@@ -74,6 +71,12 @@
     </ClCompile>
     <ClCompile Include="IO\Source\Directives.cpp">
       <Filter>IO\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\Source\TuringMachineTapeHeader.cpp">
+      <Filter>Business\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\AbstractMachineUserinterface.cpp">
+      <Filter>Common\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +124,15 @@
     </ClInclude>
     <ClInclude Include="IO\Header\Directives.hpp">
       <Filter>IO\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Header\TuringMachineTapeHeader.hpp">
+      <Filter>Business\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\BaseTransition.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\AbstractMachineUserinterface.hpp">
+      <Filter>Common\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
