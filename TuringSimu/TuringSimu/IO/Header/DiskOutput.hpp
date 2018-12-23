@@ -38,6 +38,7 @@ namespace ts_io {
 		void makeBinary(std::ofstream &out, State &state);
 		void makeBinary(std::ofstream &out, Transition &t);
 		void makeBinary(std::ofstream &out, char &c);
+		void makeBinary(std::ofstream &out, std::string &s);
 
 		template <typename T>
 		bool writeToCSVFile(std::ofstream &out, std::vector<T> &toWrite) {

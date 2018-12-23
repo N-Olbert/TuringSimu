@@ -10,13 +10,8 @@ void ts_io::saveAsCSV(std::string const &filePath, TuringMachineDefinition &data
 		if (out.is_open()) {
 			out << "0\n";
 
-			if (data.type == DTM) {
-				out << "DTM\n";
+			out << TypeToString(data.type) << std::endl;
 
-				//TODO marker in case we add more tm-types, maybe should be a own method
-			} else {
-				out << "NTM\n";
-			}
 			out << directiveToString(states);
 			auto v = data.states.asVector();
 
@@ -49,13 +44,9 @@ void ts_io::saveAsBinary(std::string const &filePath, TuringMachineDefinition &d
 		if (out.is_open()) {
 			uint16_t version = 0;
 			out.write((char*)&version, sizeof(uint16_t));
-			if (data.type == DTM) {
-				const char* ptr = "DTM";
-				out.write(ptr, 3);
-			} else {
-				const char* ptr = "NTM";
-				out.write(ptr, 3);
-			}
+
+			ts_io_intern::writeToBinary<std::string>(out, TypeToString(data.type));
+
 			ts_io_intern::writeToBinary<State>(out, data.states.asVector());
 			ts_io_intern::writeToBinary<State>(out, data.beginState);
 			ts_io_intern::writeToBinary<State>(out, data.finalStates.asVector());
@@ -146,4 +137,11 @@ void ts_io_intern::makeBinary(std::ofstream &out, Transition & t) {
 
 void ts_io_intern::makeBinary(std::ofstream& out, char& c) {
 	out.write(&c, sizeof(char));
+}
+
+void ts_io_intern::makeBinary(std::ofstream& out, std::string& s)
+{
+	for (int i = 0; i < s.length(); ++i) {
+		out.write(&(s.at(i)), sizeof(char));
+	}
 }

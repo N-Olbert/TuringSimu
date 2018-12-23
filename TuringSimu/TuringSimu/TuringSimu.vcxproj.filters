@@ -75,6 +75,9 @@
     <ClCompile Include="IO\Source\Directives.cpp">
       <Filter>IO\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Common\Source\MachineType.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\Header\ConsoleUI.hpp">

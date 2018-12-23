@@ -61,6 +61,7 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 						break;
 					}
 					case tape: {
+						//TODO set errorbit if this is reached and type is a state machine
 						auto vector = split(line);
 						for (auto c : vector) {
 							tapeAlpha.push_back(c[0]);
@@ -87,12 +88,19 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 						break;
 					}
 					case blank: {
+						//TODO set errorbit if this is reached and type is a state machine
 						tmd.blank = split(line)[0].at(0);
 						metBlankDirective = true;
 						break;
 					}
 					case transitions: {
-						tmd.transitions.emplace_back(line);
+							if(tmd.type==DEA||tmd.type==NEA)
+							{
+								line.push_back(';');
+								line.append(split(line)[1]);
+								line.append(";R");
+							}
+						tmd.transitions.emplace_back(Transition{ line });
 						break;
 					}
 
@@ -109,7 +117,13 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 			}
 			//fulfilling the convenience promises given in CSVFormatV0.txt
 			if (!metBlankDirective) {
-				tmd.blank = tapeAlpha[0];
+				if(tmd.type==DEA||tmd.type ==NEA)
+				{
+					tmd.blank = '#';
+					tmd.tapeAlphabet.insert('#');
+				} else {
+					tmd.blank = tapeAlpha[0];
+				}
 			}
 			if (!metStartStateDirective) {
 				//copy-constructor usage
@@ -198,19 +212,6 @@ bool ts_io_intern::isDirective(std::string &toTest) {
 	if (toTest.size() < 2)
 		return false;
 	return toTest.front() == '%'&&toTest.back() == '%';
-}
-
-//method to simulate a switch on strings. returns DTM as default
-MachineType ts_io_intern::getType(std::string &line) {
-	if (line == ("DTM")) {
-		return DTM;
-	} else if (line == "TM") {
-		return DTM;
-	} else if (line == "NTM") {
-		return NTM;
-	}
-	return DTM;
-
 }
 
 std::string ts_io_intern::readString(std::ifstream& in, char* dest) {

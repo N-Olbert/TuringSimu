@@ -120,6 +120,7 @@
     <ClCompile Include="Common\Header\AbstractMachineUserinterface.hpp" />
     <ClCompile Include="Common\Header\BaseComparable.hpp" />
     <ClCompile Include="Common\Source\HashSet.cpp" />
+    <ClCompile Include="Common\Source\MachineType.cpp" />
     <ClCompile Include="Common\Source\State.cpp" />
     <ClCompile Include="Common\Source\Transition.cpp" />
     <ClCompile Include="IO\Source\Directives.cpp" />
@@ -139,9 +140,7 @@
     <ClInclude Include="Common\Header\Transition.hpp" />
     <ClInclude Include="Common\Header\TuringMachineDefinition.hpp" />
     <ClInclude Include="Common\Header\Utility.hpp" />
-
     <ClInclude Include="IO\Header\Directives.hpp" />
-
     <ClInclude Include="IO\Header\DiskIO.hpp" />
     <ClInclude Include="IO\Header\DiskOutput.hpp" />
     <ClInclude Include="UI\Header\ConsoleUI.hpp" />
