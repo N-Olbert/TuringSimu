@@ -3,21 +3,23 @@
 #define TM_TRANSITION
 #include "State.hpp"
 #include "HeadDirection.hpp"
+#include "BaseTransition.hpp"
 
 namespace ts_common
 {
-	class Transition:public BaseComparable<Transition>
+	class Transition:public BaseComparable<Transition>, public BaseTransition
 	{
 		public:
+			static Transition Empty;
 			Transition(State currentState, char currentChar,
 				char toWrite, State nextState, HeadDirection headDirection);
 			Transition(std::string csvLine);
-			virtual ~Transition() {};
+			~Transition() override;
 
-			State GetCurrentState() const;
+			State& GetCurrentState();
 			char GetCurrentChar() const;
 			char GetToWrite() const;
-			State GetNextState() const;
+			State& GetNextState();
 			HeadDirection GetHeadDirection() const;
 
 			bool operator==(const Transition& other) const noexcept override;
@@ -26,6 +28,7 @@ namespace ts_common
 			bool operator>(const Transition& other) const noexcept override;
 			size_t GetHashCode() const noexcept override;
 		private:
+			Transition(): currentChar(0), toWrite(0), headDirection(Stay){};
 			State currentState;
 			char currentChar;
 			char toWrite;
@@ -34,7 +37,7 @@ namespace ts_common
 
 	};
 
-	inline State Transition::GetCurrentState() const
+	inline State& Transition::GetCurrentState()
 	{
 		return currentState;
 	}
@@ -49,7 +52,7 @@ namespace ts_common
 		return toWrite;
 	}
 
-	inline State Transition::GetNextState() const
+	inline State& Transition::GetNextState()
 	{
 		return nextState;
 	}

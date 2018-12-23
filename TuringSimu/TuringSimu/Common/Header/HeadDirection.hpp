@@ -19,7 +19,7 @@ namespace ts_common
 		Right,
 
 		/**
-		 * Let head stay at position.
+		 * Let head stay at rawPosition.
 		 */
 		Stay
 	};

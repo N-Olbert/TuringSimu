@@ -2,6 +2,7 @@
 #include "../Header/Utility.hpp"
 
 using namespace ts_common;
+Transition Transition::Empty;
 Transition::Transition(State currentState, char currentChar,
 	char toWrite, State nextState, HeadDirection headDirection) {
 	this->currentState = State{ currentState };
@@ -17,7 +18,11 @@ Transition::Transition(std::string csvLine) {
 	this->nextState = State{ rawData[2] };
 	this->toWrite = rawData[3].at(0);
 	this->headDirection = getDirection(rawData[4]);
-};
+}
+ts_common::Transition::~Transition()
+{
+}
+;
 
 bool Transition::operator==(const Transition& other) const noexcept {
 	return this->toWrite == other.toWrite&& this->currentChar == other.currentChar
@@ -32,7 +37,7 @@ bool Transition::operator==(const Transition& other) const noexcept {
  * \return True if their unqual, false otherwise
  */
 bool Transition::operator!=(const Transition& other) const noexcept {
-	return !(this == &other);
+	return !(*this==other);
 }
 
 
@@ -45,11 +50,11 @@ bool Transition::operator<(const Transition& other) const noexcept {
 	return this->currentState > other.currentState;
 }
 bool Transition::operator>(const Transition& other) const noexcept {
-	return !(this > &other);
+	return !(*this > other);
 }
 
 size_t Transition::GetHashCode() const noexcept {
-	return (this->GetCurrentState().GetHashCode()) + std::hash<char>()(this->currentChar)
+	return (this->currentState.GetHashCode()) + std::hash<char>()(this->currentChar)
 		+ std::hash<char>()(this->toWrite) + this->headDirection + this->nextState.GetHashCode();
 }
 

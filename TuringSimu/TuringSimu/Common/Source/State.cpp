@@ -10,7 +10,7 @@ State::State(std::string identifer)
 	this->identifier = identifer;
 }
 
-std::string State::GetIdentifier()
+std::string& State::GetIdentifier()
 {
 	return this->identifier;
 }
