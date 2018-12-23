@@ -7,7 +7,7 @@ using namespace ts_common;
 std::unique_ptr<AbstractMachine> MachineFactory::CreateMachineFromFile(std::string& path,
                                                                        AbstractMachineUserinterface* observingUI)
 {
-	auto definition = ts_io::DiskIO::GetTuringMachineDefinitionFromFile(path);
+	auto definition = ts_io::GetTuringMachineDefinitionFromFile(path);
 	if(IsValidMachineDefinition(definition))
 	{
 		auto result = std::unique_ptr<AbstractMachine>(new TuringMachine{observingUI, definition});
