@@ -7,18 +7,20 @@
 using namespace ts_common;
 using namespace ts_io;
 
-TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromFile(std::string path) {
+TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string path) {
 	auto const index = path.find_last_of('.');
 	auto const fileExtension = path.substr(index + 1, path.length() - index);
 	std::cout << fileExtension;
 	if (fileExtension == "csv") {
-		return GetTuringMachineDefinitionFromCSV(path);
+		return ts_io_intern::GetTuringMachineDefinitionFromCSV(path);
+	} else if (fileExtension == "tmsim") {
+		return ts_io_intern::GetTuringMachineDefinitionFromBinary(path);
 	}
-	TuringMachineDefinition t;
+	//TODO maybe different handling of bad user input
 	throw std::logic_error("unsupported File extension");
 }
 
-TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string path) {
+TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::string path) {
 	bool metBlankDirective = false;
 	bool metStartStateDirective = false;
 	std::ifstream input;
@@ -39,9 +41,10 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 			std::getline(input, line); //getting the first actual data
 			std::vector<char> tapeAlpha;
 			std::vector<State> stateVector;
-			std::vector<State> finalStatesVector;
 
 			while (true) {
+				//skips empty lines
+
 				if (!line.empty()) {
 					switch (activeDirective) {
 
@@ -50,46 +53,49 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 						auto tmp = split(line);
 						if (tmp.size() > 1) {
 							if (tmp[1] == "f") {
-								finalStatesVector.emplace_back(State{ tmp[0] });
+
+								tmd.finalStates.insert(State{ tmp[0] });
 							}
 						}
 						stateVector.emplace_back(State{ tmp[0] });
+						break;
 					}
-					break;
 					case tape: {
 						auto vector = split(line);
 						for (auto c : vector) {
 							tapeAlpha.push_back(c[0]);
 						}
+
+						break;
 					}
-							   break;
+
 					case alphabet: {
 						auto vector = split(line);
 						for (auto c : vector) {
 							tmd.alphabet.insert(c[0]);
 						}
+						break;
 					}
-								   break;
+
 					case startState: {
 						tmd.beginState = line;
 						metStartStateDirective = true;
 					}
 									 break;
 					case finalState: {
-						//TODO
-						finalStatesVector.push_back(State{ split(line)[0] });
+						tmd.finalStates.insert(State{ split(line)[0] });
+						break;
 					}
-									 break;
 					case blank: {
 						tmd.blank = split(line)[0].at(0);
 						metBlankDirective = true;
+						break;
 					}
-								break;
 					case transitions: {
-						Transition t{ line };
-						tmd.transitions.push_back(t);
+						tmd.transitions.emplace_back(line);
+						break;
 					}
-									  break;
+
 					}
 				}
 				if (!input.eof()) {
@@ -101,24 +107,19 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 					std::getline(input, line);
 				}
 			}
-			std::cout << "im here";
+			//fulfilling the convenience promises given in CSVFormatV0.txt
 			if (!metBlankDirective) {
-				//tapealpha cant be initialized currently so this needs to be commented out
 				tmd.blank = tapeAlpha[0];
 			}
 			if (!metStartStateDirective) {
+				//copy-constructor usage
 				tmd.beginState = State{ stateVector[0] };
 			}
 
-			tmd.states.UnionWith(stateVector);
 			//getting rid of vectors
-
-			tmd.finalStates.UnionWith(finalStatesVector);
-
+			tmd.states.UnionWith(stateVector);
 			tmd.tapeAlphabet.UnionWith(tapeAlpha);
 			tmd.tapeAlphabet.insert(tmd.alphabet.begin(), tmd.alphabet.end());
-
-
 		}
 
 	}
@@ -129,14 +130,70 @@ TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromCSV(std::string pa
 	return tmd;
 }
 
-TuringMachineDefinition DiskIO::GetTuringMachineDefinitionFromBinary(std::string path) {
-	//TODO
-	throw std::logic_error("Not implemented yet");
+TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromBinary(std::string path) {
+	std::ifstream in;
+	TuringMachineDefinition tmd;
+	try {
+		in.open(path);
+		if (in.is_open()) {
 
+			char buffer[1024];
+			auto version = readFromBinaryStream<uint16_t>(in, buffer);
+			//TODO maybe different version handling
+			std::string type = readString(in, buffer,3);
+			tmd.type = getType(type);
+
+			auto stateNR = readFromBinaryStream<uint16_t>(in, buffer);
+			for (int i = 0; i < stateNR; ++i) {
+				auto s = readString(in, buffer);
+				tmd.states.insert(State{ s });
+			}
+			auto beginstate = readString(in, buffer);
+			tmd.beginState = State{ beginstate };
+
+			auto finalStateNr = readFromBinaryStream<uint16_t>(in, buffer);
+			for (int i = 0; i < finalStateNr; ++i) {
+				auto s = readString(in, buffer);
+				tmd.finalStates.insert(State{ s });
+			}
+			auto alphabetNr = readFromBinaryStream<uint16_t>(in, buffer);
+			for (int i = 0; i < alphabetNr; ++i) {
+				auto c = readFromBinaryStream<char>(in, buffer);
+				tmd.alphabet.insert(c);
+			}
+			auto tapeAlphabetNr = readFromBinaryStream<uint16_t>(in, buffer);
+			for (int i = 0; i < tapeAlphabetNr; ++i) {
+				auto c = readFromBinaryStream<char>(in, buffer);
+				tmd.tapeAlphabet.insert(c);
+			}
+			auto blank = readFromBinaryStream<char>(in, buffer);
+			tmd.blank = blank;
+
+			auto transitionNr = readFromBinaryStream<uint16_t>(in, buffer);
+			for (int i = 0; i < transitionNr; ++i) {
+
+				auto currentState = State{ readString(in, buffer) };
+				auto currentChar = readFromBinaryStream<char>(in, buffer);
+				auto nextState = State{ readString(in,buffer) };
+				auto nextChar = readFromBinaryStream<char>(in, buffer);
+				auto hd = readFromBinaryStream<char>(in, buffer);
+				std::string temp;
+				temp.push_back(hd);
+				auto headDirection = getDirection(temp);
+				tmd.transitions.push_back(Transition{ currentState,currentChar,nextChar,nextState,headDirection });
+			}
+		}
+	}
+	catch (...) {
+		in.close();
+	}
+	in.close();
+	return tmd;
 }
 
 //specifies wether a string could be a directive
-bool DiskIO::isDirective(std::string &toTest) {
+
+bool ts_io_intern::isDirective(std::string &toTest) {
 	//TODO maybe flesh out and harden it
 	if (toTest.size() < 2)
 		return false;
@@ -144,8 +201,7 @@ bool DiskIO::isDirective(std::string &toTest) {
 }
 
 //method to simulate a switch on strings. returns DTM as default
-
-MachineType DiskIO::getType(std::string &line) {
+MachineType ts_io_intern::getType(std::string &line) {
 	if (line == ("DTM")) {
 		return DTM;
 	} else if (line == "TM") {
@@ -154,4 +210,22 @@ MachineType DiskIO::getType(std::string &line) {
 		return NTM;
 	}
 	return DTM;
+
+}
+
+std::string ts_io_intern::readString(std::ifstream& in, char* dest) {
+	return readString(in, dest, readSize(in, dest));
+}
+
+std::string ts_io_intern::readString(std::ifstream& in, char* dest, uint16_t size) {
+	std::string toReturn;
+	for (int i = 0; i < size; ++i) {
+		auto c = readFromBinaryStream<char>(in, dest);
+		toReturn.push_back(c);
+	}
+	return toReturn;
+}
+
+uint16_t ts_io_intern::readSize(std::ifstream& in, char* dest) {
+	return readFromBinaryStream<uint16_t>(in, dest);
 }

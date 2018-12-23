@@ -13,6 +13,12 @@ namespace ts_common
 			static Transition Empty;
 			Transition(State currentState, char currentChar,
 				char toWrite, State nextState, HeadDirection headDirection);
+      
+      /**
+		  * \brief Special constructor needed when reading from a csvFile
+		  * \param csvLine the line of the .csv representing a Transition
+		  * \see CSVFormatV0.txt for additional info
+		  */
 			Transition(std::string csvLine);
 			~Transition() override;
 
@@ -42,13 +48,11 @@ namespace ts_common
 		return currentState;
 	}
 
-	inline char Transition::GetCurrentChar() const
-	{
+	inline char Transition::GetCurrentChar() const {
 		return currentChar;
 	}
 
-	inline char Transition::GetToWrite() const
-	{
+	inline char Transition::GetToWrite() const {
 		return toWrite;
 	}
 
@@ -57,8 +61,7 @@ namespace ts_common
 		return nextState;
 	}
 
-	inline HeadDirection Transition::GetHeadDirection() const
-	{
+	inline HeadDirection Transition::GetHeadDirection() const {
 		return headDirection;
 	}
 }
