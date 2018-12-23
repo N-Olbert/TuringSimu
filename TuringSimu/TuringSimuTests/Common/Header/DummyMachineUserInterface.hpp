@@ -10,7 +10,7 @@ namespace ts_common
 	{
 	public:
 		size_t StateChanges;
-		void NotifyInvalidMachineDefinition() override;
+		void NotifyInvalidMachineDefinition(std::string& errorMessage) override;
 		void NotifyInitialized(std::string& tapeInput, std::string& initialState) override;
 		void NotifyTapeWritten(char written) override;
 		void NotifyHeadMoved(HeadDirection direction) override;

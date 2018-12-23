@@ -1,6 +1,6 @@
 #include "..\Header\DummyMachineUserInterface.hpp"
 
-void DummyMachineUserInterface::NotifyInvalidMachineDefinition()
+void DummyMachineUserInterface::NotifyInvalidMachineDefinition(std::string& errorMessage)
 {
 }
 
