@@ -16,8 +16,10 @@ TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string pa
 	} else if (fileExtension == "tmsim") {
 		return ts_io_intern::GetTuringMachineDefinitionFromBinary(path);
 	}
+	TuringMachineDefinition dummy;
+	dummy.error = true;
 	//TODO maybe different handling of bad user input
-	throw std::logic_error("unsupported File extension");
+	return dummy;
 }
 
 TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::string path) {
@@ -25,6 +27,7 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 	bool metStartStateDirective = false;
 	std::ifstream input;
 	TuringMachineDefinition tmd;
+	tmd.error = false;
 	try {
 		input.open(path);
 		if (input.is_open()) {
@@ -61,7 +64,9 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 						break;
 					}
 					case tape: {
-						//TODO set errorbit if this is reached and type is a state machine
+						if (tmd.type == DEA || tmd.type == NEA) {
+							tmd.error = true;
+						}
 						auto vector = split(line);
 						for (auto c : vector) {
 							tapeAlpha.push_back(c[0]);
@@ -88,18 +93,24 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 						break;
 					}
 					case blank: {
-						//TODO set errorbit if this is reached and type is a state machine
+						if (tmd.type == DEA || tmd.type == NEA) {
+							tmd.error = true;
+						}
 						tmd.blank = split(line)[0].at(0);
 						metBlankDirective = true;
 						break;
 					}
 					case transitions: {
-							if(tmd.type==DEA||tmd.type==NEA)
-							{
-								line.push_back(';');
-								line.append(split(line)[1]);
-								line.append(";R");
+						if (tmd.type == DEA || tmd.type == NEA) {
+							line.push_back(';');
+							auto s = split(line)[1];
+							if (!s.empty()) {
+								line.append(s);
+							} else {
+								line.push_back(epsilon);
 							}
+							line.append(";R");
+						}
 						tmd.transitions.emplace_back(Transition{ line });
 						break;
 					}
@@ -117,8 +128,7 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 			}
 			//fulfilling the convenience promises given in CSVFormatV0.txt
 			if (!metBlankDirective) {
-				if(tmd.type==DEA||tmd.type ==NEA)
-				{
+				if (tmd.type == DEA || tmd.type == NEA) {
 					tmd.blank = '#';
 					tmd.tapeAlphabet.insert('#');
 				} else {
@@ -134,11 +144,15 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 			tmd.states.UnionWith(stateVector);
 			tmd.tapeAlphabet.UnionWith(tapeAlpha);
 			tmd.tapeAlphabet.insert(tmd.alphabet.begin(), tmd.alphabet.end());
+		} else {
+			//happens when the std::ifstream couldn't be opened, aka the filepath was bad
+			tmd.error = true;
 		}
 
 	}
 	catch (...) {
 		input.close();
+		tmd.error = true;
 	}
 	input.close();
 	return tmd;
@@ -147,6 +161,7 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromBinary(std::string path) {
 	std::ifstream in;
 	TuringMachineDefinition tmd;
+	tmd.error = false;
 	try {
 		in.open(path);
 		if (in.is_open()) {
@@ -154,7 +169,7 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromBinary(std::
 			char buffer[1024];
 			auto version = readFromBinaryStream<uint16_t>(in, buffer);
 			//TODO maybe different version handling
-			std::string type = readString(in, buffer,3);
+			std::string type = readString(in, buffer, 3);
 			tmd.type = getType(type);
 
 			auto stateNR = readFromBinaryStream<uint16_t>(in, buffer);
@@ -196,10 +211,14 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromBinary(std::
 				auto headDirection = getDirection(temp);
 				tmd.transitions.push_back(Transition{ currentState,currentChar,nextChar,nextState,headDirection });
 			}
+		} else {
+			//happens when the std::ifstream couldn't be opened
+			tmd.error = true;
 		}
 	}
 	catch (...) {
 		in.close();
+		tmd.error = true;
 	}
 	in.close();
 	return tmd;
@@ -208,10 +227,10 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromBinary(std::
 //specifies wether a string could be a directive
 
 bool ts_io_intern::isDirective(std::string &toTest) {
-	//TODO maybe flesh out and harden it
+	//size test, so the method wont crash on single char input
 	if (toTest.size() < 2)
 		return false;
-	return toTest.front() == '%'&&toTest.back() == '%';
+	return toTest.front() == '%' && toTest.back() == '%';
 }
 
 std::string ts_io_intern::readString(std::ifstream& in, char* dest) {

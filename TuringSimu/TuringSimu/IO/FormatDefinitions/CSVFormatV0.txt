@@ -31,7 +31,8 @@ currentState; transitionCharacter; nextState; characterToWrite; movement
 	and characterToWrite are characters specified in the %tape% and %alphabet% directive. Valid options
 	for movement are 'L' to move the head of the TM to the left, 'S' to let the head stay and 'R'
 	to let it move to the right. If the TM isnt of type NTM the combination of currentState and 
-	transitionCharacter needs to be unique*/
+	transitionCharacter needs to be unique.
+	If you want a transition with epsilon (the empty word) specify it like q0;;q1;b;R*/
 
 %tape%
 char;someOtherChar;... /*specifies the characters of the tapealphabet. You may only specify the 

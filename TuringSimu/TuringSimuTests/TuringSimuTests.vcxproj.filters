@@ -46,6 +46,9 @@
     <ClCompile Include="Common\Source\DummyMachineUserInterface.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
+    <ClCompile Include="IO\Source\ErrorTests.cpp">
+      <Filter>IO\Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="IO\TestFiles\parseTest1.csv">
@@ -61,6 +64,15 @@
       <Filter>IO\TestFiles</Filter>
     </None>
     <None Include="IO\TestFiles\parseTest4.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\parseFail1.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\parseFail2.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\parseFail3.csv">
       <Filter>IO\TestFiles</Filter>
     </None>
   </ItemGroup>
