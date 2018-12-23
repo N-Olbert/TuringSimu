@@ -22,6 +22,15 @@
     <Filter Include="IO\Sources">
       <UniqueIdentifier>{170262ef-4d40-4884-93ad-eeaade5a5a1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Business">
+      <UniqueIdentifier>{67b0f819-f17e-4f9a-8357-f03ea0e34989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Business\Sources">
+      <UniqueIdentifier>{75bb35d8-bdfb-4196-9500-01a27e81c69c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Business\Header">
+      <UniqueIdentifier>{a0189b0d-378e-4c67-9892-4ec5207a5034}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\Source\CommonTests.cpp">
@@ -31,6 +40,12 @@
       <Filter>IO\Sources</Filter>
     </ClCompile>
     <ClCompile Include="TestsMain.cpp" />
+    <ClCompile Include="Business\Source\BusinessTests.cpp">
+      <Filter>Business\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\DummyMachineUserInterface.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="IO\TestFiles\parseTest1.csv">
@@ -48,5 +63,10 @@
     <None Include="IO\TestFiles\parseTest4.csv">
       <Filter>IO\TestFiles</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common\Header\DummyMachineUserInterface.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

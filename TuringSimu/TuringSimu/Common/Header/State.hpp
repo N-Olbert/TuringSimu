@@ -19,7 +19,7 @@ namespace ts_common
 			 * \brief Returns the identifier of the state.
 			 * \return The identifier of the state.
 			 */
-			std::string GetIdentifier();
+			std::string& GetIdentifier();
 
 			/*
 			 * Destructor.

@@ -1,4 +1,5 @@
 #pragma once
+#include "TuringMachineTapeHeader.hpp"
 #ifndef TS_TURINGMACHINE
 #include "../../Common/Header/TuringMachineDefinition.hpp"
 #include "../../Common/Header/AbstractMachine.hpp"
@@ -15,17 +16,16 @@ namespace ts_business
 			/**
 			 * \brief The definition of the machine
 			 */
-			ts_common::TuringMachineDefinition definition;
+			TuringMachineDefinition definition;
+			std::unique_ptr<TuringMachineTapeHeader> head;
 		public:
-		TuringMachine(AbstactMachineUserinterface* userinterface, ts_common::TuringMachineDefinition definition)
-			: AbstractMachine(userinterface)
-		{
-			this->definition = definition;
-		}
-
-		void PerformNextStep() override;
-		bool IsFinished() override;
-		~TuringMachine() override;
+			TuringMachine(AbstractMachineUserinterface* userinterface, TuringMachineDefinition& definition);
+			void InitTapeAndMachine(std::string& initText);
+			void PerformNextStep() override;
+			bool IsFinished() override;
+			~TuringMachine() override = default;
+		protected:
+			Transition& GetNextTransition() override;
 	};
 }
 
