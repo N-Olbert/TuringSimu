@@ -14,18 +14,28 @@ void ts_io::saveAsCSV(std::string const &filePath, TuringMachineDefinition &data
 
 			out << directiveToString(states);
 			auto v = data.states.asVector();
-
 			ts_io_intern::writeToCSVFile<State>(out, v);
+
+			out << directiveToString(finalStates);
+			auto finalStates = data.finalStates.asVector();
+			ts_io_intern::writeToCSVFile<State>(out, finalStates);
+
 			out << directiveToString(startState);
 			out << data.beginState.GetIdentifier() << std::endl;
+
 			out << directiveToString(transitions);
 			ts_io_intern::writeToCSVFile<Transition>(out, data.transitions);
-			out << directiveToString(tape);
-			auto anotherVector = data.tapeAlphabet.asVector();
-			ts_io_intern::writeToCSVFile<char>(out, anotherVector);
 
-			out << directiveToString(blank);
-			out << data.blank << std::endl;
+			//a state machine doesn't have a tape so we skip this part if data is 
+			//specifying a state machine
+			if (!(data.type == DEA || data.type == NEA)) {
+				out << directiveToString(tape);
+				auto anotherVector = data.tapeAlphabet.asVector();
+				ts_io_intern::writeToCSVFile<char>(out, anotherVector);
+
+				out << directiveToString(blank);
+				out << data.blank << std::endl;
+			}
 			out << directiveToString(alphabet);
 			auto yetanothervector = data.alphabet.asVector();
 			ts_io_intern::writeToCSVFile<char>(out, yetanothervector);
@@ -61,7 +71,7 @@ void ts_io::saveAsBinary(std::string const &filePath, TuringMachineDefinition &d
 	}
 	out.close();
 }
-
+//TODO needs to change based on TM type since sm transition only has 3 elements
 std::string ts_io_intern::stringifyCSV(Transition & t) {
 	std::string string;
 	auto s = t.GetCurrentState();
@@ -139,8 +149,7 @@ void ts_io_intern::makeBinary(std::ofstream& out, char& c) {
 	out.write(&c, sizeof(char));
 }
 
-void ts_io_intern::makeBinary(std::ofstream& out, std::string& s)
-{
+void ts_io_intern::makeBinary(std::ofstream& out, std::string& s) {
 	for (int i = 0; i < s.length(); ++i) {
 		out.write(&(s.at(i)), sizeof(char));
 	}

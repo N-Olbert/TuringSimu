@@ -8,8 +8,6 @@ qb;n
 qe;f
 %startState%
 q0
-%finalStates%
-qe
 %transitions%
 q0;0;q0;0;R
 q0;1;q0;1;R
@@ -26,7 +24,7 @@ q1;a;q1;a;L
 q1;b;q1;b;L
 q1;#;qe;#;S
 %tape%
-#;0;1;a;b
+0;1;a;b
 %alphabet%
 0;1
 %blank%

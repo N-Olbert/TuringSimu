@@ -28,6 +28,14 @@ stateNameN;[f|n]
 %startState%
 stateName /*sets the state "stateName" as the starting state of the TM*/
 
+%finalStates%
+/*this sets the states "stateName1" to "stateNameN" as final states of the TM. Only one (1)
+state per line is allowed. Every state mentioned here has to appear in the %states% directive.*/
+stateName1
+stateName2
+...
+stateNameN
+
 %transitions%
 currentState; transitionCharacter; nextState; characterToWrite; movement
 	/* currentState and nextState are given stateNames of the %states% directive, transitionCharacter
@@ -46,11 +54,14 @@ char;someOtherChar;... /*specifies the characters of the tapealphabet. You may o
 						here does not result in an error. If no %blank% directive is found, the
 						first character given will be treated as the blank. This might rise an error,
 						if the first character is part of the input alphabet. This definition may
-						span over several lines. Do not end a line with a trailing semicolon (e.g a;)*/
+						span over several lines. Do not end a line with a trailing semicolon (e.g a;).
+						This directive is not allowed when specifying a state machine.*/
 
 %blank%
-blank		/* specifies the blank-symbol of the TM. This does need to reappear in the %tape% directive*/
+blank		/* specifies the blank-symbol of the TM. This does need to reappear in the
+			%tape% directive. This directive is not allowed when specifying a state machine.*/
 
 %alphabet%
 char; otherChar;...	/* specifies the characters of the input alphabet. This definition may span several
-					lines. Do not end a line with a trailing semicolon (e.g a;) */
+					lines. Do not end a line with a trailing semicolon (e.g a;). When specifying a
+					state machine this may not contain the '#' as a character.*/

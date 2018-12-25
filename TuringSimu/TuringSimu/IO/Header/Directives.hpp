@@ -3,7 +3,7 @@
 #define TS_DIRECTIVES
 #include <string>
 namespace ts_io {
-	enum directive { states, tape, alphabet, startState, blank, transitions };
+	enum directive { states, tape, alphabet, startState, finalStates, blank, transitions };
 
 
 
@@ -11,7 +11,7 @@ namespace ts_io {
 	 * \brief Since you cannot use a switch-case statement on strings, this method exists
 	 * \param directive The string to switch on
 	 * \return The enum corresponding to the string
-	 * \throws std::logic_error if the string doesnt represent a directive
+	 * \throws std::logic_error if the string doesn't represent a directive
 	 */
 	directive switchOnDirectives(std::string &directive);
 
