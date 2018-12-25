@@ -15,8 +15,6 @@ directive ts_io::switchOnDirectives(std::string &directive) {
 		return states;
 	} else if (directive == "startState") {
 		return startState;
-	} else if (directive == "finalState") {
-		return finalState;
 	} else if (directive == "blank") {
 		return blank;
 	} else if (directive == "transitions") {
@@ -41,9 +39,6 @@ std::string ts_io::directiveToString(directive directive) {
 		return "%tape%\n";
 	case startState:
 		return "%startState%\n";
-		break;
-	case finalState:
-		return "%finalState%\n";
 	case transitions:
 		return "%transitions%\n";
 		//should never be reached

@@ -49,6 +49,9 @@
     <ClCompile Include="IO\Source\ErrorTests.cpp">
       <Filter>IO\Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Business\Source\VerifyTMDTests.cpp">
+      <Filter>Business\Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="IO\TestFiles\parseTest1.csv">
@@ -73,6 +76,36 @@
       <Filter>IO\TestFiles</Filter>
     </None>
     <None Include="IO\TestFiles\parseFail3.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\parseFail4.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\parseFail5.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\parseTest5.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\VerifyTMDTest1.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\VerifyTMDTest2.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\VerifyTMDTest3.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\VerifyTMDTest4.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\VerifyTMDTest5.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\VerifyTMDTest6.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\VerifyTMDTest7.csv">
       <Filter>IO\TestFiles</Filter>
     </None>
   </ItemGroup>

@@ -3,7 +3,7 @@
 #define TS_DIRECTIVES
 #include <string>
 namespace ts_io {
-	enum directive { states, tape, alphabet, startState, finalState, blank, transitions };
+	enum directive { states, tape, alphabet, startState, blank, transitions };
 
 
 

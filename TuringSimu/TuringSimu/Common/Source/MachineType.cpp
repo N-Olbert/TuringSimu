@@ -30,5 +30,5 @@ MachineType ts_common::getType(std::string &line) {
 	} else if (line == "NEA") {
 		return NEA;
 	}
-	return DTM;
+	throw std::logic_error("Unsupported TuringMachineType");
 }

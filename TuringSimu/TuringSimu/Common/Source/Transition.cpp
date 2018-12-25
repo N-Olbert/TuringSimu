@@ -27,7 +27,7 @@ ts_common::Transition::~Transition() {
 }
 
 /**
- * \brief Counts the number of transitions with the same currentChar and currentState fields 
+ * \brief Counts the number of transitions with the same currentChar and currentState fields
  * \param t The Transition determining the parameters to check
  * \param vector The vector to search
  * \return The count of transitions having the same currentChar and currentState field as the given Transition
@@ -42,6 +42,18 @@ int Transition::countOccurrences(Transition& t, std::vector<Transition> vector) 
 	return count;
 }
 ;
+
+void Transition::setCurrentChar(char c) {
+	this->currentChar = c;
+}
+
+void Transition::setToWrite(char c) {
+	this->toWrite = c;
+}
+
+void Transition::setHeadDirection(HeadDirection hd) {
+	this->headDirection = hd;
+}
 
 bool Transition::operator==(const Transition& other) const noexcept {
 	return this->toWrite == other.toWrite&& this->currentChar == other.currentChar

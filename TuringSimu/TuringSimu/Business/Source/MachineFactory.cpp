@@ -19,16 +19,22 @@ bool MachineFactory::IsValidMachineDefinition(TuringMachineDefinition & definiti
 	if (definition.error) {
 		return false;
 	}
-	for (const auto &element : definition.finalStates) {
-		if (definition.states.find(element) == definition.states.end()) {
-			return false;
-		}
+	//no need to check finalStates and States. There is no way for States to be wrong and 
+	//final states are also defined during the %states% directive and thus are automatically
+	//added to States. So you cant have a State that is included in finalStates but not in
+	//states
+
+	//Because alphabet is added to tape in the end, tape must include every character of
+	//the input alphabet.
+
+	//The blank symbol can only be a member of the tapeAlphabet
+	if (definition.alphabet.find(definition.blank) != definition.alphabet.end()) {
+		return false;
 	}
-	//checking if every member of the alphabet is allowed on the tape
-	for (const auto &element : definition.alphabet) {
-		if (definition.tapeAlphabet.find(element) == definition.tapeAlphabet.end()) {
-			return false;
-		}
+
+	//the beginState must be a member of states
+	if (definition.states.find(definition.beginState) == definition.states.end()) {
+		return false;
 	}
 
 	for (auto & element : definition.transitions) {
@@ -40,7 +46,6 @@ bool MachineFactory::IsValidMachineDefinition(TuringMachineDefinition & definiti
 		if (definition.tapeAlphabet.find(element.GetCurrentChar()) == definition.tapeAlphabet.end()) {
 			return false;
 		}
-		//TODO EPSILON
 		//checking that the nextState of the transition was actually defined
 		if (definition.states.find(element.GetNextState()) == definition.states.end()) {
 			return false;
@@ -53,8 +58,8 @@ bool MachineFactory::IsValidMachineDefinition(TuringMachineDefinition & definiti
 		//HeadDirection cannot be wrong since that throws an exception during parsing which
 		//would reflect in the previously checked error bit
 
-		//checking that every pair of currentState and currentChar is unique if type is deter-
-		//ministic
+		//checking that every pair of currentState and currentChar is unique if type is 
+		//deterministic
 		if (definition.type == DEA || definition.type == DTM) {
 			if (Transition::countOccurrences(element, definition.transitions) > 1) {
 				return false;

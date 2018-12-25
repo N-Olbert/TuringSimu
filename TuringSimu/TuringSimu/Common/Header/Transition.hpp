@@ -20,7 +20,7 @@ namespace ts_common
 			* \param csvLine the line of the .csv representing a Transition
 			* \see CSVFormatV0.txt for additional info
 			*/
-		Transition(std::string csvLine);
+		explicit Transition(std::string csvLine);
 		~Transition() override;
 
 		static int countOccurrences(Transition& t, std::vector<Transition> vector);
@@ -29,6 +29,10 @@ namespace ts_common
 		char GetToWrite() const;
 		State& GetNextState();
 		HeadDirection GetHeadDirection() const;
+
+		void setCurrentChar(char c);
+		void setToWrite(char c);
+		void setHeadDirection(HeadDirection hd);
 
 		bool operator==(const Transition& other) const noexcept override;
 		bool operator!=(const Transition& other) const noexcept override;

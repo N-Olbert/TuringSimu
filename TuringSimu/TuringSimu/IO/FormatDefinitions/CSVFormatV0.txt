@@ -3,7 +3,10 @@ parsed to a TuringMachineDefinition */
 versionNumber /* expected to be of type long at most. If its omitted the most recent version is 
 				 assumed. Valid option here are 0. */
 TypeOfTM /* defines the type of the TM that is specified in this file. Valid values are 'TM', 'NTM' 
-		 (non deterministic) and 'DTM' (deterministic). 'TM' is interpreted like a DTM.*/
+		 (non deterministic) and 'DTM' (deterministic),'TM' is interpreted like 'DTM'.
+		 Furthermore 'NEA' as well as 'DEA' are valid values and represent finite state machines.
+		 These will implicitly be converted to a corresponding TM.
+		 */
 
 /* All following directives mark the start of a certain section and do not need to appear in the exact
 order they are mentioned in this file. To make the directives work the '%'-character is used as a
@@ -32,7 +35,10 @@ currentState; transitionCharacter; nextState; characterToWrite; movement
 	for movement are 'L' to move the head of the TM to the left, 'S' to let the head stay and 'R'
 	to let it move to the right. If the TM isnt of type NTM the combination of currentState and 
 	transitionCharacter needs to be unique.
-	If you want a transition with epsilon (the empty word) specify it like q0;;q1;b;R*/
+	Transitions for finite state machines (DEA,NEA) are specified by only the first 3 parameters
+	(currentState; transitionCharacter; nextState).
+	If you want a transition with epsilon (the empty word) specify it like q0;;q1. This is only
+	allowed for NEAs.*/
 
 %tape%
 char;someOtherChar;... /*specifies the characters of the tapealphabet. You may only specify the 

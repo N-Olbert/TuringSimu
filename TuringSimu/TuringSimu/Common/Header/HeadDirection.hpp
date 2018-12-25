@@ -38,8 +38,7 @@ namespace ts_common
 		} else if (line == "S") {
 			return Stay;
 		}
-		//TODO other handling of bad user input
-		throw std::logic_error("Parse-Error: Unknown Headdirection");
+		throw std::logic_error("Parse-Error: Unknown HeadDirection");
 	}
 }
 
