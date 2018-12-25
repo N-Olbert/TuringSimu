@@ -52,6 +52,12 @@
     <ClCompile Include="Business\Source\VerifyTMDTests.cpp">
       <Filter>Business\Sources</Filter>
     </ClCompile>
+    <ClCompile Include="IO\Source\SavingTests.cpp">
+      <Filter>IO\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="IO\Source\StateMachineTests.cpp">
+      <Filter>IO\Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="IO\TestFiles\parseTest1.csv">

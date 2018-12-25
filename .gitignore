@@ -340,3 +340,5 @@ ASALocalRun/
 /TuringSimu/TuringSimuTests/bin4.tmsim
 /TuringSimu/TuringSimuTests/bin5.tmsim
 /TuringSimu/TuringSimuTests/parseTest5Saved.csv
+/TuringSimu/TuringSimuTests/SaveAsBinaryTest.tmsim
+/TuringSimu/TuringSimuTests/SaveAsCSVTest.csv

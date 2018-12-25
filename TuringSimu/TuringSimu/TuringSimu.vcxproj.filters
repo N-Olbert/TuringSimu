@@ -60,14 +60,8 @@
     <ClCompile Include="Common\Source\State.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Header\AbstractMachineUserinterface.hpp">
-      <Filter>Common\Header</Filter>
-    </ClCompile>
     <ClCompile Include="IO\Source\DiskOutput.cpp">
       <Filter>IO\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Source\HashSet.cpp">
-      <Filter>Common\Source</Filter>
     </ClCompile>
     <ClCompile Include="IO\Source\DiskIO.cpp">
       <Filter>IO\Source</Filter>
@@ -78,6 +72,8 @@
     <ClCompile Include="Common\Source\MachineType.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Business\Source\TuringMachineTapeHeader.cpp" />
+    <ClCompile Include="Common\Source\AbstractMachineUserinterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\Header\ConsoleUI.hpp">
@@ -125,6 +121,9 @@
     <ClInclude Include="IO\Header\Directives.hpp">
       <Filter>IO\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Business\Header\TuringMachineTapeHeader.hpp" />
+    <ClInclude Include="Common\Header\AbstractMachineUserinterface.hpp" />
+    <ClInclude Include="Common\Header\BaseTransition.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="IO\FormatDefinitions\BinaryFormatV0.txt">

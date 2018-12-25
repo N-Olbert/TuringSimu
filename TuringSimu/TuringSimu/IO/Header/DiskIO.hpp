@@ -4,7 +4,7 @@
 #include <string>
 #include "../../Common/Header/TuringMachineDefinition.hpp"
 #include <fstream>
-
+//for everything concerning public IO-Action
 namespace ts_io
 {
 	using namespace ts_common;
@@ -16,7 +16,7 @@ namespace ts_io
 	 */
 	TuringMachineDefinition GetTuringMachineDefinitionFromFile(std::string path);
 
-	//Namespace for nestings sake
+	//Namespace for nesting's sake
 	namespace ts_io_intern {
 
 		/**
@@ -35,8 +35,31 @@ namespace ts_io
 		 */
 		bool isDirective(std::string &toTest);
 
+		/**
+		 * \brief Reads a string from the given input stream into the specified buffer. Stringlength is
+		 * //determined by a call to \see readSize
+		 * \param in The stream to read from
+		 * \param dest The buffer to read into
+		 * \return The read string
+		 */
 		std::string readString(std::ifstream &in, char* dest);
+
+		/**
+		 * \brief Reads a string from the given fileinputstream
+		 * \param in The fileinputstream to read from
+		 * \param dest The buffer to read into
+		 * \param size The length of characters to read
+		 * \return The read string
+		 * \throws std::runtime_error if the filestream is invalid
+		 */
 		std::string readString(std::ifstream &in, char* dest,uint16_t size);
+
+		/**
+		 * \brief Reads a uint16_t from the given stream
+		 * \param in The fileinputstream to read from
+		 * \param dest The buffer to read into
+		 * \return The read uint16_t
+		 */
 		uint16_t readSize(std::ifstream& in, char* dest);
 		//taken from the lecture
 		template <typename typ1>

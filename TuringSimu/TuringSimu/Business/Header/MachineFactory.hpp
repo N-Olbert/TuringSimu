@@ -23,7 +23,7 @@ namespace ts_business
 		private:
 			/**
 			 * \brief Checks whether a given machine definition is valid
-			 * \param definition The definition to check.
+			 * \param definition The definition to check
 			 * \return true if machine is valid, false otherwise
 			 */
 			static bool IsValidMachineDefinition(TuringMachineDefinition& definition);
