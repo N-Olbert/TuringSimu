@@ -1,6 +1,5 @@
 #include <boost/test/unit_test.hpp>
 #include "../../../TuringSimu/IO/Header/DiskIO.hpp"
-#include <iostream>
 #include "../../../TuringSimu/Common/Header/Utility.hpp"
 #include "../../../TuringSimu/IO/Header/DiskOutput.hpp"
 using namespace ts_common;
@@ -107,6 +106,7 @@ BOOST_AUTO_TEST_CASE(ParseCSV_MinimumSpecified) {
 	ts_io::saveAsCSV("./parseTest2Saved.csv", tmd);
 	ts_io::saveAsBinary("./bin2.tmsim", tmd);
 }
+
 BOOST_AUTO_TEST_CASE(ParseCSV_EmptyLines) {
 	//working directory for VisualStudio is the directory in which the .vcxproj lies. So your relative path has
 	//to start there
@@ -158,6 +158,7 @@ BOOST_AUTO_TEST_CASE(ParseCSV_EmptyLines) {
 	ts_io::saveAsCSV("./parseTest3Saved.csv", tmd);
 	ts_io::saveAsBinary("./bin3.tmsim", tmd);
 }
+
 BOOST_AUTO_TEST_CASE(ParseBinary) {
 	//working directory for VisualStudio is the directory in which the .vcxproj lies. So your relative path has
 	//to start there
@@ -208,6 +209,7 @@ BOOST_AUTO_TEST_CASE(ParseBinary) {
 	BOOST_REQUIRE(tmd.blank == '#');
 	ts_io::saveAsCSV("./bin.csv", tmd);
 }
+
 BOOST_AUTO_TEST_CASE(ParseStateMachine) {
 	auto tmd = ts_io::GetTuringMachineDefinitionFromFile("./IO/TestFiles/parseTest4.csv");
 
@@ -291,9 +293,11 @@ BOOST_AUTO_TEST_CASE(ParseEpsilon)
 	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "q11;1;qf;1;R" }));
 	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "qu;1;qs;1;S" }));
 	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "qu;0;qs;0;S" }));
+	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "qu;#;qs;#;S" }));
 	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "qs;1;qu;1;S" }));
 	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "qs;0;qu;0;S" }));
-	BOOST_REQUIRE(tmd.transitions.size() == 14);
+	BOOST_REQUIRE(vectorContains(tmd.transitions, Transition{ "qs;#;qu;#;S" }));
+	BOOST_REQUIRE(tmd.transitions.size() == 16);
 
 	BOOST_REQUIRE(tmd.alphabet.find('1') != tmd.alphabet.end());
 	BOOST_REQUIRE(tmd.alphabet.find('0') != tmd.alphabet.end());

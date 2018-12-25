@@ -19,7 +19,9 @@ directive ts_io::switchOnDirectives(std::string &directive) {
 		return blank;
 	} else if (directive == "transitions") {
 		return transitions;
-	} else throw std::exception("Not a valid directive");
+	} else if (directive == "finalStates") {
+		return finalStates;
+	} else throw std::logic_error("Not a valid directive");
 }
 
 std::string ts_io::getDirectiveString(std::string &directive) {
@@ -41,6 +43,8 @@ std::string ts_io::directiveToString(directive directive) {
 		return "%startState%\n";
 	case transitions:
 		return "%transitions%\n";
+	case finalStates:
+		return "%finalStates%\n";
 		//should never be reached
 	default: return "";
 	}

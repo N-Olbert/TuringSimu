@@ -56,3 +56,17 @@ BOOST_AUTO_TEST_CASE(UndefinedToWrite) {
 	auto machine = MachineFactory::CreateMachineFromFile(path, ui.get());
 	BOOST_REQUIRE(machine == nullptr);
 }
+
+BOOST_AUTO_TEST_CASE(UndefinedFinalState) {
+	auto path = std::string{ "./IO/TestFiles/VerifyTMDTest8.csv" };
+	auto ui = std::make_unique<DummyMachineUserInterface>();
+	auto machine = MachineFactory::CreateMachineFromFile(path, ui.get());
+	BOOST_REQUIRE(machine == nullptr);
+}
+
+BOOST_AUTO_TEST_CASE(BlankNotOnTape) {
+	auto path = std::string{ "./IO/TestFiles/VerifyTMDTest9.csv" };
+	auto ui = std::make_unique<DummyMachineUserInterface>();
+	auto machine = MachineFactory::CreateMachineFromFile(path, ui.get());
+	BOOST_REQUIRE(machine == nullptr);
+}

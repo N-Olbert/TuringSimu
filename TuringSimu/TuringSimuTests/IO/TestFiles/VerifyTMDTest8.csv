@@ -8,8 +8,6 @@ qb;n
 qe;f
 %startState%
 q0
-%finalStates%
-qe
 %transitions%
 q0;0;q0;0;R
 q0;1;q0;1;R
@@ -31,3 +29,5 @@ q1;#;qe;#;S
 0;1
 %blank%
 #
+%finalStates%
+errorio

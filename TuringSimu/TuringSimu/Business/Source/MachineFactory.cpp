@@ -19,16 +19,25 @@ bool MachineFactory::IsValidMachineDefinition(TuringMachineDefinition & definiti
 	if (definition.error) {
 		return false;
 	}
-	//no need to check finalStates and States. There is no way for States to be wrong and 
-	//final states are also defined during the %states% directive and thus are automatically
-	//added to States. So you cant have a State that is included in finalStates but not in
-	//states
 
-	//Because alphabet is added to tape in the end, tape must include every character of
-	//the input alphabet.
+	//checking that every member of final states was specified as a state
+	for (const auto& element : definition.finalStates) {
+		if (definition.states.find(element) == definition.states.end()) {
+			return false;
+		}
+	}
 
-	//The blank symbol can only be a member of the tapeAlphabet
+	//Because alphabet is added to tapeAlphabet after parsing, tape must include every 
+	//character of the input alphabet.
+
+	//Checking that the blank symbol isn't a member of the input alphabet
 	if (definition.alphabet.find(definition.blank) != definition.alphabet.end()) {
+		return false;
+	}
+
+	//Checking that the blanksymbol is a member of the tapeAlphabet
+	if (definition.tapeAlphabet.find(definition.blank)==definition.tapeAlphabet.end())
+	{
 		return false;
 	}
 

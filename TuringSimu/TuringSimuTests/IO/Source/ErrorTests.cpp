@@ -1,7 +1,5 @@
 #include <boost/test/unit_test.hpp>
 #include "../../../TuringSimu/IO/Header/DiskIO.hpp"
-#include <iostream>
-#include "../../../TuringSimu/Common/Header/Utility.hpp"
 #include "../../../TuringSimu/IO/Header/DiskOutput.hpp"
 using namespace ts_common;
 using namespace boost::unit_test;

@@ -13,7 +13,6 @@ TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string pa
 	//then just returns the entire string
 	auto const index = path.find_last_of('.');
 	auto const fileExtension = path.substr(index + 1, path.length() - index);
-	std::cout << fileExtension;
 	if (fileExtension == "csv") {
 		return ts_io_intern::GetTuringMachineDefinitionFromCSV(path);
 	} else if (fileExtension == "tmsim") {
@@ -21,7 +20,6 @@ TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string pa
 	}
 	TuringMachineDefinition dummy;
 	dummy.error = true;
-	//TODO maybe different handling of bad user input
 	return dummy;
 }
 
@@ -122,7 +120,10 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 						}
 						break;
 					}
-
+					case finalStates: {
+						tmd.finalStates.insert(State{ line });
+						break; }
+					default:;
 					}
 				}
 				if (!input.eof()) {
@@ -164,7 +165,7 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 				//need to convert them
 				for (auto const element : transitionsWithEpsilon) {
 					//converts qX;\epsilon;qY;\epsilon;R to qX;a;qY;a;S
-					for (auto value : tmd.alphabet) {
+					for (auto value : tmd.tapeAlphabet) {
 						auto k = element;
 						k.setCurrentChar(value);
 						k.setToWrite(value);
@@ -240,7 +241,7 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromBinary(std::
 				std::string temp;
 				temp.push_back(hd);
 				auto headDirection = getDirection(temp);
-				tmd.transitions.emplace_back(currentState,currentChar,nextChar,nextState,headDirection);
+				tmd.transitions.emplace_back(currentState, currentChar, nextChar, nextState, headDirection);
 			}
 		} else {
 			//happens when the std::ifstream couldn't be opened

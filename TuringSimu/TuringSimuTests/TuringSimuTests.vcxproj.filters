@@ -108,6 +108,12 @@
     <None Include="IO\TestFiles\VerifyTMDTest7.csv">
       <Filter>IO\TestFiles</Filter>
     </None>
+    <None Include="IO\TestFiles\VerifyTMDTest8.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\VerifyTMDTest9.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Header\DummyMachineUserInterface.hpp">
