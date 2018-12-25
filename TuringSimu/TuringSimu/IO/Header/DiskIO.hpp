@@ -35,14 +35,6 @@ namespace ts_io
 		 */
 		bool isDirective(std::string &toTest);
 
-
-		/**
-		 * \brief Gets the appropriate enum for the given string, Default return is DTM
-		 * \param in the string containing the TM-Type
-		 * \return The appropriate enum
-		 */
-		MachineType getType(std::string &in);
-
 		std::string readString(std::ifstream &in, char* dest);
 		std::string readString(std::ifstream &in, char* dest,uint16_t size);
 		uint16_t readSize(std::ifstream& in, char* dest);

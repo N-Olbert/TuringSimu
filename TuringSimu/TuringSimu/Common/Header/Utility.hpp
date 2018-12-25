@@ -2,6 +2,14 @@
 #define TM_UTILITY
 #include <vector>
 namespace ts_common {
+
+	/**
+	 * \brief Checks if the element is contained in the vector
+	 * \tparam T Type of the template
+	 * \param vector The vector to search
+	 * \param element The element to find
+	 * \return True if the vector holds the element, false otherwise
+	 */
 	template <typename T>  bool vectorContains(std::vector<T> vector, T element) {
 		return std::find(vector.begin(), vector.end(), element) != vector.end();
 	}

@@ -13,16 +13,47 @@ Transition::Transition(State currentState, char currentChar,
 }
 Transition::Transition(std::string csvLine) {
 	auto rawData = split(csvLine);
-	this->currentChar = rawData[1].at(0);
+	if (!rawData[1].empty()) {
+		this->currentChar = rawData[1].at(0);
+	} else {
+		this->currentChar = epsilon;
+	}
 	this->currentState = State{ rawData[0] };
 	this->nextState = State{ rawData[2] };
 	this->toWrite = rawData[3].at(0);
 	this->headDirection = getDirection(rawData[4]);
 }
-ts_common::Transition::~Transition()
-{
+ts_common::Transition::~Transition() {
+}
+
+/**
+ * \brief Counts the number of transitions with the same currentChar and currentState fields
+ * \param t The Transition determining the parameters to check
+ * \param vector The vector to search
+ * \return The count of transitions having the same currentChar and currentState field as the given Transition
+ */
+int Transition::countOccurrences(Transition& t, std::vector<Transition> vector) {
+	int count = 0;
+	for (const auto& element : vector) {
+		if (element.currentState == t.currentState && element.currentChar == t.currentChar) {
+			count++;
+		}
+	}
+	return count;
 }
 ;
+
+void Transition::setCurrentChar(char c) {
+	this->currentChar = c;
+}
+
+void Transition::setToWrite(char c) {
+	this->toWrite = c;
+}
+
+void Transition::setHeadDirection(HeadDirection hd) {
+	this->headDirection = hd;
+}
 
 bool Transition::operator==(const Transition& other) const noexcept {
 	return this->toWrite == other.toWrite&& this->currentChar == other.currentChar
@@ -37,7 +68,7 @@ bool Transition::operator==(const Transition& other) const noexcept {
  * \return True if their unqual, false otherwise
  */
 bool Transition::operator!=(const Transition& other) const noexcept {
-	return !(*this==other);
+	return !(*this == other);
 }
 
 

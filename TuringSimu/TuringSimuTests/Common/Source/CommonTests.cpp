@@ -18,4 +18,11 @@ BOOST_AUTO_TEST_CASE(TransitionConstructorFromCSVLineTest) {
 	BOOST_REQUIRE(t.GetHeadDirection() == Right);
 	BOOST_REQUIRE(t.GetNextState() == State{ "q0" });
 	BOOST_REQUIRE(t.GetToWrite() == '0');
+
+	 t = Transition("q0;;q0;0;R");
+	BOOST_REQUIRE(t.GetCurrentState() == State{ "q0" });
+	BOOST_REQUIRE(t.GetCurrentChar() == '\0');
+	BOOST_REQUIRE(t.GetHeadDirection() == Right);
+	BOOST_REQUIRE(t.GetNextState() == State{ "q0" });
+	BOOST_REQUIRE(t.GetToWrite() == '0');
 }
