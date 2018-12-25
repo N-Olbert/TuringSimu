@@ -120,7 +120,6 @@
     <ClCompile Include="Business\Source\TuringMachineTapeHeader.cpp" />
     <ClCompile Include="Common\Header\BaseComparable.hpp" />
     <ClCompile Include="Common\Source\AbstractMachineUserinterface.cpp" />
-    <ClCompile Include="Common\Source\HashSet.cpp" />
     <ClCompile Include="Common\Source\MachineType.cpp" />
     <ClCompile Include="Common\Source\State.cpp" />
     <ClCompile Include="Common\Source\Transition.cpp" />

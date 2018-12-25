@@ -129,6 +129,8 @@
     <ClCompile Include="Common\Source\DummyMachineUserInterface.cpp" />
     <ClCompile Include="IO\Source\ErrorTests.cpp" />
     <ClCompile Include="IO\Source\IOTests.cpp" />
+    <ClCompile Include="IO\Source\SavingTests.cpp" />
+    <ClCompile Include="IO\Source\StateMachineTests.cpp" />
     <ClCompile Include="TestsMain.cpp" />
   </ItemGroup>
   <ItemGroup>

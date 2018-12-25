@@ -2,6 +2,11 @@
 #include <string>
 using namespace ts_common;
 
+/**
+ * \brief Returns the string corresponding to the enum value
+ * \param type The enum value to stringify
+ * \return The string representation of the enum value 
+ */
 std::string ts_common::TypeToString(MachineType type) {
 	switch (type) {
 	case DTM:
@@ -17,7 +22,13 @@ std::string ts_common::TypeToString(MachineType type) {
 	}
 }
 
-//method to simulate a switch on strings. returns DTM as default
+
+/**
+ * \brief Returns the enum value corresponding to the string
+ * \param line The string representation of an enum value
+ * \return The corresponding enum value
+ * \throws std::logic_error if the string doesn't correspond to an enum value
+ */
 MachineType ts_common::getType(std::string &line) {
 	if (line == ("DTM")) {
 		return DTM;

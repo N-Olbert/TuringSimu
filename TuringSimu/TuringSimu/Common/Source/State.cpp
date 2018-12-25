@@ -1,13 +1,9 @@
 #include "../Header/State.hpp"
 using namespace ts_common;
 
-State::State()
+State::State(std::string identifier)
 {
-}
-
-State::State(std::string identifer)
-{
-	this->identifier = identifer;
+	this->identifier = identifier;
 }
 
 std::string& State::GetIdentifier()
