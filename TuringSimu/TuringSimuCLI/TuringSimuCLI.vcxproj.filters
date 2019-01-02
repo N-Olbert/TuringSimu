@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Business">
+      <UniqueIdentifier>{9828c972-7fa7-4c05-aee9-5b84b09b3ee1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Business\Header">
+      <UniqueIdentifier>{15f0ec48-ecc2-4057-aded-0408a928553b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Business\Sources">
+      <UniqueIdentifier>{0b33671b-a320-48cc-bbf1-9ab17bf138dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{5796248b-ee5c-40eb-94b3-1197f924c958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Header">
+      <UniqueIdentifier>{f114ed58-70bc-47b4-b511-ebc90cbc55d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Sources">
+      <UniqueIdentifier>{3834fa89-4ca7-428a-8726-23d21188282a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UI\Header\Console.hpp">
+      <Filter>UI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Header\ConsoleController.hpp">
+      <Filter>Business\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="UI\Sources\Console.cpp">
+      <Filter>UI\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\Sources\ConsoleController.cpp">
+      <Filter>Business\Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

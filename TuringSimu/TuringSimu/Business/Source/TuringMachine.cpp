@@ -1,6 +1,8 @@
 #include "../Header/TuringMachine.hpp"
+#include "../../../TuringSimuUICommon/UI/Header/Localization.hpp"
 using namespace ts_common;
 using namespace ts_business;
+using namespace ts_ui;
 using AMU = AbstractMachineUserinterface;
 
 TuringMachine::TuringMachine(AbstractMachineUserinterface* userinterface, TuringMachineDefinition& definition)
@@ -10,20 +12,22 @@ TuringMachine::TuringMachine(AbstractMachineUserinterface* userinterface, Turing
 	this->head = std::make_unique<TuringMachineTapeHeader>(this->definition.blank);
 }
 
-void TuringMachine::InitTapeAndMachine(std::string& initText)
+bool TuringMachine::Init(std::string& initText)
 {
 	auto validChars = this->definition.tapeAlphabet;
 	for (char c : initText)
 	{
 		if(!validChars.Contains(c))
 		{
-			throw std::logic_error("Invalid char within input string.");
+			AMU::NotifyInvalidMachineDefinition(GetUI(), Localization::GetString(LocId::ErrorInvalidCharOnTape));
+			return false;
 		}
 	}
 
 	this->head->InitWith(initText);
 	this->currentState = this->definition.beginState;
 	AMU::NotifyInitialized(GetUI(), initText, this->currentState.GetIdentifier());
+	return true;
 }
 
 void TuringMachine::PerformNextStep()
@@ -53,6 +57,16 @@ bool TuringMachine::IsFinished()
 	}
 
 	return false;
+}
+
+std::string TuringMachine::GetSpecificValue(const std::string& valueIdentifier) const
+{
+	if (valueIdentifier == "BLANK")
+	{
+		return std::string{ this->definition.blank };
+	}
+
+	return UnknownSpecificValue;
 }
 
 Transition& TuringMachine::GetNextTransition()

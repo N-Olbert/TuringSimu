@@ -20,9 +20,10 @@ namespace ts_business
 			std::unique_ptr<TuringMachineTapeHeader> head;
 		public:
 			TuringMachine(AbstractMachineUserinterface* userinterface, TuringMachineDefinition& definition);
-			void InitTapeAndMachine(std::string& initText);
+			bool Init(std::string& initText) override;
 			void PerformNextStep() override;
 			bool IsFinished() override;
+			std::string GetSpecificValue(const std::string& valueIdentifier) const override;
 			~TuringMachine() override = default;
 		protected:
 			Transition& GetNextTransition() override;

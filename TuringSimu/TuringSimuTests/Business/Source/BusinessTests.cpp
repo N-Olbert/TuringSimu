@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE(TestPalindromGeratorTuringMachine) {
 	auto tm = dynamic_cast<TuringMachine*>(val);
 	BOOST_REQUIRE(tm);
 	auto toParse = std::string{"001"};
-	tm->InitTapeAndMachine(toParse);
+	tm->Init(toParse);
 	while (!tm->IsFinished())
 	{
 		tm->PerformNextStep();

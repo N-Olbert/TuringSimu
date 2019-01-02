@@ -10,11 +10,11 @@ namespace ts_common
 	{
 	public:
 		size_t StateChanges;
-		void NotifyInvalidMachineDefinition(std::string& errorMessage) override;
-		void NotifyInitialized(std::string& tapeInput, std::string& initialState) override;
+		void NotifyInvalidMachineDefinition(const std::string& errorMessage) override;
+		void NotifyInitialized(const std::string& tapeInput, const std::string& initialState) override;
 		void NotifyTapeWritten(char written) override;
 		void NotifyHeadMoved(HeadDirection direction) override;
-		void NotifyStateChanged(std::string& newState) override;
+		void NotifyStateChanged(const std::string& newState) override;
 		~DummyMachineUserInterface() = default;
 	};
 }

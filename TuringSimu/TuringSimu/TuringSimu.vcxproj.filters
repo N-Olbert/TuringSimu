@@ -72,8 +72,15 @@
     <ClCompile Include="Common\Source\MachineType.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Business\Source\TuringMachineTapeHeader.cpp" />
-    <ClCompile Include="Common\Source\AbstractMachineUserinterface.cpp" />
+    <ClCompile Include="Business\Source\TuringMachineTapeHeader.cpp">
+      <Filter>Business\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\AbstractMachineUserinterface.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\AbstractMachine.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI\Header\ConsoleUI.hpp">
@@ -121,9 +128,15 @@
     <ClInclude Include="IO\Header\Directives.hpp">
       <Filter>IO\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Business\Header\TuringMachineTapeHeader.hpp" />
-    <ClInclude Include="Common\Header\AbstractMachineUserinterface.hpp" />
-    <ClInclude Include="Common\Header\BaseTransition.hpp" />
+    <ClInclude Include="Common\Header\BaseTransition.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\AbstractMachineUserinterface.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Header\TuringMachineTapeHeader.hpp">
+      <Filter>Business\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="IO\FormatDefinitions\BinaryFormatV0.txt">
