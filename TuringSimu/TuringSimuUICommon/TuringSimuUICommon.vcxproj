@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{A79DEED0-F4DC-4B86-8384-B5B24BC61322}</ProjectGuid>
-    <RootNamespace>TuringSimu</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{D8A9E4E6-A9C8-46CC-874A-1978153A2BBF}</ProjectGuid>
+    <RootNamespace>TuringSimuUICommon</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -39,7 +39,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -115,48 +115,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Business\Source\MachineFactory.cpp" />
-    <ClCompile Include="Business\Source\TuringMachine.cpp" />
-    <ClCompile Include="Business\Source\TuringMachineTapeHeader.cpp" />
-    <ClCompile Include="Common\Header\BaseComparable.hpp" />
-    <ClCompile Include="Common\Source\AbstractMachine.cpp" />
-    <ClCompile Include="Common\Source\AbstractMachineUserinterface.cpp" />
-    <ClCompile Include="Common\Source\MachineType.cpp" />
-    <ClCompile Include="Common\Source\State.cpp" />
-    <ClCompile Include="Common\Source\Transition.cpp" />
-    <ClCompile Include="IO\Source\Directives.cpp" />
-    <ClCompile Include="IO\Source\DiskIO.cpp" />
-    <ClCompile Include="IO\Source\DiskOutput.cpp" />
-    <ClCompile Include="UI\Source\ConsoleUI.cpp" />
+    <ClInclude Include="UI\Header\Localization.hpp" />
+    <ClInclude Include="UI\Header\Result.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Business\Header\MachineFactory.hpp" />
-    <ClInclude Include="Business\Header\TuringMachine.hpp" />
-    <ClInclude Include="Business\Header\TuringMachineTapeHeader.hpp" />
-    <ClInclude Include="Common\Header\AbstractMachine.hpp" />
-    <ClInclude Include="Common\Header\AbstractMachineUserinterface.hpp" />
-    <ClInclude Include="Common\Header\BaseTransition.hpp" />
-    <ClInclude Include="Common\Header\ComparableHelpers.hpp" />
-    <ClInclude Include="Common\Header\HashSet.hpp" />
-    <ClInclude Include="Common\Header\HeadDirection.hpp" />
-    <ClInclude Include="Common\Header\MachineType.hpp" />
-    <ClInclude Include="Common\Header\State.hpp" />
-    <ClInclude Include="Common\Header\Transition.hpp" />
-    <ClInclude Include="Common\Header\TuringMachineDefinition.hpp" />
-    <ClInclude Include="Common\Header\Utility.hpp" />
-    <ClInclude Include="IO\Header\Directives.hpp" />
-    <ClInclude Include="IO\Header\DiskIO.hpp" />
-    <ClInclude Include="IO\Header\DiskOutput.hpp" />
-    <ClInclude Include="UI\Header\ConsoleUI.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="IO\FormatDefinitions\BinaryFormatV0.txt" />
-    <Text Include="IO\FormatDefinitions\CSVFormatV0.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TuringSimuUICommon\TuringSimuUICommon.vcxproj">
-      <Project>{d8a9e4e6-a9c8-46cc-874a-1978153a2bbf}</Project>
-    </ProjectReference>
+    <ClCompile Include="UI\Sources\Localization.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

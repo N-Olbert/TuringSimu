@@ -5,24 +5,30 @@ using namespace ts_business;
 using namespace ts_common;
 
 std::unique_ptr<AbstractMachine> MachineFactory::CreateMachineFromFile(std::string& path,
-	AbstractMachineUserinterface* observingUI) {
+	AbstractMachineUserinterface* observingUI)
+{
 	auto definition = ts_io::GetTuringMachineDefinitionFromFile(path);
-	if (IsValidMachineDefinition(definition)) {
-		auto result = std::unique_ptr<AbstractMachine>(new TuringMachine{ observingUI, definition });
+	if (IsValidMachineDefinition(definition))
+	{
+		auto result = std::unique_ptr<AbstractMachine>(new TuringMachine{observingUI, definition});
 		return result;
 	}
 
 	return std::unique_ptr<AbstractMachine>(nullptr);
 }
 
-bool MachineFactory::IsValidMachineDefinition(TuringMachineDefinition & definition) {
-	if (definition.error) {
+bool MachineFactory::IsValidMachineDefinition(TuringMachineDefinition & definition)
+{
+	if (definition.error)
+	{
 		return false;
 	}
 
 	//checking that every member of final states was specified as a state
-	for (const auto& element : definition.finalStates) {
-		if (definition.states.find(element) == definition.states.end()) {
+	for (const auto& element : definition.finalStates)
+	{
+		if (definition.states.find(element) == definition.states.end())
+		{
 			return false;
 		}
 	}
@@ -31,36 +37,43 @@ bool MachineFactory::IsValidMachineDefinition(TuringMachineDefinition & definiti
 	//character of the input alphabet.
 
 	//Checking that the blank symbol isn't a member of the input alphabet
-	if (definition.alphabet.find(definition.blank) != definition.alphabet.end()) {
+	if (definition.alphabet.find(definition.blank) != definition.alphabet.end())
+	{
 		return false;
 	}
 
 	//Checking that the blanksymbol is a member of the tapeAlphabet
-	if (definition.tapeAlphabet.find(definition.blank)==definition.tapeAlphabet.end())
+	if (definition.tapeAlphabet.find(definition.blank) == definition.tapeAlphabet.end())
 	{
 		return false;
 	}
 
 	//the beginState must be a member of states
-	if (definition.states.find(definition.beginState) == definition.states.end()) {
+	if (definition.states.find(definition.beginState) == definition.states.end())
+	{
 		return false;
 	}
 
-	for (auto & element : definition.transitions) {
+	for (auto& element : definition.transitions)
+	{
 		//checking that the currentState of the transition is actually a defined state
-		if (definition.states.find(element.GetCurrentState()) == definition.states.end()) {
+		if (definition.states.find(element.GetCurrentState()) == definition.states.end())
+		{
 			return false;
 		}
 		//checking that the currentChar of the transition can actually appear on the tape
-		if (definition.tapeAlphabet.find(element.GetCurrentChar()) == definition.tapeAlphabet.end()) {
+		if (definition.tapeAlphabet.find(element.GetCurrentChar()) == definition.tapeAlphabet.end())
+		{
 			return false;
 		}
 		//checking that the nextState of the transition was actually defined
-		if (definition.states.find(element.GetNextState()) == definition.states.end()) {
+		if (definition.states.find(element.GetNextState()) == definition.states.end())
+		{
 			return false;
 		}
 		//checking that the character to write was properly defined
-		if (definition.tapeAlphabet.find(element.GetToWrite()) == definition.tapeAlphabet.end()) {
+		if (definition.tapeAlphabet.find(element.GetToWrite()) == definition.tapeAlphabet.end())
+		{
 			return false;
 		}
 
@@ -69,8 +82,10 @@ bool MachineFactory::IsValidMachineDefinition(TuringMachineDefinition & definiti
 
 		//checking that every pair of currentState and currentChar is unique if type is 
 		//deterministic
-		if (definition.type == DEA || definition.type == DTM) {
-			if (Transition::countOccurrences(element, definition.transitions) > 1) {
+		if (definition.type == DEA || definition.type == DTM)
+		{
+			if (Transition::countOccurrences(element, definition.transitions) > 1)
+			{
 				return false;
 			}
 		}

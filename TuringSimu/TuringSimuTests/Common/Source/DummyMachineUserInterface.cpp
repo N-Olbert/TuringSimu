@@ -1,10 +1,10 @@
 #include "..\Header\DummyMachineUserInterface.hpp"
 
-void DummyMachineUserInterface::NotifyInvalidMachineDefinition(std::string& errorMessage)
+void DummyMachineUserInterface::NotifyInvalidMachineDefinition(const std::string& errorMessage)
 {
 }
 
-void DummyMachineUserInterface::NotifyInitialized(std::string& tapeInput, std::string& initialState)
+void DummyMachineUserInterface::NotifyInitialized(const std::string& tapeInput, const std::string& initialState)
 {
 }
 
@@ -16,7 +16,7 @@ void DummyMachineUserInterface::NotifyHeadMoved(HeadDirection direction)
 {
 }
 
-void DummyMachineUserInterface::NotifyStateChanged(std::string& newState)
+void DummyMachineUserInterface::NotifyStateChanged(const std::string& newState)
 {
 	StateChanges++;
 }
