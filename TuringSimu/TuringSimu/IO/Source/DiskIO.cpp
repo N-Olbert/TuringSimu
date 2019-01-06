@@ -34,7 +34,12 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 		if (input.is_open()) {
 			std::string line;
 			std::getline(input, line);
-			auto version = std::stoi(line); //TODO redefine later stuff, so it is parsed according to versionnumber
+			auto version = ts_io_intern::getVersion(std::stoi(line));
+			//getting out of dodge since this version is not supported for this file format
+			if (version != v0) {
+				tmd.error = true;
+				return tmd;
+			}
 			std::getline(input, line);
 			tmd.type = getType(line);
 
@@ -199,40 +204,48 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromBinary(std::
 		if (in.is_open()) {
 
 			char buffer[1024];
-			auto version = readFromBinaryStream<uint16_t>(in, buffer);
-			//TODO maybe different version handling
+			auto version = ts_io_intern::getVersion(
+				readFromBinaryStream<uint16_t>(in, buffer));
+			uint32_t count = 0;
 			std::string type = readString(in, buffer, 3);
 			tmd.type = getType(type);
 
-			auto stateNR = readFromBinaryStream<uint16_t>(in, buffer);
+			auto const stateNR = readFromBinaryStream<uint16_t>(in, buffer);
+			count += stateNR;
 			for (int i = 0; i < stateNR; ++i) {
 				auto s = readString(in, buffer);
 				tmd.states.insert(State{ s });
 			}
-			auto beginstate = readString(in, buffer);
+			auto const beginstate = readString(in, buffer);
 			tmd.beginState = State{ beginstate };
 
-			auto finalStateNr = readFromBinaryStream<uint16_t>(in, buffer);
+			auto const finalStateNr = readFromBinaryStream<uint16_t>(in, buffer);
+			count += finalStateNr;
 			for (int i = 0; i < finalStateNr; ++i) {
 				auto s = readString(in, buffer);
 				tmd.finalStates.insert(State{ s });
 			}
-			auto alphabetNr = readFromBinaryStream<uint16_t>(in, buffer);
+
+			auto const alphabetNr = readFromBinaryStream<uint16_t>(in, buffer);
+			count += alphabetNr;
 			for (int i = 0; i < alphabetNr; ++i) {
 				auto c = readFromBinaryStream<char>(in, buffer);
 				tmd.alphabet.insert(c);
 			}
-			auto tapeAlphabetNr = readFromBinaryStream<uint16_t>(in, buffer);
+
+			auto const tapeAlphabetNr = readFromBinaryStream<uint16_t>(in, buffer);
+			count += tapeAlphabetNr;
 			for (int i = 0; i < tapeAlphabetNr; ++i) {
 				auto c = readFromBinaryStream<char>(in, buffer);
 				tmd.tapeAlphabet.insert(c);
 			}
-			auto blank = readFromBinaryStream<char>(in, buffer);
+
+			const auto blank = readFromBinaryStream<char>(in, buffer);
 			tmd.blank = blank;
 
-			auto transitionNr = readFromBinaryStream<uint16_t>(in, buffer);
+			const auto transitionNr = readFromBinaryStream<uint16_t>(in, buffer);
+			count += transitionNr;
 			for (int i = 0; i < transitionNr; ++i) {
-
 				auto currentState = State{ readString(in, buffer) };
 				auto currentChar = readFromBinaryStream<char>(in, buffer);
 				auto nextState = State{ readString(in,buffer) };
@@ -242,6 +255,14 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromBinary(std::
 				temp.push_back(hd);
 				auto headDirection = getDirection(temp);
 				tmd.transitions.emplace_back(currentState, currentChar, nextChar, nextState, headDirection);
+			}
+
+			//checksum feature introduced in v1
+			if (version == v1) {
+				auto compareCount = readFromBinaryStream<uint32_t>(in, buffer);
+				if (compareCount != count) {
+					tmd.error = true;
+				}
 			}
 		} else {
 			//happens when the std::ifstream couldn't be opened
@@ -279,4 +300,15 @@ std::string ts_io_intern::readString(std::ifstream& in, char* dest, uint16_t siz
 
 uint16_t ts_io_intern::readSize(std::ifstream& in, char* dest) {
 	return readFromBinaryStream<uint16_t>(in, dest);
+}
+
+ts_io_intern::versionNumber ts_io_intern::getVersion(uint16_t in) {
+	switch (in) {
+	case 0:
+		return v0;
+	case 1:
+		return v1;
+	default:
+		throw std::runtime_error("unsupportedVersion");
+	}
 }

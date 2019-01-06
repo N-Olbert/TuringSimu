@@ -40,3 +40,14 @@ BOOST_AUTO_TEST_CASE(TapeDirectiveForStateMachine)
 	const auto tmd = ts_io::GetTuringMachineDefinitionFromFile("./IO/TestFiles/parseFail5.csv");
 	BOOST_REQUIRE(tmd.error);
 }
+
+BOOST_AUTO_TEST_CASE(UnsupportedVersion)
+{
+	const auto tmd = ts_io::GetTuringMachineDefinitionFromFile("./IO/TestFiles/parseFail5.csv");
+	BOOST_REQUIRE(tmd.error);
+}
+
+BOOST_AUTO_TEST_CASE(InvalidVersion) {
+	const auto tmd = ts_io::GetTuringMachineDefinitionFromFile("./IO/TestFiles/parseFail5.csv");
+	BOOST_REQUIRE(tmd.error);
+}

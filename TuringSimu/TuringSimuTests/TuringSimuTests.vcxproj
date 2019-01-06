@@ -135,11 +135,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="IO\TestFiles\bin.tmsim" />
+    <None Include="IO\TestFiles\binV1.tmsim" />
     <None Include="IO\TestFiles\parseFail1.csv" />
     <None Include="IO\TestFiles\parseFail2.csv" />
     <None Include="IO\TestFiles\parseFail3.csv" />
     <None Include="IO\TestFiles\parseFail4.csv" />
     <None Include="IO\TestFiles\parseFail5.csv" />
+    <None Include="IO\TestFiles\parseFail6.csv" />
+    <None Include="IO\TestFiles\parseFail7.csv" />
     <None Include="IO\TestFiles\parseTest1.csv" />
     <None Include="IO\TestFiles\parseTest2.csv" />
     <None Include="IO\TestFiles\parseTest3.csv" />

@@ -10,7 +10,7 @@ namespace ts_io
 	using namespace ts_common;
 
 	/**
-	 * \brief Loads a TM from a file. The only method for endusers
+	 * \brief Loads a TM from a file. The only method for end users
 	 * \param path The path to the save file
 	 * \return The TuringMachineDefinition specified by the file. This can be made into an actual TM
 	 */
@@ -18,7 +18,7 @@ namespace ts_io
 
 	//Namespace for nesting's sake
 	namespace ts_io_intern {
-
+		enum versionNumber { v0, v1 };
 		/**
 		 * \brief Specializations of the GetTuringMachineDefinitionFromFile method
 		 * \param path The path to the save File
@@ -52,7 +52,7 @@ namespace ts_io
 		 * \return The read string
 		 * \throws std::runtime_error if the filestream is invalid
 		 */
-		std::string readString(std::ifstream &in, char* dest,uint16_t size);
+		std::string readString(std::ifstream &in, char* dest, uint16_t size);
 
 		/**
 		 * \brief Reads a uint16_t from the given stream
@@ -72,8 +72,14 @@ namespace ts_io
 				throw std::runtime_error("Could not read from file");
 			}
 		}
-	}
 
-	enum versionNumber { v0 };
+		/**
+		 * \brief Converts the input to the appropriate version enum
+		 * \param in The uint16_t to convert
+		 * \return the matching versionNumber enum
+		 * \throws std::runtime_error if the version is undefined
+		 */
+		versionNumber getVersion(uint16_t in);
+	}
 }
 #endif // TM_DISKIO
