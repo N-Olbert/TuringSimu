@@ -24,8 +24,17 @@ void ts_io::saveAsCSV(std::string const &filePath, TuringMachineDefinition &data
 			out << data.beginState.GetIdentifier() << std::endl;
 
 			out << directiveToString(transitions);
-			ts_io_intern::writeToCSVFile<Transition>(out, data.transitions);
-
+			//Nobody needs to know how we internally handle statemachines, so 
+			//we need to cut a bit of the transition of there
+			if (!(data.type == DEA || data.type == NEA)) {
+				ts_io_intern::writeToCSVFile<Transition>(out, data.transitions);
+			} else {
+				for (auto& element : data.transitions) {
+					out << ts_io_intern::stringifyCSV(element.GetCurrentState()) <<
+						';' << element.GetCurrentChar() << ';' <<
+						ts_io_intern::stringifyCSV(element.GetNextState()) << std::endl;
+				}
+			}
 			//a state machine doesn't have a tape so we skip this part if data is 
 			//specifying a state machine
 			if (!(data.type == DEA || data.type == NEA)) {
@@ -52,9 +61,10 @@ void ts_io::saveAsBinary(std::string const &filePath, TuringMachineDefinition &d
 	try {
 		out.open(filePath);
 		if (out.is_open()) {
-			uint16_t version = 0;
-			out.write((char*)&version, sizeof(uint16_t));
+			uint16_t version = 1;
+			out.write(reinterpret_cast<char*>(&version), sizeof(uint16_t));
 
+			uint32_t count = 0;
 			ts_io_intern::writeToBinary<std::string>(out, TypeToString(data.type));
 
 			ts_io_intern::writeToBinary<State>(out, data.states.asVector());
@@ -64,6 +74,14 @@ void ts_io::saveAsBinary(std::string const &filePath, TuringMachineDefinition &d
 			ts_io_intern::writeToBinary<char>(out, data.tapeAlphabet.asVector());
 			ts_io_intern::writeToBinary<char>(out, data.blank);
 			ts_io_intern::writeToBinary<Transition>(out, data.transitions);
+
+			count += data.states.size();
+			count += data.finalStates.size();
+			count += data.alphabet.size();
+			count += data.tapeAlphabet.size();
+			count += data.transitions.size();
+
+			out.write(reinterpret_cast<char*>(&count), sizeof(uint32_t));
 		}
 	}
 	catch (...) {
@@ -71,7 +89,7 @@ void ts_io::saveAsBinary(std::string const &filePath, TuringMachineDefinition &d
 	}
 	out.close();
 }
-//TODO needs to change based on TM type since sm transition only has 3 elements
+
 std::string ts_io_intern::stringifyCSV(Transition & t) {
 	std::string string;
 	auto s = t.GetCurrentState();
@@ -111,8 +129,7 @@ std::string ts_io_intern::stringifyCSV(State & state) {
 void ts_io_intern::makeBinary(std::ofstream &out, State & state) {
 	auto identifier = state.GetIdentifier();
 	uint16_t identifierLength = identifier.length();
-	out.write((char*)&identifierLength, sizeof(uint16_t));
-	//TODO maybe its possible to just interpret std::string as a char* and do the entire string at once
+	out.write(reinterpret_cast<char*>(&identifierLength), sizeof(uint16_t));
 	for (int i = 0; i < identifierLength; ++i) {
 		out.write(&(identifier.at(i)), sizeof(char));
 	}
@@ -150,7 +167,8 @@ void ts_io_intern::makeBinary(std::ofstream& out, char& c) {
 }
 
 void ts_io_intern::makeBinary(std::ofstream& out, std::string& s) {
-	for (int i = 0; i < s.length(); ++i) {
-		out.write(&(s.at(i)), sizeof(char));
+	//C++11 feature
+	for (char& i : s) {
+		out.write(&i, sizeof(char));
 	}
 }
