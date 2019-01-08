@@ -1,12 +1,13 @@
 #include "../Header/DiskIO.hpp"
-#include <iostream>
 #include <fstream>
-#include "../../Common/Header/Utility.hpp"
+#include "../../../TuringSimuCommon/Common/Header/Utility.hpp"
 #include "../Header/Directives.hpp"
+#include <filesystem>
 
 using namespace ts_common;
 using namespace ts_io;
 
+//Todo: we probably should return a pointer here
 TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string path) {
 	//needs to be last of since the path may contain ".."/"." 
 	//if the path doesn't contain a '.' there are no problems because the substr method 
@@ -14,13 +15,22 @@ TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string pa
 	auto const index = path.find_last_of('.');
 	auto const fileExtension = path.substr(index + 1, path.length() - index);
 	if (fileExtension == "csv") {
-		return ts_io_intern::GetTuringMachineDefinitionFromCSV(path);
+		auto machineDefinition = ts_io_intern::GetTuringMachineDefinitionFromCSV(path);
+		machineDefinition.fileName = std::filesystem::path{ path }.filename().string();
+		return machineDefinition;
 	} else if (fileExtension == "tmsim") {
-		return ts_io_intern::GetTuringMachineDefinitionFromBinary(path);
+		auto machineDefinition = ts_io_intern::GetTuringMachineDefinitionFromBinary(path);
+		machineDefinition.fileName = std::filesystem::path{ path }.filename().string();
+		return machineDefinition;
 	}
 	TuringMachineDefinition dummy;
 	dummy.error = true;
 	return dummy;
+}
+
+std::string ts_io::GetAbsolutePath(const std::string & relativePath)
+{
+	return absolute(std::filesystem::path{ relativePath }).string();
 }
 
 TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::string path) {
@@ -30,6 +40,7 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 	TuringMachineDefinition tmd;
 	tmd.error = false;
 	try {
+		//pointer?
 		input.open(path);
 		if (input.is_open()) {
 			std::string line;

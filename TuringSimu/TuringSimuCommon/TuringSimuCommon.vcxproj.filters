@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="UI">
+      <UniqueIdentifier>{834ea4db-cea7-40d8-80f0-a18ada618eb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Header">
+      <UniqueIdentifier>{ea69460c-f3ba-415c-82cb-ac06dc8d61d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Sources">
+      <UniqueIdentifier>{b31e70c3-ecf4-41b9-80e3-348d0dac521a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{049f440c-b706-4a92-abcb-7779737b460b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Header">
+      <UniqueIdentifier>{eaeb8ef4-1703-47a2-a6a6-d58dc8f05305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Source">
+      <UniqueIdentifier>{4a9ea3e7-20f1-4ac8-80ec-b31d5d537624}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UI\Header\Localization.hpp">
+      <Filter>UI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Header\Result.hpp">
+      <Filter>UI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\AbstractMachine.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\AbstractMachineUserinterface.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\BaseTransition.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\ComparableHelpers.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\DynamicType.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\HashSet.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\HeadDirection.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\MachineType.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\State.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\StringRepresentable.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\Utility.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Header\MachineUIExecutionData.hpp">
+      <Filter>UI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Header\TuringMachineUIExecutionData.hpp">
+      <Filter>UI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Header\UIExecutionDataFactory.hpp">
+      <Filter>UI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\ErrorDisplayableUserinterface.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Header\MachineExecutionController.hpp">
+      <Filter>UI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Header\MachineExecutionControllerFactory.hpp">
+      <Filter>UI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\BaseMachineDefinition.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="UI\Sources\Localization.cpp">
+      <Filter>UI\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Header\BaseComparable.hpp">
+      <Filter>Common\Header</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\AbstractMachineUserinterface.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\State.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\MachineType.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Sources\TuringMachineUIExecutionData.cpp">
+      <Filter>UI\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Sources\UIExecutionDataFactory.cpp">
+      <Filter>UI\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\ErrorDisplayableUserinterface.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Sources\MachineExecutionController.cpp">
+      <Filter>UI\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Source\BaseTransition.cpp">
+      <Filter>Common\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

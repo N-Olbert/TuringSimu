@@ -1,6 +1,6 @@
 #include <string>
 #include "../Header/Directives.hpp"
-#include "../../Common/Header/HeadDirection.hpp"
+#include "../../../TuringSimuCommon/Common/Header/HeadDirection.hpp"
 using namespace ts_io;
 using namespace ts_common;
 //method to simulate a switch on strings. Throws exception if default case is reached

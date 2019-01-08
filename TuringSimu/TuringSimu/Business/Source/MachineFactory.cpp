@@ -4,20 +4,35 @@
 using namespace ts_business;
 using namespace ts_common;
 
-std::unique_ptr<AbstractMachine> MachineFactory::CreateMachineFromFile(std::string& path,
+std::unique_ptr<AbstractMachine> MachineFactory::CreateMachineFromFile(MachineType requestedMachineType, const std::string& path)
+{
+	return CreateMachineFromFile(requestedMachineType, path, nullptr);
+}
+
+std::unique_ptr<AbstractMachine> MachineFactory::CreateMachineFromFile(MachineType requestedMachineType, const std::string& path,
 	AbstractMachineUserinterface* observingUI)
 {
-	auto definition = ts_io::GetTuringMachineDefinitionFromFile(path);
-	if (IsValidMachineDefinition(definition))
+	switch (requestedMachineType)
 	{
-		auto result = std::unique_ptr<AbstractMachine>(new TuringMachine{observingUI, definition});
-		return result;
+		case DTM:
+		case NTM:
+		case DEA:
+		case NEA:
+			{
+				auto definition = ts_io::GetTuringMachineDefinitionFromFile(path);
+				if (IsValidTuringMachineDefinition(definition))
+				{
+					auto result = std::unique_ptr<TuringMachine>(new TuringMachine{ observingUI, definition });
+					return result;
+				}
+			}
+			break;
 	}
 
 	return std::unique_ptr<AbstractMachine>(nullptr);
 }
 
-bool MachineFactory::IsValidMachineDefinition(TuringMachineDefinition & definition)
+bool MachineFactory::IsValidTuringMachineDefinition(TuringMachineDefinition& definition)
 {
 	if (definition.error)
 	{

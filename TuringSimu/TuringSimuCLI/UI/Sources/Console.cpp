@@ -1,14 +1,13 @@
-#include "..\Header\Console.hpp"
+#include "../Header/Console.hpp"
 #include <iostream>
 #include <cctype>
 #include <string>
 
+//// For ANSI escape sequences see http://ascii-table.com/ansi-escape-sequences-vt-100.php
+
 using namespace ts_ui;
 const std::string Console::ESC = std::string{"\x1b"};
 const std::string Console::CSI = std::string{"\x1b["};
-const std::string Console::AnsiLineUp = std::string{"A"};
-const std::string Console::AnsiClearLine = std::string{"K"};
-const std::string Console::CarriageReturn = std::string{"\r"};
 std::mutex Console::ConsoleMutex;
 
 void Console::Print(const std::string& toPrint)
@@ -35,9 +34,40 @@ void Console::PrintDelayed(const char toPrint)
 	std::cout << toPrint;
 }
 
+void Console::PrintDelayed(const uint64_t toPrint)
+{
+	std::lock_guard<std::mutex> lock(ConsoleMutex);
+	std::cout << toPrint;
+}
+
 void Console::PrintLine(const std::string& toPrint)
 {
-	Print(toPrint);
+	PrintDelayed(toPrint);
+	NewLine();
+}
+
+void Console::PrintLineBlueUnderlinedDelayed(const std::string& toPrint)
+{
+	PrintDelayed(CSI + "34;1;4m" + toPrint + CSI + "0m");
+	NewLineDelayed();
+}
+
+void Console::PrintLineDelayed(const std::string& toPrint)
+{
+	PrintDelayed(toPrint);
+	NewLineDelayed();
+}
+
+
+void Console::PrintLine(const StringRepresentable& toPrint)
+{
+	PrintDelayed(toPrint.ToString());
+	NewLine();
+}
+
+void Console::PrintLine(const char toPrint)
+{
+	PrintDelayed(toPrint);
 	NewLine();
 }
 
@@ -46,34 +76,42 @@ void Console::NewLine()
 	Print("\n");
 }
 
+void Console::NewLineDelayed()
+{
+	Print("\n");
+}
+
+void Console::Flush()
+{
+	Print("");
+}
+
 void Console::LineBack()
 {
-	const auto command = ESC + AnsiLineUp + CarriageReturn;
-	Print(command);
+	Print(ESC + "A\r");
 }
 
 void Console::ClearLine()
 {
-	const auto command = CSI + AnsiClearLine;
-	Print(command);
+	Print(CSI + "K");
 }
 
 void Console::ClearScreen()
 {
-	const auto command = CSI + "2J";
-	Print(command);
+	// For whatever reason requesting only "Esc[2J" = "Clear entire screen" fails to clear the previous screen contents sometimes
+	// Printing "Esc[1J" = "Clear screen from cursor up" before seems to fix this.
+	Print(CSI + "1J"); 
+	Print(CSI + "2J");
 }
 
 void Console::HideCursor()
 {
-	const auto command = CSI + "?25l";
-	Print(command);
+	Print(CSI + "?25l");
 }
 
 void Console::ShowCursor()
 {
-	const auto command = CSI + "?25h";
-	Print(command);
+	Print(CSI + "?25h");
 }
 
 void Console::AwaitEnter()

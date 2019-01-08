@@ -1,8 +1,7 @@
 #ifndef TM_TURINGMACHINETAPEHEADER
 #define TM_TURINGMACHINETAPEHEADER
 #include <vector>
-#include <deque> 
-#include "../../Common/Header/HeadDirection.hpp"
+#include "../../../TuringSimuCommon/Common/Header/HeadDirection.hpp"
 
 using namespace ts_common;
 namespace ts_business
@@ -19,7 +18,8 @@ namespace ts_business
 			void Move(HeadDirection direction);
 			char GetChar();
 			void WriteChar(char toWrite);
-			void InitWith(std::string& input);
+			void InitWith(const std::string& input);
+			std::string GetCurrentTapeContent();
 		    std::vector<char>& GetVector() noexcept;
 			size_t GetAdjustedPosition() const noexcept;
 	};

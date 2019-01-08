@@ -2,18 +2,21 @@
 #ifdef _WIN32
 #include <Windows.h>
 #endif
-#include "Business/Header/ConsoleController.hpp"
+#include "Business/Header/BaseConsoleController.hpp"
+#include "../TuringSimuCommon/UI/Header/Localization.hpp"
 
 bool EnableVTMode(void);
 int main()
 {
 	if(!EnableVTMode())
 	{
-		
+		Console::PrintDelayed(Localization::GetString(LocId::WarningNoVirtualTerminalMode));
+		Console::NewLineDelayed();
+		Console::PrintLine(Localization::GetString(LocId::EnterToContinue));
+		Console::AwaitEnter();
 	}
 
-	ts_cliui_business::ConsoleController controller;
-	controller.Start();
+	ts_ui_business::BaseConsoleController::Start();
 	return 0; 
 }
 

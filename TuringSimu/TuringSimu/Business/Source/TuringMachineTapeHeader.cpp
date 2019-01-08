@@ -39,7 +39,7 @@ void TuringMachineTapeHeader::WriteChar(const char toWrite)
 	toModify[pos] = toWrite;
 }
 
-void TuringMachineTapeHeader::InitWith(std::string& input)
+void TuringMachineTapeHeader::InitWith(const std::string& input)
 {
 	this->inputPositiveDirection.clear();
 	this->inputNegativeDirection.clear();
@@ -49,6 +49,22 @@ void TuringMachineTapeHeader::InitWith(std::string& input)
 	}
 
 	this->rawPosition = 0;
+}
+
+std::string TuringMachineTapeHeader::GetCurrentTapeContent()
+{
+	std::string result;
+	for (auto c : this->inputNegativeDirection)
+	{
+		result.push_back(c);
+	}
+
+	for (auto c : this->inputPositiveDirection)
+	{
+		result.push_back(c);
+	}
+
+	return result;
 }
 
 std::vector<char>& TuringMachineTapeHeader::GetVector() noexcept

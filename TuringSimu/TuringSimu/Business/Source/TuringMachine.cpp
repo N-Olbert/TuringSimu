@@ -1,5 +1,5 @@
 #include "../Header/TuringMachine.hpp"
-#include "../../../TuringSimuUICommon/UI/Header/Localization.hpp"
+#include "../../../TuringSimuCommon/UI/Header/Localization.hpp"
 using namespace ts_common;
 using namespace ts_business;
 using namespace ts_ui;
@@ -12,28 +12,28 @@ TuringMachine::TuringMachine(AbstractMachineUserinterface* userinterface, Turing
 	this->head = std::make_unique<TuringMachineTapeHeader>(this->definition.blank);
 }
 
-bool TuringMachine::Init(std::string& initText)
+bool TuringMachine::InitMachineForExecution(std::string& initText)
 {
 	auto validChars = this->definition.tapeAlphabet;
 	for (char c : initText)
 	{
 		if(!validChars.Contains(c))
 		{
-			AMU::NotifyInvalidMachineDefinition(GetUI(), Localization::GetString(LocId::ErrorInvalidCharOnTape));
+			AMU::NotifyError(GetUI(), Localization::GetString(LocId::ErrorInvalidCharOnTape));
 			return false;
 		}
 	}
 
 	this->head->InitWith(initText);
 	this->currentState = this->definition.beginState;
-	AMU::NotifyInitialized(GetUI(), initText, this->currentState.GetIdentifier());
+	AMU::NotifyInitialized(GetUI());
 	return true;
 }
 
 void TuringMachine::PerformNextStep()
 {
 	auto& transition = GetNextTransition();
-	if(transition != Transition::Empty)
+	if(!transition.IsEmpty())
 	{
 		const auto toWrite = transition.GetToWrite();
 		this->head->WriteChar(toWrite);
@@ -45,31 +45,59 @@ void TuringMachine::PerformNextStep()
 
 		auto& nextState = transition.GetNextState();
 		this->currentState = nextState;
-		AMU::NotifyStateChanged(GetUI(), nextState.GetIdentifier());
+		AMU::NotifyStateChanged(GetUI(), nextState);
 	}
 }
 
 bool TuringMachine::IsFinished()
 {
-	if(this->definition.finalStates.Contains(this->currentState))
-	{
-		return GetNextTransition() == Transition::Empty;
-	}
-
-	return false;
+	return GetNextTransition().IsEmpty();
 }
 
-std::string TuringMachine::GetSpecificValue(const std::string& valueIdentifier) const
+bool TuringMachine::IsFinishedSuccessfully()
 {
-	if (valueIdentifier == "BLANK")
-	{
-		return std::string{ this->definition.blank };
-	}
-
-	return UnknownSpecificValue;
+	return IsFinished() && this->definition.finalStates.Contains(this->currentState);
 }
 
-Transition& TuringMachine::GetNextTransition()
+std::unique_ptr<DynamicType> TuringMachine::GetSpecificValue(SpecificMachineValue valueIdentifier) const
+{
+	using S = SpecificMachineValue;
+	switch (valueIdentifier)
+	{
+		case S::Blank: 
+			return std::make_unique<ConcreteDynamicType<char>>(this->definition.blank);
+		case S::FileName: 
+			return std::make_unique<ConcreteDynamicType<std::string>>(this->definition.fileName);
+		case S::Type: 
+			return std::make_unique<ConcreteDynamicType<MachineType>>(this->definition.type);
+		case S::States: 
+			return std::make_unique<ConcreteDynamicType<HashSet<State>>>(this->definition.states);
+		case S::FinalStates: 
+			return std::make_unique<ConcreteDynamicType<HashSet<State>>>(this->definition.finalStates);
+		case S::Alphabet:
+			return std::make_unique<ConcreteDynamicType<HashSet<char>>>(this->definition.alphabet);
+		case S::TapeAlphabet: 
+			return std::make_unique<ConcreteDynamicType<HashSet<char>>>(this->definition.tapeAlphabet);
+		case S::Transitions:
+			{
+				auto result = std::vector<const StringRepresentable*>{};
+				for (auto& tmp: this->definition.transitions)
+				{
+					result.push_back(&tmp);
+				}
+
+				return std::make_unique<ConcreteDynamicType<std::vector<const StringRepresentable*>>>(result);
+			}
+		case S::InitialState:
+			return std::make_unique<ConcreteDynamicType<State>>(this->definition.beginState);
+		case S::TapeContent:
+			return std::make_unique<ConcreteDynamicType<std::string>>(this->head->GetCurrentTapeContent());
+		default: 
+			return nullptr;
+	}
+}
+
+const Transition& TuringMachine::GetNextTransition()
 {
 	const auto currentChar = this->head->GetChar();
 	auto& transitions = this->definition.transitions;

@@ -2,8 +2,9 @@
 #ifndef TM_DISKIO
 #define TM_DISKIO
 #include <string>
-#include "../../Common/Header/TuringMachineDefinition.hpp"
 #include <fstream>
+#include "../../../TuringSimu/Common/Header/TuringMachineDefinition.hpp"
+
 //for everything concerning public IO-Action
 namespace ts_io
 {
@@ -15,6 +16,13 @@ namespace ts_io
 	 * \return The TuringMachineDefinition specified by the file. This can be made into an actual TM
 	 */
 	TuringMachineDefinition GetTuringMachineDefinitionFromFile(std::string path);
+
+	/**
+	 * \brief Retruns the absolute path of a given relative path;
+	 * \param relativePath The relative path;
+	 * \return The absolute path;
+	 */
+	std::string GetAbsolutePath(const std::string& relativePath);
 
 	//Namespace for nesting's sake
 	namespace ts_io_intern {

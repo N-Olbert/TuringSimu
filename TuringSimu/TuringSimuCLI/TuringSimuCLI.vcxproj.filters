@@ -24,7 +24,13 @@
     <ClInclude Include="UI\Header\Console.hpp">
       <Filter>UI\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Business\Header\ConsoleController.hpp">
+    <ClInclude Include="Business\Header\BaseConsoleController.hpp">
+      <Filter>Business\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Header\TuringMachineConsoleOutputController.hpp">
+      <Filter>Business\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Header\TuringMachineLogfileOutputController.hpp">
       <Filter>Business\Header</Filter>
     </ClInclude>
   </ItemGroup>
@@ -33,7 +39,13 @@
     <ClCompile Include="UI\Sources\Console.cpp">
       <Filter>UI\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Business\Sources\ConsoleController.cpp">
+    <ClCompile Include="Business\Sources\BaseConsoleController.cpp">
+      <Filter>Business\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\Sources\TuringMachineConsoleOutputController.cpp">
+      <Filter>Business\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Business\Sources\TuringMachineLogfileOutputController.cpp">
       <Filter>Business\Sources</Filter>
     </ClCompile>
   </ItemGroup>

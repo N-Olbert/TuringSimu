@@ -2,10 +2,15 @@
 #ifndef TS_DISKOUTPUT
 #define TS_DISKOUTPUT
 #include <string>
-#include "../../Common/Header/HeadDirection.hpp"
-#include "../../Common/Header/TuringMachineDefinition.hpp"
+#include "../../../TuringSimu/Common/Header/TuringMachineDefinition.hpp"
+#include "../../../TuringSimuCommon/Common/Header/State.hpp"
+#include "../../../TuringSimu/Common/Header/Transition.hpp"
 #include <fstream>
-#include <iostream>
+
+namespace ts_common {
+	class TuringMachineDefinition;
+}
+
 using namespace ts_common;
 namespace ts_io {
 	/**
@@ -22,6 +27,14 @@ namespace ts_io {
 	 */
 	void saveAsBinary(std::string const &filePath, TuringMachineDefinition &data);
 
+	/**
+	 * \brief Writes the given data to the specified file path.
+	 * \param filePath The file path
+	 * \param data The data to write
+	 * \return true in case of success, false otherwise.
+	 */
+	bool WriteToFile(const std::string& filePath, const std::string& data);
+
 	//for private helper functions concerning IO
 	namespace ts_io_intern {
 
@@ -29,9 +42,9 @@ namespace ts_io {
 		 * \brief Returns a string representation of its parameter which is
 		 * appropriate for a CSVfile
 		 */
-		std::string stringifyCSV(Transition &t);
-		std::string stringifyCSV(char &c);
-		std::string stringifyCSV(State &state);
+		std::string stringifyCSV(const Transition &t);
+		std::string stringifyCSV(const char &c);
+		std::string stringifyCSV(const State &state);
 		/**
 		 * \brief Saves its parameter in the defined format
 		 * \see BinaryFormatV0.txt
@@ -80,7 +93,7 @@ namespace ts_io {
 		 */
 		template <typename T>
 		void writeToBinary(std::ofstream &out, std::vector<T> params) {
-			uint16_t size = params.size();
+			auto size = static_cast<uint16_t>(params.size());
 			out.write((char*)&size, sizeof(uint16_t));
 			for (auto element : params) {
 				writeToBinary(out, element);

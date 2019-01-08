@@ -75,11 +75,11 @@ void ts_io::saveAsBinary(std::string const &filePath, TuringMachineDefinition &d
 			ts_io_intern::writeToBinary<char>(out, data.blank);
 			ts_io_intern::writeToBinary<Transition>(out, data.transitions);
 
-			count += data.states.size();
-			count += data.finalStates.size();
-			count += data.alphabet.size();
-			count += data.tapeAlphabet.size();
-			count += data.transitions.size();
+			count += static_cast<uint32_t>(data.states.size());
+			count += static_cast<uint32_t>(data.finalStates.size());
+			count += static_cast<uint32_t>(data.alphabet.size());
+			count += static_cast<uint32_t>(data.tapeAlphabet.size());
+			count += static_cast<uint32_t>(data.transitions.size());
 
 			out.write(reinterpret_cast<char*>(&count), sizeof(uint32_t));
 		}
@@ -90,7 +90,37 @@ void ts_io::saveAsBinary(std::string const &filePath, TuringMachineDefinition &d
 	out.close();
 }
 
-std::string ts_io_intern::stringifyCSV(Transition & t) {
+bool ts_io::WriteToFile(const std::string& filePath, const std::string& data)
+{
+	bool success;
+	std::unique_ptr<std::ofstream> stream;
+	try
+	{
+		stream = std::make_unique<std::ofstream>(filePath, std::ios::trunc);
+		if ((success = stream->is_open()))
+		{
+			*stream << data;
+		}
+	}
+	catch (...)
+	{
+		if(stream != nullptr)
+		{
+			stream->close();
+		}
+
+		return false;
+	}
+
+	if (stream != nullptr)
+	{
+		stream->close();
+	}
+
+	return success;
+}
+
+std::string ts_io_intern::stringifyCSV(const Transition & t) {
 	std::string string;
 	auto s = t.GetCurrentState();
 	string.append(stringifyCSV(s));
@@ -116,19 +146,19 @@ std::string ts_io_intern::stringifyCSV(Transition & t) {
 	return string;
 }
 
-std::string ts_io_intern::stringifyCSV(char & c) {
+std::string ts_io_intern::stringifyCSV(const char & c) {
 	std::string string;
 	string.push_back(c);
 	return string;
 }
 
-std::string ts_io_intern::stringifyCSV(State & state) {
+std::string ts_io_intern::stringifyCSV(const State & state) {
 	return state.GetIdentifier();
 }
 
 void ts_io_intern::makeBinary(std::ofstream &out, State & state) {
 	auto identifier = state.GetIdentifier();
-	uint16_t identifierLength = identifier.length();
+	auto identifierLength = static_cast<uint16_t>(identifier.length());
 	out.write(reinterpret_cast<char*>(&identifierLength), sizeof(uint16_t));
 	for (int i = 0; i < identifierLength; ++i) {
 		out.write(&(identifier.at(i)), sizeof(char));

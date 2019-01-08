@@ -1,72 +1,54 @@
 #pragma once
 #ifndef TM_TRANSITION
 #define TM_TRANSITION
-#include "State.hpp"
-#include "HeadDirection.hpp"
-#include "BaseTransition.hpp"
+#include "../../../TuringSimuCommon/Common/Header/State.hpp"
+#include "../../../TuringSimuCommon/Common/Header/HeadDirection.hpp"
+#include "../../../TuringSimuCommon/Common/Header/BaseTransition.hpp"
 #include <vector>
 
 namespace ts_common
 {
 	static const char epsilon = '\0';
-	class Transition :public BaseComparable<Transition>, public BaseTransition {
-	public:
-		static Transition Empty;
-		Transition(State currentState, char currentChar,
-			char toWrite, State nextState, HeadDirection headDirection);
+	class Transition : public BaseTransition, public BaseComparable<Transition>
+	{
+		private:
+			char currentChar;
+			char toWrite;
+			HeadDirection headDirection;
+			Transition() : currentChar(0), toWrite(0), headDirection(Stay) {}
 
-		/**
-			* \brief Special constructor needed when reading from a csvFile
-			* \param csvLine the line of the .csv representing a Transition
-			* \see CSVFormatV0.txt for additional info
-			*/
-		explicit Transition(std::string csvLine);
-		~Transition() override;
+		public:		
+			static const Transition Empty;
+			Transition(State currentState, char currentChar,
+				char toWrite, State nextState, HeadDirection headDirection);
 
-		static int countOccurrences(Transition& t, std::vector<Transition> vector);
-		State& GetCurrentState();
-		char GetCurrentChar() const;
-		char GetToWrite() const;
-		State& GetNextState();
-		HeadDirection GetHeadDirection() const;
+			/**
+				* \brief Special constructor needed when reading from a csvFile
+				* \param csvLine the line of the .csv representing a Transition
+				* \see CSVFormatV0.txt for additional info
+				*/
+			explicit Transition(std::string csvLine);
 
-		void setCurrentChar(char c);
-		void setToWrite(char c);
-		void setHeadDirection(HeadDirection hd);
+			static int countOccurrences(const Transition& t, const std::vector<Transition>& vector);
+			char GetCurrentChar() const;
+			char GetToWrite() const;
+			HeadDirection GetHeadDirection() const;
 
-		bool operator==(const Transition& other) const noexcept override;
-		bool operator!=(const Transition& other) const noexcept override;
-		bool operator<(const Transition& other) const noexcept override;
-		bool operator>(const Transition& other) const noexcept override;
-		size_t GetHashCode() const noexcept override;
-	private:
-		Transition() : currentChar(0), toWrite(0), headDirection(Stay) {};
-		State currentState;
-		char currentChar;
-		char toWrite;
-		State nextState;
-		HeadDirection headDirection;
+			void setCurrentChar(char c);
+			void setToWrite(char c);
+			void setHeadDirection(HeadDirection hd);
 
+			const bool IsEmpty() const override;
+			const bool operator==(const BaseTransition& other) const noexcept override;
+			const bool operator!=(const BaseTransition& other) const noexcept override;
+			const bool operator<(const BaseTransition& other) const noexcept override;
+			const bool operator>(const BaseTransition& other) const noexcept override;
+			const bool operator==(const Transition& other) const noexcept override;
+			const bool operator!=(const Transition& other) const noexcept override;
+			const bool operator<(const Transition& other) const noexcept override;
+			const bool operator>(const Transition& other) const noexcept override;
+			const size_t GetHashCode() const noexcept override;
+			std::string ToString() const noexcept override;
 	};
-
-	inline State& Transition::GetCurrentState() {
-		return currentState;
-	}
-
-	inline char Transition::GetCurrentChar() const {
-		return currentChar;
-	}
-
-	inline char Transition::GetToWrite() const {
-		return toWrite;
-	}
-
-	inline State& Transition::GetNextState() {
-		return nextState;
-	}
-
-	inline HeadDirection Transition::GetHeadDirection() const {
-		return headDirection;
-	}
 }
 #endif

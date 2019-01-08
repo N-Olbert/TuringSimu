@@ -69,7 +69,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -108,6 +110,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -115,7 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TuringSimuUICommon\TuringSimuUICommon.vcxproj">
+    <ProjectReference Include="..\TuringSimuCommon\TuringSimuCommon.vcxproj">
       <Project>{d8a9e4e6-a9c8-46cc-874a-1978153a2bbf}</Project>
     </ProjectReference>
     <ProjectReference Include="..\TuringSimu\TuringSimu.vcxproj">
@@ -123,11 +126,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Business\Header\ConsoleController.hpp" />
+    <ClInclude Include="Business\Header\BaseConsoleController.hpp" />
     <ClInclude Include="UI\Header\Console.hpp" />
+    <ClInclude Include="Business\Header\TuringMachineConsoleOutputController.hpp" />
+    <ClInclude Include="Business\Header\TuringMachineLogfileOutputController.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Business\Sources\ConsoleController.cpp" />
+    <ClCompile Include="Business\Sources\BaseConsoleController.cpp" />
+    <ClCompile Include="Business\Sources\TuringMachineConsoleOutputController.cpp" />
+    <ClCompile Include="Business\Sources\TuringMachineLogfileOutputController.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="UI\Sources\Console.cpp" />
   </ItemGroup>

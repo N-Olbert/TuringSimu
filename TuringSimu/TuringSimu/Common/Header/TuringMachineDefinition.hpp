@@ -1,30 +1,17 @@
 #pragma once
 #ifndef  TM_TMDEFINITION
 #define  TM_TMDEFINITION
-#include "State.hpp"
-#include "MachineType.hpp"
 #include "Transition.hpp"
-#include "HashSet.hpp"
-#include <vector>
+#include "../../../TuringSimuCommon/Common/Header/BaseMachineDefinition.hpp"
 
 namespace ts_common
 {
-	class TuringMachineDefinition
+	class TuringMachineDefinition : public BaseMachineDefinition<Transition>
 	{
 		public:
-			MachineType type;
-			HashSet<State> states;
-			HashSet<State> finalStates;
 			HashSet<char> alphabet;
 			HashSet<char> tapeAlphabet;
-			char blank;
-			bool error;
-			/**
-			 * \brief The transitions. Must be a vector (not a map) cause we may encounter
-			 * non-determinism which means that we deal with a relation instead of a function
-			 */
-			std::vector<Transition> transitions;
-			State beginState;
+			char blank = 0;
 	};
 }
 #endif

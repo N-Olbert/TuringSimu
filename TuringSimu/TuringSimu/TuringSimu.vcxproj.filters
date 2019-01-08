@@ -10,15 +10,6 @@
     <Filter Include="Business\Header">
       <UniqueIdentifier>{47d90059-d0bc-46ea-b166-a1f360f370cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI">
-      <UniqueIdentifier>{10897082-f1bd-426e-8a83-c4996bf490d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Header">
-      <UniqueIdentifier>{990a7cda-10b7-42b3-b1ad-b8b5f0090f44}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Source">
-      <UniqueIdentifier>{61a823d3-b1a4-49c2-85df-94833b2b73b0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="IO">
       <UniqueIdentifier>{1229ccc8-50a5-4e3c-9158-c7289e2bf3a1}</UniqueIdentifier>
     </Filter>
@@ -28,37 +19,25 @@
     <Filter Include="IO\Source">
       <UniqueIdentifier>{92f10553-33c0-4f44-9a30-ad41b527aaf5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Common">
-      <UniqueIdentifier>{a43528ca-4a25-4863-ad87-780add6115fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Header">
-      <UniqueIdentifier>{4a30c66b-d56f-4009-92cd-221b10b4a82b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Common\Source">
-      <UniqueIdentifier>{60904674-7d8c-4b61-8727-66ebe95e8f14}</UniqueIdentifier>
-    </Filter>
     <Filter Include="IO\FormatDefinitions">
       <UniqueIdentifier>{bebb4422-9b1d-4200-9ba4-5133b4e028c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{b66aa734-942f-4958-8f37-52e341b12997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Header">
+      <UniqueIdentifier>{be45c946-1cb9-4b42-a7e8-d23b88553864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Source">
+      <UniqueIdentifier>{9d938184-aae6-43a8-b46d-20f5a40b7e96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UI\Source\ConsoleUI.cpp">
-      <Filter>UI\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Source\Transition.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Business\Source\TuringMachine.cpp">
       <Filter>Business\Source</Filter>
     </ClCompile>
     <ClCompile Include="Business\Source\MachineFactory.cpp">
       <Filter>Business\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Header\BaseComparable.hpp">
-      <Filter>Common\Header</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Source\State.cpp">
-      <Filter>Common\Source</Filter>
     </ClCompile>
     <ClCompile Include="IO\Source\DiskOutput.cpp">
       <Filter>IO\Source</Filter>
@@ -69,58 +48,22 @@
     <ClCompile Include="IO\Source\Directives.cpp">
       <Filter>IO\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Source\MachineType.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Business\Source\TuringMachineTapeHeader.cpp">
       <Filter>Business\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Source\AbstractMachineUserinterface.cpp">
-      <Filter>Common\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Common\Source\AbstractMachine.cpp">
+    <ClCompile Include="Common\Source\Transition.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UI\Header\ConsoleUI.hpp">
-      <Filter>UI\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Header\State.hpp">
-      <Filter>Common\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Header\HeadDirection.hpp">
-      <Filter>Common\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Header\MachineType.hpp">
-      <Filter>Common\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Header\Transition.hpp">
-      <Filter>Common\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Header\TuringMachineDefinition.hpp">
-      <Filter>Common\Header</Filter>
-    </ClInclude>
     <ClInclude Include="Business\Header\TuringMachine.hpp">
       <Filter>Business\Header</Filter>
     </ClInclude>
     <ClInclude Include="Business\Header\MachineFactory.hpp">
       <Filter>Business\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Header\ComparableHelpers.hpp">
-      <Filter>Common\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Header\HashSet.hpp">
-      <Filter>Common\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Header\AbstractMachine.hpp">
-      <Filter>Common\Header</Filter>
-    </ClInclude>
     <ClInclude Include="IO\Header\DiskOutput.hpp">
       <Filter>IO\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Header\Utility.hpp">
-      <Filter>Common\Header</Filter>
     </ClInclude>
     <ClInclude Include="IO\Header\DiskIO.hpp">
       <Filter>IO\Header</Filter>
@@ -128,14 +71,14 @@
     <ClInclude Include="IO\Header\Directives.hpp">
       <Filter>IO\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Header\BaseTransition.hpp">
-      <Filter>Common\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Header\AbstractMachineUserinterface.hpp">
-      <Filter>Common\Header</Filter>
-    </ClInclude>
     <ClInclude Include="Business\Header\TuringMachineTapeHeader.hpp">
       <Filter>Business\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\Transition.hpp">
+      <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Header\TuringMachineDefinition.hpp">
+      <Filter>Common\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
