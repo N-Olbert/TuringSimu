@@ -35,7 +35,7 @@ namespace ts_common
 				return toReturn;
 			}
 
-			bool Contains(const T& item)
+			bool Contains(const T& item) const
 			{
 				return this->count(item) != 0;
 			}

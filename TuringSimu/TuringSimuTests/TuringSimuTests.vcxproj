@@ -148,6 +148,9 @@
     <None Include="IO\TestFiles\parseTest3.csv" />
     <None Include="IO\TestFiles\parseTest4.csv" />
     <None Include="IO\TestFiles\parseTest5.csv" />
+    <None Include="IO\TestFiles\parseTestLeftSideOverflow.csv" />
+    <None Include="IO\TestFiles\parseTestRightSideOverflow.csv" />
+    <None Include="IO\TestFiles\parseTestSimpleNonDeterminisiticTM.csv" />
     <None Include="IO\TestFiles\VerifyTMDTest1.csv" />
     <None Include="IO\TestFiles\VerifyTMDTest2.csv" />
     <None Include="IO\TestFiles\VerifyTMDTest3.csv" />

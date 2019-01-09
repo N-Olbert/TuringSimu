@@ -6,6 +6,9 @@
 using namespace ts_common;
 namespace ts_business
 {
+	/**
+	 * \brief A class which simulates the behaviour of the tape header of a turing machine
+	 */
 	class TuringMachineTapeHeader
 	{
 		private:
@@ -22,6 +25,7 @@ namespace ts_business
 			std::string GetCurrentTapeContent();
 		    std::vector<char>& GetVector() noexcept;
 			size_t GetAdjustedPosition() const noexcept;
+			size_t GetAdjustedUIPosition() const noexcept;
 	};
 }
 #endif // TM_TURINGMACHINETAPEHEADER

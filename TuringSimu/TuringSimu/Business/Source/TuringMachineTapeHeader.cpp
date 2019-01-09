@@ -77,3 +77,8 @@ size_t TuringMachineTapeHeader::GetAdjustedPosition() const noexcept
 {
 	return this->rawPosition >= 0 ? this->rawPosition : (this->rawPosition * -1) - 1;
 }
+
+size_t TuringMachineTapeHeader::GetAdjustedUIPosition() const noexcept
+{
+	return this->rawPosition >= 0 ? this->rawPosition : (this->inputNegativeDirection.size() - (this->rawPosition * -1));
+}

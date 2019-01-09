@@ -81,6 +81,9 @@
     <ClInclude Include="Common\Header\BaseMachineDefinition.hpp">
       <Filter>Common\Header</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Header\NonDeterministicTuringMachineUIExecutionData.hpp">
+      <Filter>UI\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\Sources\Localization.cpp">
@@ -112,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="Common\Source\BaseTransition.cpp">
       <Filter>Common\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Sources\NonDeterministicTuringMachineUIExecutionData.cpp">
+      <Filter>UI\Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

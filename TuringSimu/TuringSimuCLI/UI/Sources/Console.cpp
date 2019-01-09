@@ -52,6 +52,12 @@ void Console::PrintLineBlueUnderlinedDelayed(const std::string& toPrint)
 	NewLineDelayed();
 }
 
+void Console::PrintLineRedUnderlinedDelayed(const std::string& toPrint)
+{
+	PrintDelayed(CSI + "31;1;4m" + toPrint + CSI + "0m");
+	NewLineDelayed();
+}
+
 void Console::PrintLineDelayed(const std::string& toPrint)
 {
 	PrintDelayed(toPrint);

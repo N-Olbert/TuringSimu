@@ -43,7 +43,8 @@ std::unordered_map<LocId, std::string> Localization::locEN =
 	{ LocId::NotImplementedFunction, "Not implemented function called." },
 	{ LocId::LogFileCreatedAt, "Logfile can be found at: " },
 	{ LocId::LogFileGenerationError, "Error during log file creation." },
-	{ LocId::LogFileHeading, "Execution log of machine: " }
+	{ LocId::LogFileHeading, "Execution log of machine: " },
+	{ LocId::ExecutionPathChanged, "No valid transition found! Attempting to execute different execution path now.\nRestored to state:\n"}
 };
 
 std::unordered_map<LocId, std::string> Localization::locDE =

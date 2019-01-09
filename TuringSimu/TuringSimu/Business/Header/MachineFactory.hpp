@@ -14,7 +14,7 @@ using namespace ts_common;
 namespace ts_business
 {
 	/*
-	 * Factory to create turing machines
+	 * Factory to create machines
 	 */
 	class MachineFactory
 	{

@@ -54,6 +54,9 @@
     <ClCompile Include="Common\Source\Transition.cpp">
       <Filter>Common\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Business\Source\NonDeterministicTuringMachine.cpp">
+      <Filter>Business\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Business\Header\TuringMachine.hpp">
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="Common\Header\TuringMachineDefinition.hpp">
       <Filter>Common\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Business\Header\NonDeterministicTuringMachine.hpp">
+      <Filter>Business\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

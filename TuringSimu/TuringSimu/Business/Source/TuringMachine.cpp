@@ -49,14 +49,22 @@ void TuringMachine::PerformNextStep()
 	}
 }
 
-bool TuringMachine::IsFinished()
+bool TuringMachine::IsFinished() const
 {
+	//Attention: There are two common theorems about whenever a TM stops: 
+	//		1. the Turing machine stops as soon as it reaches any final state
+	//		2. the Turing machine stops at the current state if no possible transition can be found anymore
+	//We have decided to go for the second definiton, which implies that a final state can also have exits.
 	return GetNextTransition().IsEmpty();
 }
 
-bool TuringMachine::IsFinishedSuccessfully()
+bool TuringMachine::IsFinishedSuccessfully() const
 {
-	return IsFinished() && this->definition.finalStates.Contains(this->currentState);
+	//Attention: There are two common theorems about whenever a TM stops: 
+	//		1. the Turing machine stops as soon as it reaches any final state
+	//		2. the Turing machine stops at the current state if no possible transition can be found anymore
+	//We have decided to go for the second definiton, which implies that a final state can also have exits.
+	return this->definition.finalStates.Contains(this->currentState) && IsFinished();
 }
 
 std::unique_ptr<DynamicType> TuringMachine::GetSpecificValue(SpecificMachineValue valueIdentifier) const
@@ -92,12 +100,16 @@ std::unique_ptr<DynamicType> TuringMachine::GetSpecificValue(SpecificMachineValu
 			return std::make_unique<ConcreteDynamicType<State>>(this->definition.beginState);
 		case S::TapeContent:
 			return std::make_unique<ConcreteDynamicType<std::string>>(this->head->GetCurrentTapeContent());
+		case S::CurrentState:
+			return std::make_unique<ConcreteDynamicType<State>>(this->currentState);
+		case S::CurrentHeadPositon:
+			return std::make_unique<ConcreteDynamicType<size_t>>(this->head->GetAdjustedUIPosition());
 		default: 
 			return nullptr;
 	}
 }
 
-const Transition& TuringMachine::GetNextTransition()
+const Transition& TuringMachine::GetNextTransition() const
 {
 	const auto currentChar = this->head->GetChar();
 	auto& transitions = this->definition.transitions;

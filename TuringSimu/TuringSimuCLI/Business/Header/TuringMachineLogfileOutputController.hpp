@@ -16,6 +16,7 @@ namespace ts_ui_business
 			void PrintLoadedMachine() override;
 			void InitAndExecuteMachine() override;
 			void OnStateChanged(const State& newState) override;
+			void OnBacktraceDifferentExecutionPathChosen() override;
 			void OnError(const std::string& errorMessage) override;
 			void OnAfterMachineExecution() override;
 	};

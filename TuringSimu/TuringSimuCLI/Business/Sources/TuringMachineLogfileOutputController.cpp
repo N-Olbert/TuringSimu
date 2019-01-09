@@ -60,6 +60,16 @@ void TuringMachineLogfileOutputController::OnStateChanged(const State& newState)
 	PrintMachineExecutionState();
 }
 
+void TuringMachineLogfileOutputController::OnBacktraceDifferentExecutionPathChosen()
+{
+	this->stringBuilder.push_back(LineFeed);
+	this->stringBuilder.push_back(LineFeed);
+	this->stringBuilder.append(Localization::GetString(LocId::ExecutionPathChanged));
+	PrintMachineExecutionState();
+	this->stringBuilder.push_back(LineFeed);
+	this->stringBuilder.push_back(LineFeed);
+}
+
 void TuringMachineLogfileOutputController::OnError(const std::string& errorMessage)
 {
 	Console::NewLineDelayed();

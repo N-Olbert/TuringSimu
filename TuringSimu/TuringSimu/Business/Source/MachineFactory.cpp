@@ -1,4 +1,5 @@
 #include "../Header/TuringMachine.hpp"
+#include "../Header/NonDeterministicTuringMachine.hpp"
 #include "../Header/MachineFactory.hpp"
 #include "../../IO/Header/DiskIO.hpp"
 using namespace ts_business;
@@ -14,16 +15,23 @@ std::unique_ptr<AbstractMachine> MachineFactory::CreateMachineFromFile(MachineTy
 {
 	switch (requestedMachineType)
 	{
-		case DTM:
 		case NTM:
-		case DEA:
 		case NEA:
+		case DTM:
+		case DEA:
 			{
 				auto definition = ts_io::GetTuringMachineDefinitionFromFile(path);
 				if (IsValidTuringMachineDefinition(definition))
 				{
-					auto result = std::unique_ptr<TuringMachine>(new TuringMachine{ observingUI, definition });
-					return result;
+					switch (definition.type)
+					{
+					case NTM:
+					case NEA:
+						return std::unique_ptr<NonDeterministicTuringMachine>(new NonDeterministicTuringMachine{ observingUI, definition });;
+					case DTM:
+					case DEA:
+						return std::unique_ptr<TuringMachine>(new TuringMachine{ observingUI, definition });
+					}				
 				}
 			}
 			break;

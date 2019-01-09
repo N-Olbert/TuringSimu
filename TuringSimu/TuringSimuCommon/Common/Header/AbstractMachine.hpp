@@ -34,10 +34,10 @@ namespace ts_common
 			AbstractMachineUserinterface* GetUI() const { return this->ui;}
 
 			/**
-			 * \brief Gets the next transition based on the current state.
+			 * \brief Gets the next transition based on the current machine state.
 			 * \returns The next transition
 			 */
-			const virtual BaseTransition& GetNextTransition() = 0;
+			const virtual BaseTransition& GetNextTransition() const = 0;
 
 		public:			
 			/**
@@ -69,7 +69,7 @@ namespace ts_common
 			 * \brief Returnes a wrapper around a machine specific value
 			 * \param valueIdentifier The id of the requested machine specific value.
 			 * NOTE: Not all machines must support all SpecificMachineValue's
-			 * \return Wrapper around requested machine specific value; nullptr if not supported.
+			 * \return Wrapper around requested machine specific value; nullptr if not supported request.
 			 */
 			virtual std::unique_ptr<DynamicType> GetSpecificValue(SpecificMachineValue valueIdentifier) const = 0;
 			
@@ -83,14 +83,17 @@ namespace ts_common
 			 *			actions.
 			 * \return true if the current machine may not perform any more actions.
 			 */
-			virtual bool IsFinished() = 0;
+			virtual bool IsFinished() const = 0;
 
 			/**
 			 * \brief Gets a value indicating whether the current machine has finished successfully.
 			 * \return true if the current machine has finished successfully.
 			 */
-			virtual bool IsFinishedSuccessfully() = 0;
+			virtual bool IsFinishedSuccessfully() const = 0;
 
+			/**
+			 * \brief default constructor
+			 */
 			virtual ~AbstractMachine() = default;
 	};
 
@@ -112,7 +115,9 @@ namespace ts_common
 		TapeAlphabet,
 		Transitions,
 		InitialState,
-		TapeContent
+		TapeContent,
+		CurrentState,
+		CurrentHeadPositon
 	};
 }
 #endif // TM_ABSTRACTMACHINE

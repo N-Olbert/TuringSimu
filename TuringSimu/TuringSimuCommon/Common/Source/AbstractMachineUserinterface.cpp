@@ -20,3 +20,8 @@ void AbstractMachineUserinterface::NotifyStateChanged(AbstractMachineUserinterfa
 {
 	if(toNotify != nullptr) toNotify->OnStateChanged(newState);
 }
+
+void AbstractMachineUserinterface::NotifyBacktraceDifferentExecutionPathChosen(AbstractMachineUserinterface * toNotify)
+{
+	if (toNotify != nullptr) toNotify->OnBacktraceDifferentExecutionPathChosen();
+}

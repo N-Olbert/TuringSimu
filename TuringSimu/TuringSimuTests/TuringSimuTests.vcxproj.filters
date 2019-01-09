@@ -129,6 +129,15 @@
     <None Include="IO\TestFiles\parseFail7.csv">
       <Filter>IO\TestFiles</Filter>
     </None>
+    <None Include="IO\TestFiles\parseTestLeftSideOverflow.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\parseTestRightSideOverflow.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
+    <None Include="IO\TestFiles\parseTestSimpleNonDeterminisiticTM.csv">
+      <Filter>IO\TestFiles</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Header\DummyMachineUserInterface.hpp">

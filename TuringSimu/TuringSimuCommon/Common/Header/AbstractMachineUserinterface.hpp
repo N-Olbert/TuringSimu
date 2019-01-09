@@ -20,10 +20,12 @@ namespace ts_common
 		virtual void OnTapeWritten(char written) = 0;
 		virtual void OnHeadMoved(HeadDirection direction) = 0; 
 		virtual void OnStateChanged(const State& newState) = 0;
+		virtual void OnBacktraceDifferentExecutionPathChosen() = 0;
 		static void NotifyInitialized(AbstractMachineUserinterface* toNotify);
 		static void NotifyTapeWritten(AbstractMachineUserinterface* toNotify, char written);
 		static void NotifyHeadMoved(AbstractMachineUserinterface* toNotify, HeadDirection direction);
 		static void NotifyStateChanged(AbstractMachineUserinterface* toNotify, const State& newState);
+		static void NotifyBacktraceDifferentExecutionPathChosen(AbstractMachineUserinterface* toNotify);
 	};
 }
 #endif // TM_ABSTRACTMACHINEUSERINTERFACE

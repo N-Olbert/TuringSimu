@@ -124,6 +124,7 @@
     <ClCompile Include="Common\Source\BaseTransition.cpp" />
     <ClCompile Include="Common\Source\ErrorDisplayableUserinterface.cpp" />
     <ClCompile Include="UI\Sources\MachineExecutionController.cpp" />
+    <ClCompile Include="UI\Sources\NonDeterministicTuringMachineUIExecutionData.cpp" />
     <ClCompile Include="UI\Sources\TuringMachineUIExecutionData.cpp" />
     <ClCompile Include="UI\Sources\UIExecutionDataFactory.cpp" />
     <ClInclude Include="Common\Header\AbstractMachine.hpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="UI\Header\MachineExecutionController.hpp" />
     <ClInclude Include="UI\Header\MachineExecutionControllerFactory.hpp" />
     <ClInclude Include="UI\Header\MachineUIExecutionData.hpp" />
+    <ClInclude Include="UI\Header\NonDeterministicTuringMachineUIExecutionData.hpp" />
     <ClInclude Include="UI\Header\Result.hpp" />
     <ClInclude Include="UI\Header\TuringMachineUIExecutionData.hpp" />
     <ClInclude Include="UI\Header\UIExecutionDataFactory.hpp" />

@@ -1,22 +1,21 @@
 #pragma once
-#ifndef TMS_TURINGMACHINEEXECUTIONDATA
-#define TMS_TURINGMACHINEEXECUTIONDATA
+#ifndef TMS_NONDETERMINISTICTURINGMACHINEEXECUTIONDATA
+#define TMS_NONDETERMINISTICTURINGMACHINEEXECUTIONDATA
 #include <string>
 #include <deque>
-#include "MachineUIExecutionData.hpp"
-#include "../../Common/Header/AbstractMachine.hpp"
-#include <fstream>
+#include "TuringMachineUIExecutionData.hpp"
+
+using namespace ts_common;
+using namespace ts_ui;
 
 namespace ts_ui
 {
-	class TuringMachineUIExecutionData : public MachineUIExecutionData
+	class NonDeterministicTuringMachineUIExecutionData : public TuringMachineUIExecutionData
 	{
-		protected:
-			std::deque<char> tape;
-			size_t position = 0;
-			State currentState;
-			char blank = 0;
-			size_t stepsCounter = 0;
+		private:
+			static const size_t TapeFillup = 4;
+			AbstractMachine* machine;
+
 		public:
 			virtual const std::deque<char>& GetTape() const;
 			virtual size_t GetPosition() const;
@@ -28,9 +27,6 @@ namespace ts_ui
 			void HandleTapeWritten(char written) override;
 			void HandleHeadMoved(HeadDirection direction) override;
 			void HandleStateChanged(const State& newState) override;
-		private:
-			void HandleMoveHeadLeft();
-			void HandleMoveHeadRight();
 	};
 }
-#endif // TMS_TURINGMACHINEEXECUTIONDATA
+#endif // TMS_NONDETERMINISTICTURINGMACHINEEXECUTIONDATA

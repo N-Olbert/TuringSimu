@@ -26,6 +26,7 @@ namespace ts_ui
 			static void PrintLine(const std::string& toPrint);
 			static void PrintLineDelayed(const std::string & toPrint);
 			static void PrintLineBlueUnderlinedDelayed(const std::string & toPrint);
+			static void PrintLineRedUnderlinedDelayed(const std::string & toPrint);
 			static void PrintLine(const StringRepresentable& toPrint);
 			static void PrintLine(char toPrint);
 			static void NewLine();

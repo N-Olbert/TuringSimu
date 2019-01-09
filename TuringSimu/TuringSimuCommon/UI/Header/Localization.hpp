@@ -49,7 +49,8 @@ namespace ts_ui
 		NotImplementedFunction,
 		LogFileCreatedAt,
 		LogFileGenerationError,
-		LogFileHeading
+		LogFileHeading,
+		ExecutionPathChanged
 	};
 
 	enum class Language

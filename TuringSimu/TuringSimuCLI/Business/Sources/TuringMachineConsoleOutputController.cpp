@@ -16,7 +16,8 @@ void TuringMachineConsoleOutputController::PrintMachineExecutionState()
 	{
 		const auto execData = static_cast<TuringMachineUIExecutionData*>(this->executionData.get());
 		Console::ClearLine();
-		for (size_t i = 0; i < execData->GetPosition(); ++i)
+		auto offset = execData->GetPosition();
+		for (size_t i = 0; i < offset; ++i)
 		{
 			Console::PrintDelayed(WhiteSpace);
 		}
@@ -118,6 +119,25 @@ void TuringMachineConsoleOutputController::OnStateChanged(const State& newState)
 {
 	MachineExecutionController::OnStateChanged(newState);
 	PrintMachineExecutionState();
+}
+
+void TuringMachineConsoleOutputController::OnBacktraceDifferentExecutionPathChosen()
+{
+	Console::NewLineDelayed();
+	Console::NewLineDelayed();
+	Console::NewLineDelayed();
+	Console::NewLineDelayed();
+	Console::PrintLineRedUnderlinedDelayed(Localization::GetString(LocId::ExecutionPathChanged));
+	PrintMachineExecutionState();
+	Console::NewLineDelayed();
+	Console::NewLineDelayed();
+	Console::NewLineDelayed();
+	Console::NewLineDelayed();
+	Console::NewLineDelayed();
+	Console::PrintLineDelayed(Localization::GetString(LocId::EnterToContinue));
+	Console::AwaitEnter();
+	Console::LineBack();
+	Console::LineBack();
 }
 
 void TuringMachineConsoleOutputController::OnError(const std::string& errorMessage)
