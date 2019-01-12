@@ -3,8 +3,9 @@
 #define TSM_MACHINEEXECUTIONCONTROLLERFACTORY
 #include "../Header/MachineExecutionController.hpp"
 #include "../../../TuringSimuCommon/Common/Header/MachineType.hpp"
-#include "../Header/TuringMachineConsoleOutputController.hpp"
-#include "../Header/TuringMachineLogfileOutputController.hpp"
+#include "../../../TuringSimuCLI/Business/Header/TuringMachineConsoleOutputController.hpp"
+#include "../../../TuringSimuCLI/Business/Header/TuringMachineLogfileOutputController.hpp"
+
 namespace ts_ui
 {
 	enum class UI { Console, LogFile, QtGui };
@@ -32,7 +33,6 @@ namespace ts_ui_business
 									return std::make_unique<TuringMachineConsoleOutputController>(machine);
 								case UI::LogFile:
 									return std::make_unique<TuringMachineLogfileOutputController>(machine);
-									break;
 								case UI::QtGui: break;
 							}
 

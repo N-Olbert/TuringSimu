@@ -12,9 +12,12 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
@@ -26,6 +29,11 @@ public:
     QWidget *centralWidget;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
+    QTabWidget *tabWidget;
+    QWidget *tab;
+    QPushButton *ReadInFileButton;
+    QLineEdit *PathTextBox;
+    QWidget *tab_2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -45,6 +53,23 @@ public:
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
+        tabWidget = new QTabWidget(gridLayoutWidget);
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        tab = new QWidget();
+        tab->setObjectName(QString::fromUtf8("tab"));
+        ReadInFileButton = new QPushButton(tab);
+        ReadInFileButton->setObjectName(QString::fromUtf8("ReadInFileButton"));
+        ReadInFileButton->setGeometry(QRect(420, 10, 75, 23));
+        PathTextBox = new QLineEdit(tab);
+        PathTextBox->setObjectName(QString::fromUtf8("PathTextBox"));
+        PathTextBox->setGeometry(QRect(10, 10, 113, 20));
+        tabWidget->addTab(tab, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        tabWidget->addTab(tab_2, QString());
+
+        gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
+
         TuringSimuQtUIClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(TuringSimuQtUIClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -65,6 +90,9 @@ public:
     void retranslateUi(QMainWindow *TuringSimuQtUIClass)
     {
         TuringSimuQtUIClass->setWindowTitle(QApplication::translate("TuringSimuQtUIClass", "TuringSimuQtUI", nullptr));
+        ReadInFileButton->setText(QApplication::translate("TuringSimuQtUIClass", "PushButton", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("TuringSimuQtUIClass", "Tab 1", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("TuringSimuQtUIClass", "Tab 2", nullptr));
     } // retranslateUi
 
 };

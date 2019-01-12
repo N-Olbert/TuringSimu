@@ -1,4 +1,7 @@
+
 #pragma once
+#ifndef NONDETERMINISTICTURINGMACHINE_HPP
+#define NONDETERMINISTICTURINGMACHINE_HPP
 #include "../Header/TuringMachine.hpp"
 using namespace ts_common;
 
@@ -39,3 +42,4 @@ namespace ts_business
 		std::vector<NonDeterministicTuringMachine::TraceData> backtraceList;
 	};
 }
+#endif // NONDETERMINISTICTURINGMACHINE_HPP
