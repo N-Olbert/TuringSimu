@@ -28,7 +28,7 @@ namespace ts_ui_business
 			virtual void PrintMachineExecutionState() = 0;
 			virtual void PrintLoadedMachine() = 0;
 			virtual void InitAndExecuteMachine() = 0;
-			void AwaitMachineExecution(bool autoRun);
+			virtual void AwaitMachineExecution(bool autoRun);
 			void OnInitialized() override;
 			void OnTapeWritten(char written) override;
 			void OnHeadMoved(HeadDirection direction) override;
@@ -36,7 +36,7 @@ namespace ts_ui_business
 			virtual void OnBeforeNextExecutionStep(bool autoRun) {};
 			virtual void OnAfterMachineExecution() {};
 
-		private:
+		public:
 			void ExecuteMachine(bool autoRun);
 	};
 }

@@ -11,15 +11,24 @@ using namespace ts_ui_business;
 class TuringSimuQtPresenter : public QObject
 {
     Q_OBJECT
+	private:
+		AbstractTuringSimuQtForm* view;
+		std::unique_ptr<AbstractMachine> currentMachine;
+		std::unique_ptr<MachineExecutionController> model;
 
     public:
         explicit TuringSimuQtPresenter(AbstractTuringSimuQtForm* view, QObject *parent = nullptr);
+		void DisplayTapeSequence(std::string toDisplay);
+		void SetTapeHeaderVisibleAt(size_t pos);
+		std::string GetInitialTapeContent();
+		void DisplayCurrentState(const std::string& currentState);
+		void DisplayCurrentChar(char toDisplay);
 
-    private:
-        AbstractTuringSimuQtForm* view;
-        std::unique_ptr<MachineExecutionController> model;
-
-    private slots:
-        void HandleReadInFileButtonClicked() const;
+	private slots:
+	        void HandleLoadFileButtonClicked();
+			void HandleRunButtonClicked();
+			void HandleStepButtonClicked();
+			void HandleResetButtonClicked();
+			void HandleInitialTapeContentChanged();
 };
 #endif // TURINGSIMUQTPRESENTER_H

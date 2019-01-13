@@ -14,7 +14,7 @@ void TuringMachineConsoleOutputController::PrintMachineExecutionState()
 {
 	if (this->machine != nullptr)
 	{
-		const auto execData = static_cast<TuringMachineUIExecutionData*>(this->executionData.get());
+		const auto execData = dynamic_cast<TuringMachineUIExecutionData*>(this->executionData.get());
 		Console::ClearLine();
 		auto offset = execData->GetPosition();
 		for (size_t i = 0; i < offset; ++i)

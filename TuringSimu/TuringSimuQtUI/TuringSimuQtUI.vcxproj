@@ -122,11 +122,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TapeLetter.cpp" />
+    <ClCompile Include="TuringMachineQtOutputController.cpp" />
     <ClCompile Include="TuringSimuQtPresenter.cpp" />
     <ClCompile Include="TuringSimuQtUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractTuringSimuQtForm.hpp" />
+    <ClInclude Include="TuringMachineQtOutputController.hpp" />
+    <QtMoc Include="TapeLetter.hpp" />
     <QtMoc Include="TuringSimuQtPresenter.hpp" />
     <QtMoc Include="TuringSimuQtUI.hpp" />
   </ItemGroup>
