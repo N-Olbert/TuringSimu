@@ -97,17 +97,29 @@ namespace ts_business
 			template<class T> class ConcreteDynamicType : public DynamicType
 			{
 				private:
+					/**
+					 * \brief The wrapped value
+					 */
 					std::unique_ptr<T> value;
 				protected:
-					const void* GetValue() override
+					/**
+					 * \brief Gets the wrapped value as void ptr.
+					 * \return The wrapped value
+					 */
+					const void* GetValue() const override
 					{
 						return static_cast<void*>(this->value.get());
 					}
 
 				public:
-					ConcreteDynamicType(const T& instanceToCarry)
+					/**
+					 * \brief Create a new instance of the ConcreteDynamicType class which carries the given instanCe (by making a COPY of it)
+					 * \param toCarry The object which should be carreid by this instance.
+					 * NOTE: Will be copied to ensure immutablity
+					 */
+					ConcreteDynamicType(const T& toCarry)
 					{
-						this->value = std::unique_ptr<T>(new T{ instanceToCarry });
+						this->value = std::unique_ptr<T>(new T{ toCarry });
 					}
 			};
 	};

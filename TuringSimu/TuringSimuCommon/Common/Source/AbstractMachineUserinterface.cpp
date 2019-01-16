@@ -1,9 +1,15 @@
 #include "../Header/AbstractMachineUserinterface.hpp"
+#include "../Header/BaseTransition.hpp"
 using namespace ts_common;
 
 void AbstractMachineUserinterface::NotifyInitialized(AbstractMachineUserinterface* toNotify)
 {
 	if(toNotify != nullptr)toNotify->OnInitialized();
+}
+
+void AbstractMachineUserinterface::NotifyTransitionChoosen(AbstractMachineUserinterface* toNotify, const BaseTransition& transition)
+{
+	if (toNotify != nullptr)toNotify->OnTransitionChoosen(transition);
 }
 
 void AbstractMachineUserinterface::NotifyTapeWritten(AbstractMachineUserinterface* toNotify, char written)

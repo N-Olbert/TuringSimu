@@ -39,12 +39,21 @@
     <ClCompile Include="TuringSimuQtPresenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TapeLetter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TuringMachineQtOutputController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TuringSimuQtPresenter.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="TuringSimuQtUI.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="TapeLetter.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -60,6 +69,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractTuringSimuQtForm.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TuringMachineQtOutputController.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

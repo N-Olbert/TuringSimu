@@ -5,10 +5,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    TuringSimuQtUI* w = new TuringSimuQtUI{};
-    TuringSimuQtPresenter *presenter = new TuringSimuQtPresenter(w);
+	auto view = std::make_unique<TuringSimuQtUI>();
+    auto presenter = std::make_unique<TuringSimuQtPresenter>(view.get());
     Q_UNUSED(presenter);
-    w->show();
+    view->show();
 
     return a.exec();
 }

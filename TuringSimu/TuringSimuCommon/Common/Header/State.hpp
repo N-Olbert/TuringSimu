@@ -5,6 +5,9 @@
 #include <string>
 namespace ts_common
 {
+	/**
+	 * \brief Class which represents a machine state.
+	 */
 	class State : public BaseComparable<State>, public StringRepresentable 
 	{
 		private:
@@ -22,10 +25,8 @@ namespace ts_common
 			 */
 			const std::string& GetIdentifier() const;
 
-			/*
-			 * Destructor.
-			 */
-			virtual ~State() = default;
+			////Overrides
+
 			const bool operator==(const State& other) const noexcept override;
 			const bool operator!=(const State& other) const noexcept override;
 			const bool operator<(const State& other) const noexcept override;

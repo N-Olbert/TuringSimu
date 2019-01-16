@@ -10,11 +10,11 @@ using namespace ts_common;
 using namespace ts_ui;
 using namespace ts_ui_business;
 
-void TuringMachineConsoleOutputController::PrintMachineExecutionState()
+void TuringMachineConsoleOutputController::ShowMachineExecutionState()
 {
 	if (this->machine != nullptr)
 	{
-		const auto execData = static_cast<TuringMachineUIExecutionData*>(this->executionData.get());
+		const auto execData = dynamic_cast<TuringMachineUIExecutionData*>(this->executionData.get());
 		Console::ClearLine();
 		auto offset = execData->GetPosition();
 		for (size_t i = 0; i < offset; ++i)
@@ -44,7 +44,7 @@ void TuringMachineConsoleOutputController::PrintMachineExecutionState()
 	}
 }
 
-void TuringMachineConsoleOutputController::PrintLoadedMachine()
+void TuringMachineConsoleOutputController::ShowLoadedMachine()
 {
 	if (this->machine != nullptr)
 	{
@@ -118,7 +118,7 @@ void TuringMachineConsoleOutputController::PrintLoadedMachine()
 void TuringMachineConsoleOutputController::OnStateChanged(const State& newState)
 {
 	MachineExecutionController::OnStateChanged(newState);
-	PrintMachineExecutionState();
+	ShowMachineExecutionState();
 }
 
 void TuringMachineConsoleOutputController::OnBacktraceDifferentExecutionPathChosen()
@@ -128,7 +128,7 @@ void TuringMachineConsoleOutputController::OnBacktraceDifferentExecutionPathChos
 	Console::NewLineDelayed();
 	Console::NewLineDelayed();
 	Console::PrintLineRedUnderlinedDelayed(Localization::GetString(LocId::ExecutionPathChanged));
-	PrintMachineExecutionState();
+	ShowMachineExecutionState();
 	Console::NewLineDelayed();
 	Console::NewLineDelayed();
 	Console::NewLineDelayed();

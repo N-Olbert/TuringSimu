@@ -48,5 +48,8 @@
     <ClCompile Include="Business\Sources\TuringMachineLogfileOutputController.cpp">
       <Filter>Business\Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Business\Sources\MachineExecutionControllerFactory.cpp">
+      <Filter>Business\Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

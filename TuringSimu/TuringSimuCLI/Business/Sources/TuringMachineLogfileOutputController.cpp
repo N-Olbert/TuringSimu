@@ -20,7 +20,7 @@ TuringMachineLogfileOutputController::TuringMachineLogfileOutputController(Abstr
 	this->stringBuilder.push_back(LineFeed);
 }
 
-void TuringMachineLogfileOutputController::PrintMachineExecutionState()
+void TuringMachineLogfileOutputController::ShowMachineExecutionState()
 {
 	if (this->machine != nullptr)
 	{
@@ -49,7 +49,7 @@ void TuringMachineLogfileOutputController::PrintMachineExecutionState()
 	}
 }
 
-void TuringMachineLogfileOutputController::PrintLoadedMachine()
+void TuringMachineLogfileOutputController::ShowLoadedMachine()
 {
 	this->OnError(Localization::GetString(LocId::NotImplementedFunction));
 }
@@ -57,7 +57,7 @@ void TuringMachineLogfileOutputController::PrintLoadedMachine()
 void TuringMachineLogfileOutputController::OnStateChanged(const State& newState)
 {
 	MachineExecutionController::OnStateChanged(newState);
-	PrintMachineExecutionState();
+	ShowMachineExecutionState();
 }
 
 void TuringMachineLogfileOutputController::OnBacktraceDifferentExecutionPathChosen()
@@ -65,7 +65,7 @@ void TuringMachineLogfileOutputController::OnBacktraceDifferentExecutionPathChos
 	this->stringBuilder.push_back(LineFeed);
 	this->stringBuilder.push_back(LineFeed);
 	this->stringBuilder.append(Localization::GetString(LocId::ExecutionPathChanged));
-	PrintMachineExecutionState();
+	ShowMachineExecutionState();
 	this->stringBuilder.push_back(LineFeed);
 	this->stringBuilder.push_back(LineFeed);
 }

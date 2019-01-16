@@ -7,10 +7,15 @@
 message("You are running qmake on a generated .pro file. This may not work!")
 
 
-HEADERS += ./TuringSimuQtUI.h \
-    ./stdafx.h
+HEADERS += ./AbstractTuringSimuQtForm.hpp \
+    ./TuringMachineQtOutputController.hpp \
+    ./TapeLetter.hpp \
+    ./TuringSimuQtPresenter.hpp \
+    ./TuringSimuQtUI.hpp
 SOURCES += ./main.cpp \
-    ./TuringSimuQtUI.cpp \
-    ./stdafx.cpp
+    ./TapeLetter.cpp \
+    ./TuringMachineQtOutputController.cpp \
+    ./TuringSimuQtPresenter.cpp \
+    ./TuringSimuQtUI.cpp
 FORMS += ./TuringSimuQtUI.ui
 RESOURCES += TuringSimuQtUI.qrc

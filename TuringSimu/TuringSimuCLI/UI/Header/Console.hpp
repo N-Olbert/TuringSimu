@@ -6,6 +6,7 @@
 #include <iterator>
 #include "../../../TuringSimuCommon/Common/Header/StringRepresentable.hpp"
 
+using namespace ts_common;
 namespace ts_ui
 {
 	/**

@@ -114,6 +114,7 @@ namespace ts_common
 		Alphabet,
 		TapeAlphabet,
 		Transitions,
+		RawTransitions,
 		InitialState,
 		TapeContent,
 		CurrentState,

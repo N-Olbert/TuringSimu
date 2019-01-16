@@ -14,9 +14,9 @@ void NonDeterministicTuringMachine::PerformNextStep()
 			//Store current state for potential backtracking
 			for (size_t i = 1; i < transitions.size(); i++)
 			{
-				auto toAdd = TraceData{};
+				auto toAdd = StateSnapshot{};
 				toAdd.Header = std::move(std::unique_ptr<TuringMachineTapeHeader>(new TuringMachineTapeHeader{ *this->head.get() }));
-				toAdd.Transiton = transitions[i];
+				toAdd.NextTransiton = transitions[i];
 				this->backtraceList.push_back(std::move(toAdd));
 			}
 		}
@@ -34,8 +34,8 @@ void NonDeterministicTuringMachine::PerformNextStep()
 			//item in vector is now in an valid, but unspecified state -> remove it
 			this->backtraceList.erase(this->backtraceList.begin() + (this->backtraceList.size() - 1));
 			this->head = std::move(toRestore.Header);
-			this->currentState = toRestore.Transiton->GetCurrentState();
-			transition = toRestore.Transiton; 
+			this->currentState = toRestore.NextTransiton->GetCurrentState();
+			transition = toRestore.NextTransiton; 
 			AMU::NotifyBacktraceDifferentExecutionPathChosen(GetUI());
 		}
 		

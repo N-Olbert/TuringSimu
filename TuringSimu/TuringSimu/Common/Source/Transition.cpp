@@ -19,7 +19,7 @@ Transition::Transition(std::string csvLine)
 	if (!rawData[1].empty()) {
 		this->currentChar = rawData[1].at(0);
 	} else {
-		this->currentChar = epsilon;
+		this->currentChar = BaseTransition::Epsilon;
 	}
 	this->SetCurrentState(State{ rawData[0] });
 	this->SetNextState(State{ rawData[2] });
@@ -42,12 +42,11 @@ HeadDirection Transition::GetHeadDirection() const
 	return headDirection;
 }
 
-/**
- * \brief Counts the number of transitions with the same currentChar and currentState fields
- * \param t The Transition determining the parameters to check
- * \param vector The vector to search
- * \return The count of transitions having the same currentChar and currentState field as the given Transition
- */
+const std::string ts_common::Transition::GetToRead() const
+{
+	return std::string{ currentChar };
+}
+
 int Transition::countOccurrences(const Transition& t, const std::vector<Transition>& vector) 
 {
 	int count = 0;
@@ -59,18 +58,6 @@ int Transition::countOccurrences(const Transition& t, const std::vector<Transiti
 		}
 	}
 	return count;
-}
-
-void Transition::setCurrentChar(char c) {
-	this->currentChar = c;
-}
-
-void Transition::setToWrite(char c) {
-	this->toWrite = c;
-}
-
-void Transition::setHeadDirection(HeadDirection hd) {
-	this->headDirection = hd;
 }
 
 const bool Transition::IsEmpty() const
@@ -171,10 +158,13 @@ std::string Transition::ToString() const noexcept
 {
 	std::string r;
 	r.append(GetCurrentState().ToString());
+	r.push_back('/');
 	r.push_back(GetCurrentChar());
 	r.push_back('/');
 	r.push_back(GetToWrite());
 	r.push_back('/');
 	r.append(GetNextState().ToString());
+	r.push_back('/');
+	r.append(DirectionAsString(this->headDirection));
 	return r;
 }

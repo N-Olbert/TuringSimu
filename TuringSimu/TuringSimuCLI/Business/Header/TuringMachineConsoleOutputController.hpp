@@ -4,12 +4,16 @@
 
 namespace ts_ui_business
 {
+	/**
+	 * \brief Impelementation of MachineExecutionController which handles the console output of a turing machine
+	 */
 	class TuringMachineConsoleOutputController : public MachineExecutionController
 	{
+		////Overrides
 		public:
 			TuringMachineConsoleOutputController(AbstractMachine* machine) : MachineExecutionController(machine) {};
-			void PrintMachineExecutionState() override;
-			void PrintLoadedMachine() override;
+			void ShowMachineExecutionState() override;
+			void ShowLoadedMachine() override;
 			void InitAndExecuteMachine() override;
 			void OnStateChanged(const State& newState) override;
 			void OnBacktraceDifferentExecutionPathChosen() override;
