@@ -784,7 +784,7 @@
            <rect>
             <x>170</x>
             <y>410</y>
-            <width>191</width>
+            <width>61</width>
             <height>31</height>
            </rect>
           </property>
@@ -802,7 +802,7 @@
            <rect>
             <x>170</x>
             <y>440</y>
-            <width>151</width>
+            <width>51</width>
             <height>31</height>
            </rect>
           </property>
@@ -825,8 +825,109 @@
            </rect>
           </property>
           <property name="text">
-           <string>Reset</string>
+           <string>Cancel</string>
           </property>
+         </widget>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="geometry">
+           <rect>
+            <x>230</x>
+            <y>400</y>
+            <width>120</width>
+            <height>80</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Step</string>
+          </property>
+          <widget class="QLabel" name="StepsLabel">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>20</y>
+             <width>71</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>26</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>20</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>12</y>
+            <width>120</width>
+            <height>241</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Information</string>
+          </property>
+          <widget class="QTextEdit" name="MachineInfoLabel">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>104</width>
+             <height>211</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="undoRedoEnabled">
+            <bool>false</bool>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="acceptRichText">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="geometry">
+           <rect>
+            <x>140</x>
+            <y>12</y>
+            <width>431</width>
+            <height>241</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Transitions</string>
+          </property>
+          <widget class="QTableView" name="TransitionTable">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>411</width>
+             <height>211</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectItems</enum>
+           </property>
+          </widget>
          </widget>
         </widget>
         <widget class="QLabel" name="label_2">

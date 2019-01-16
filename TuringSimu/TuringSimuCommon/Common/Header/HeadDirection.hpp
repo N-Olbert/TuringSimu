@@ -41,6 +41,23 @@ namespace ts_common
 		}
 		throw std::logic_error("Parse-Error: Unknown HeadDirection");
 	}
+
+	/**
+	 * \brief Returns the appropriate string for the given enum
+	 * \param direction The HeadDirection to convert
+	 * \return string corresponding to the HeadDirection
+	 */
+	inline std::string DirectionAsString(HeadDirection direction)
+	{
+		switch (direction)
+		{
+			case Left: return "L";
+			case Right: return "R";
+			case Stay: return "S";
+		}
+
+		throw std::logic_error("Parse-Error: Unknown HeadDirection");
+	}
 }
 
 #endif

@@ -14,6 +14,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -21,6 +22,8 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableView>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 #include "tapeletter.hpp"
@@ -80,6 +83,12 @@ public:
     QLabel *StateLabel;
     QLabel *CharLabel;
     QPushButton *ResetButton;
+    QGroupBox *groupBox;
+    QLabel *StepsLabel;
+    QGroupBox *groupBox_3;
+    QTextEdit *MachineInfoLabel;
+    QGroupBox *groupBox_4;
+    QTableView *TransitionTable;
     QLabel *label_2;
     QWidget *MachineGenerationTab;
     QMenuBar *menuBar;
@@ -421,15 +430,44 @@ public:
         label_4->setFont(font1);
         StateLabel = new QLabel(MachineExecutionGroupBox);
         StateLabel->setObjectName(QString::fromUtf8("StateLabel"));
-        StateLabel->setGeometry(QRect(170, 410, 191, 31));
+        StateLabel->setGeometry(QRect(170, 410, 61, 31));
         StateLabel->setFont(font1);
         CharLabel = new QLabel(MachineExecutionGroupBox);
         CharLabel->setObjectName(QString::fromUtf8("CharLabel"));
-        CharLabel->setGeometry(QRect(170, 440, 151, 31));
+        CharLabel->setGeometry(QRect(170, 440, 51, 31));
         CharLabel->setFont(font1);
         ResetButton = new QPushButton(MachineExecutionGroupBox);
         ResetButton->setObjectName(QString::fromUtf8("ResetButton"));
         ResetButton->setGeometry(QRect(500, 420, 61, 51));
+        groupBox = new QGroupBox(MachineExecutionGroupBox);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setGeometry(QRect(230, 400, 120, 80));
+        StepsLabel = new QLabel(groupBox);
+        StepsLabel->setObjectName(QString::fromUtf8("StepsLabel"));
+        StepsLabel->setGeometry(QRect(20, 20, 71, 41));
+        QFont font2;
+        font2.setPointSize(26);
+        StepsLabel->setFont(font2);
+        StepsLabel->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        groupBox_3 = new QGroupBox(MachineExecutionGroupBox);
+        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        groupBox_3->setGeometry(QRect(10, 12, 120, 241));
+        MachineInfoLabel = new QTextEdit(groupBox_3);
+        MachineInfoLabel->setObjectName(QString::fromUtf8("MachineInfoLabel"));
+        MachineInfoLabel->setGeometry(QRect(10, 20, 104, 211));
+        MachineInfoLabel->setFrameShape(QFrame::NoFrame);
+        MachineInfoLabel->setUndoRedoEnabled(false);
+        MachineInfoLabel->setReadOnly(true);
+        MachineInfoLabel->setAcceptRichText(false);
+        groupBox_4 = new QGroupBox(MachineExecutionGroupBox);
+        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
+        groupBox_4->setGeometry(QRect(140, 12, 431, 241));
+        TransitionTable = new QTableView(groupBox_4);
+        TransitionTable->setObjectName(QString::fromUtf8("TransitionTable"));
+        TransitionTable->setGeometry(QRect(10, 20, 411, 211));
+        TransitionTable->setFrameShape(QFrame::NoFrame);
+        TransitionTable->setAlternatingRowColors(true);
+        TransitionTable->setSelectionBehavior(QAbstractItemView::SelectItems);
         label_2 = new QLabel(MachineExecutionTab);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(10, 10, 151, 16));
@@ -474,7 +512,11 @@ public:
         label_4->setText(QApplication::translate("TuringSimuQtUIClass", "Current char:", nullptr));
         StateLabel->setText(QApplication::translate("TuringSimuQtUIClass", "State", nullptr));
         CharLabel->setText(QApplication::translate("TuringSimuQtUIClass", "#", nullptr));
-        ResetButton->setText(QApplication::translate("TuringSimuQtUIClass", "Reset", nullptr));
+        ResetButton->setText(QApplication::translate("TuringSimuQtUIClass", "Cancel", nullptr));
+        groupBox->setTitle(QApplication::translate("TuringSimuQtUIClass", "Step", nullptr));
+        StepsLabel->setText(QApplication::translate("TuringSimuQtUIClass", "20", nullptr));
+        groupBox_3->setTitle(QApplication::translate("TuringSimuQtUIClass", "Information", nullptr));
+        groupBox_4->setTitle(QApplication::translate("TuringSimuQtUIClass", "Transitions", nullptr));
         label_2->setText(QApplication::translate("TuringSimuQtUIClass", "Path of machine defintion file:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(MachineExecutionTab), QApplication::translate("TuringSimuQtUIClass", "Machine execution", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(MachineGenerationTab), QApplication::translate("TuringSimuQtUIClass", "Machine generation", nullptr));

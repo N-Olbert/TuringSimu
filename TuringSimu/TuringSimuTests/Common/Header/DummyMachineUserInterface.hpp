@@ -16,7 +16,8 @@ namespace ts_common
 		void OnHeadMoved(HeadDirection direction) override;
 		void OnStateChanged(const State& newState) override;
 		~DummyMachineUserInterface() = default;
-		void OnBacktraceDifferentExecutionPathChosen() override {};
+		void OnBacktraceDifferentExecutionPathChosen() override {}
+		void OnTransitionChoosen(const BaseTransition& transition) override {};
 	};
 }
 #endif // TMST_DUMMYMACHINEUSERINTERFACE

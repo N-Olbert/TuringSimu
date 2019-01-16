@@ -4,11 +4,7 @@
 #include "../../../TuringSimuCommon/Common/Header/AbstractMachine.hpp"
 #include "../../../TuringSimuCommon/Common/Header/AbstractMachineUserinterface.hpp"
 #include "../../../TuringSimuCommon/Common/Header/MachineType.hpp"
-#include "../../Common/Header/TuringMachineDefinition.hpp"
-
-namespace ts_common {
-	class TuringMachineDefinition;
-}
+#include "../Header/TuringMachine.hpp"
 
 using namespace ts_common;
 namespace ts_business

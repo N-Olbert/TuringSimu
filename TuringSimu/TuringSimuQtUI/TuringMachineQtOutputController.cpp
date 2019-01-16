@@ -1,6 +1,5 @@
 #include "TuringMachineQtOutputController.hpp"
 #include "../TuringSimuCommon/UI/Header/TuringMachineUIExecutionData.hpp"
-#include <QThread>
 
 
 TuringMachineQtOutputController::TuringMachineQtOutputController(AbstractMachine* machine, TuringSimuQtPresenter* presenter)
@@ -8,20 +7,22 @@ TuringMachineQtOutputController::TuringMachineQtOutputController(AbstractMachine
 {
 }
 
+
 void TuringMachineQtOutputController::OnError(const std::string& errorMessage)
 {
 }
 
 void TuringMachineQtOutputController::OnBacktraceDifferentExecutionPathChosen()
 {
+	//TODO
 }
 
-void TuringMachineQtOutputController::PrintMachineExecutionState()
+void TuringMachineQtOutputController::ShowMachineExecutionState()
 {
 	//Doesnt make sense here
 }
 
-void TuringMachineQtOutputController::PrintLoadedMachine()
+void TuringMachineQtOutputController::ShowLoadedMachine()
 {
 	//Doesnt make sense here
 }
@@ -30,7 +31,7 @@ void TuringMachineQtOutputController::InitAndExecuteMachine()
 {
 	auto initialContent = this->presenter->GetInitialTapeContent();
 	this->machine->InitMachineForExecution(initialContent);
-	AwaitMachineExecution(true);
+	AwaitMachineExecution(this->presenter->GetIsAutoRunMode());
 }
 
 void TuringMachineQtOutputController::OnInitialized()
@@ -38,10 +39,17 @@ void TuringMachineQtOutputController::OnInitialized()
 	this->executionData->HandleInitialized(this->machine);
 	const auto execData = dynamic_cast<TuringMachineUIExecutionData*>(this->executionData.get());
 	auto& tape = execData->GetTape();
-	this->presenter->DisplayTapeSequence(std::string{ tape.begin(), tape.end() });
-	this->presenter->SetTapeHeaderVisibleAt(execData->GetPosition());
+	auto tapeStr = std::string{ tape.begin(), tape.end() };
+	this->presenter->DisplayTapeSequence(tapeStr, execData->GetPosition());
+	this->presenter->SetTapeHeaderVisibleAt(execData->GetPosition(), tapeStr);
 	this->presenter->DisplayCurrentState(execData->GetCurrentState().ToString());
 	this->presenter->DisplayCurrentChar(execData->GetTape()[execData->GetPosition()]);
+	this->presenter->DisplayCurrentStep(0);
+}
+
+void TuringMachineQtOutputController::OnTransitionChoosen(const BaseTransition& transition)
+{
+	this->presenter->HighlightTransition(transition);
 }
 
 void TuringMachineQtOutputController::OnTapeWritten(char written)
@@ -49,25 +57,18 @@ void TuringMachineQtOutputController::OnTapeWritten(char written)
 	this->executionData->HandleTapeWritten(written);
 	const auto execData = dynamic_cast<TuringMachineUIExecutionData*>(this->executionData.get());
 	auto& tape = execData->GetTape();
-	this->presenter->DisplayTapeSequence(std::string{tape.begin(), tape.end()});
+	auto tapeStr = std::string{ tape.begin(), tape.end() };
+	this->presenter->DisplayTapeSequence(tapeStr, execData->GetPosition());
 }
 
 void TuringMachineQtOutputController::OnHeadMoved(HeadDirection direction)
 {
 	this->executionData->HandleHeadMoved(direction);
 	const auto execData = dynamic_cast<TuringMachineUIExecutionData*>(this->executionData.get());
-	this->presenter->SetTapeHeaderVisibleAt(execData->GetPosition());
-	this->presenter->DisplayCurrentChar(execData->GetTape()[execData->GetPosition()]);
-}
-
-void TuringMachineQtOutputController::AwaitMachineExecution(bool autoRun)
-{
-	QThread dummy;
-	if(this->executorThread == nullptr)
-	{
-		this->executorThread = std::make_unique<std::thread>( &MachineExecutionController::ExecuteMachine, this, autoRun );
-	}
-	//TODO
+	auto& tape = execData->GetTape();
+	auto tapeStr = std::string{ tape.begin(), tape.end() };
+	this->presenter->SetTapeHeaderVisibleAt(execData->GetPosition(), tapeStr);
+	this->presenter->DisplayCurrentChar(tapeStr[execData->GetPosition()]);
 }
 
 void TuringMachineQtOutputController::OnStateChanged(const State& newState)
@@ -78,11 +79,27 @@ void TuringMachineQtOutputController::OnStateChanged(const State& newState)
 
 void TuringMachineQtOutputController::OnBeforeNextExecutionStep(bool autoRun)
 {
-	std::this_thread::sleep_for(std::chrono::seconds(1));
+	if (this->cancellationRequested) return;
+	if (autoRun)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(200));
+	}
+	else
+	{
+		this->presenter->AwaitClickOnStepButton();
+	}
+
+	const auto execData = dynamic_cast<TuringMachineUIExecutionData*>(this->executionData.get());
+	this->presenter->DisplayCurrentStep(execData->GetStepsCounter());
 }
 
 void TuringMachineQtOutputController::OnAfterMachineExecution()
 {
-	this->executorThread = nullptr;
+	this->presenter->ExitSeparateThreadExecutionMode();
+}
+
+void TuringMachineQtOutputController::CancelExecution()
+{
+	this->cancellationRequested = true;
 }
 

@@ -106,7 +106,7 @@ void BaseConsoleController::PrintLoadedMachineMenu(std::unique_ptr<AbstractMachi
 				MachineExecutionControllerFactory::GetExecutionController(UI::LogFile, machine.get())->InitAndExecuteMachine();
 				break;
 			case 3:
-				MachineExecutionControllerFactory::GetExecutionController(UI::Console, machine.get())->PrintLoadedMachine();
+				MachineExecutionControllerFactory::GetExecutionController(UI::Console, machine.get())->ShowLoadedMachine();
 				break;
 			case 4:
 				return;

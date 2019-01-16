@@ -71,6 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -133,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Business\Sources\BaseConsoleController.cpp" />
+    <ClCompile Include="Business\Sources\MachineExecutionControllerFactory.cpp" />
     <ClCompile Include="Business\Sources\TuringMachineConsoleOutputController.cpp" />
     <ClCompile Include="Business\Sources\TuringMachineLogfileOutputController.cpp" />
     <ClCompile Include="Main.cpp" />

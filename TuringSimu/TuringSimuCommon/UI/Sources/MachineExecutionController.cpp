@@ -41,8 +41,9 @@ void MachineExecutionController::AwaitMachineExecution(bool autoRun)
 void MachineExecutionController::ExecuteMachine(bool autoRun)
 {
 	std::lock_guard<std::mutex> memBarrier{ memoryBarrierForcer };
-	PrintMachineExecutionState();
-	while (!this->machine->IsFinished())
+	this->cancellationRequested = false;
+	ShowMachineExecutionState();
+	while (!this->machine->IsFinished() && !this->cancellationRequested)
 	{
 		OnBeforeNextExecutionStep(autoRun);
 		this->machine->PerformNextStep();

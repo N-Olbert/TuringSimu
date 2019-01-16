@@ -27,6 +27,12 @@ bool TuringMachine::InitMachineForExecution(std::string& initText)
 	this->head->InitWith(initText);
 	this->currentState = this->definition.beginState;
 	AMU::NotifyInitialized(GetUI());
+	auto& transition = GetNextTransition();
+	if (!transition.IsEmpty())
+	{
+		AMU::NotifyTransitionChoosen(GetUI(), transition);
+	}
+
 	return true;
 }
 
@@ -46,6 +52,11 @@ void TuringMachine::PerformNextStep()
 		auto& nextState = transition.GetNextState();
 		this->currentState = nextState;
 		AMU::NotifyStateChanged(GetUI(), nextState);
+		auto& nextTransition = GetNextTransition();
+		if (!nextTransition.IsEmpty())
+		{
+			AMU::NotifyTransitionChoosen(GetUI(), nextTransition);
+		}
 	}
 }
 
@@ -96,6 +107,16 @@ std::unique_ptr<DynamicType> TuringMachine::GetSpecificValue(SpecificMachineValu
 
 				return std::make_unique<ConcreteDynamicType<std::vector<const StringRepresentable*>>>(result);
 			}
+		case S::RawTransitions:
+		{
+			auto result = std::vector<const BaseTransition*>{};
+			for (auto& tmp : this->definition.transitions)
+			{
+				result.push_back(&tmp);
+			}
+
+			return std::make_unique<ConcreteDynamicType<std::vector<const BaseTransition*>>>(result);
+		}
 		case S::InitialState:
 			return std::make_unique<ConcreteDynamicType<State>>(this->definition.beginState);
 		case S::TapeContent:

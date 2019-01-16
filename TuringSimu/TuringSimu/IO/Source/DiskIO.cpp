@@ -123,7 +123,7 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 							if (!s.empty()) {
 								line.push_back(s.at(0));
 							} else {
-								line.push_back(epsilon);
+								line.push_back(BaseTransition::Epsilon);
 								epsilonUsed = true;
 							}
 							//finite state machines only move right
@@ -182,11 +182,7 @@ TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::str
 				for (auto const element : transitionsWithEpsilon) {
 					//converts qX;\epsilon;qY;\epsilon;R to qX;a;qY;a;S
 					for (auto value : tmd.tapeAlphabet) {
-						auto k = element;
-						k.setCurrentChar(value);
-						k.setToWrite(value);
-						k.setHeadDirection(Stay);
-						tmd.transitions.push_back(k);
+						tmd.transitions.push_back(Transition{ element.GetCurrentState(), value, value, element.GetNextState(), Stay });
 					}
 				}
 

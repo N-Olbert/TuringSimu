@@ -15,6 +15,10 @@ namespace ts_common
 		    const virtual bool operator != (const T& other) const noexcept = 0;
 			const virtual bool operator < (const T& other) const noexcept = 0;
 			const virtual bool operator > (const T& other) const noexcept = 0;
+
+			/**
+			 * \brief Retrieves the hash code of the current object.
+			 */
 			const virtual size_t GetHashCode() const noexcept = 0;
 	};
 }
