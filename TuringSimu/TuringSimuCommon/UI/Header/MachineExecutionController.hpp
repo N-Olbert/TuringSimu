@@ -64,22 +64,22 @@ namespace ts_ui_business
 			 * \brief Called before the next operation is executed by the machine
 			 * \param autoRun -
 			 */
-			virtual void OnBeforeNextExecutionStep(bool autoRun) {};
+            virtual void OnBeforeNextExecutionStep(bool autoRun) { /* Not using: autoRun*/ }
 			
 			/**
 			 * \brief Called after machine execution finishes
 			 */
-			virtual void OnAfterMachineExecution() {};
+            virtual void OnAfterMachineExecution() {}
 
 			/**
 			 * \brief Requests and cancellation of the current execution
 			 */
-			virtual void CancelExecution() {};
+            virtual void CancelExecution() {}
 
 			//Overrides
 
 			void OnInitialized() override;
-			virtual void OnTransitionChoosen(const BaseTransition& transition) override {};
+            virtual void OnTransitionChoosen(const BaseTransition& transition) override {}
 			void OnTapeWritten(char written) override;
 			void OnHeadMoved(HeadDirection direction) override;
 			void OnStateChanged(const State& newState) override;
