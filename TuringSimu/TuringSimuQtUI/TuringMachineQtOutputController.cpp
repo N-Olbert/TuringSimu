@@ -68,7 +68,7 @@ void TuringMachineQtOutputController::OnHeadMoved(HeadDirection direction)
 	auto& tape = execData->GetTape();
 	auto tapeStr = std::string{ tape.begin(), tape.end() };
 	this->presenter->SetTapeHeaderVisibleAt(execData->GetPosition(), tapeStr);
-	this->presenter->DisplayCurrentChar(tapeStr[execData->GetPosition()]);
+	this->presenter->DisplayCurrentChar(execData->GetTape()[execData->GetPosition()]);
 }
 
 void TuringMachineQtOutputController::OnStateChanged(const State& newState)
