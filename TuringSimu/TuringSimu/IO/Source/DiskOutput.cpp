@@ -1,5 +1,6 @@
 #include "../Header/DiskOutput.hpp"
 #include <fstream>
+#include <memory>
 #include "../Header/Directives.hpp"
 using namespace ts_io;
 using namespace ts_common;

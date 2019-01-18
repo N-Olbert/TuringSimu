@@ -2,6 +2,8 @@
 #include "../../UI/Header/Console.hpp"
 #include "../../../TuringSimuCommon/UI/Header/Localization.hpp"
 #include <cctype>
+#include <thread>
+#include <chrono>
 #include "../../../TuringSimuCommon/Common/Header/HashSet.hpp"
 #include "../../../TuringSimuCommon/Common/Header/MachineType.hpp"
 #include "../../../TuringSimuCommon/UI/Header/TuringMachineUIExecutionData.hpp"
