@@ -982,7 +982,7 @@
   <customwidget>
    <class>TapeLetter</class>
    <extends>QPlainTextEdit</extends>
-   <header>tapeletter.hpp</header>
+   <header>TapeLetter.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>

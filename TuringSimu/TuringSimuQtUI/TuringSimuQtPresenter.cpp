@@ -1,4 +1,4 @@
-#include "../../TuringSimu/Business/Header/MachineFactory.hpp"
+#include "../TuringSimu/Business/Header/MachineFactory.hpp"
 #include "TuringSimuQtPresenter.hpp"
 #include "../TuringSimuCommon/UI/Header/MachineExecutionControllerFactory.hpp"
 #include "TuringMachineQtOutputController.hpp"

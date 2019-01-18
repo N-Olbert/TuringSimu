@@ -1,4 +1,4 @@
-#include "..\Header\NonDeterministicTuringMachineUIExecutionData.hpp"
+#include "../Header/NonDeterministicTuringMachineUIExecutionData.hpp"
 
 const std::deque<char>& ts_ui::NonDeterministicTuringMachineUIExecutionData::GetTape() const
 {

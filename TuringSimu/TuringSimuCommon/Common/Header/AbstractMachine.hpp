@@ -5,6 +5,7 @@
 #include "State.hpp"
 #include "BaseTransition.hpp"
 #include "DynamicType.hpp"
+#include <memory>
 
 namespace ts_common
 {

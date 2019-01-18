@@ -1,4 +1,4 @@
-#include "..\Header\TuringMachineTapeHeader.hpp"
+#include "../Header/TuringMachineTapeHeader.hpp"
 using namespace ts_business;
 void TuringMachineTapeHeader::Move(HeadDirection direction)
 {

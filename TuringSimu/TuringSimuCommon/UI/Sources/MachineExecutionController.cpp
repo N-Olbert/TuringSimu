@@ -1,6 +1,7 @@
 #include "../Header/MachineExecutionController.hpp"
 #include "../../../TuringSimu/Business/Header/MachineFactory.hpp"
 #include "../../../TuringSimuCommon/UI/Header/UIExecutionDataFactory.hpp"
+#include <thread>
 
 using namespace ts_common;
 using namespace ts_ui;

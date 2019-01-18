@@ -88,13 +88,13 @@ namespace ts_business
 			 */
 			const Transition& GetNextTransition() const override;
 
-		protected:
+        private:
 			/**
 			 * \brief A private class which allows us to store a unique pointer of a concrete type (because a unique_ptr
 			 * cant be created for a void pointer). Anyways from outside the concrete type will never be visible. 
 			 * \tparam T Concrete type of stored object.
 			 */
-			template<class T> class ConcreteDynamicType : public DynamicType
+            template<class T> class ConcreteDynamicType : public DynamicType
 			{
 				private:
 					/**
@@ -106,7 +106,7 @@ namespace ts_business
 					 * \brief Gets the wrapped value as void ptr.
 					 * \return The wrapped value
 					 */
-					const void* GetValue() const override
+                    const void* GetValue() const override
 					{
 						return static_cast<void*>(this->value.get());
 					}
@@ -117,7 +117,7 @@ namespace ts_business
 					 * \param toCarry The object which should be carreid by this instance.
 					 * NOTE: Will be copied to ensure immutablity
 					 */
-					ConcreteDynamicType(const T& toCarry)
+                    ConcreteDynamicType(const T& toCarry)
 					{
 						this->value = std::unique_ptr<T>(new T{ toCarry });
 					}

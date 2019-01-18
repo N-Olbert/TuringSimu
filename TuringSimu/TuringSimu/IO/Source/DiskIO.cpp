@@ -2,10 +2,10 @@
 #include <fstream>
 #include "../../../TuringSimuCommon/Common/Header/Utility.hpp"
 #include "../Header/Directives.hpp"
-#include <filesystem>
 
 using namespace ts_common;
 using namespace ts_io;
+
 
 //Todo: we probably should return a pointer here
 TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string path) {
@@ -16,11 +16,11 @@ TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string pa
 	auto const fileExtension = path.substr(index + 1, path.length() - index);
 	if (fileExtension == "csv") {
 		auto machineDefinition = ts_io_intern::GetTuringMachineDefinitionFromCSV(path);
-		machineDefinition.fileName = std::filesystem::path{ path }.filename().string();
+        machineDefinition.fileName =  path;
 		return machineDefinition;
 	} else if (fileExtension == "tmsim") {
 		auto machineDefinition = ts_io_intern::GetTuringMachineDefinitionFromBinary(path);
-		machineDefinition.fileName = std::filesystem::path{ path }.filename().string();
+        machineDefinition.fileName = path;
 		return machineDefinition;
 	}
 	TuringMachineDefinition dummy;
@@ -30,7 +30,8 @@ TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string pa
 
 std::string ts_io::GetAbsolutePath(const std::string & relativePath)
 {
-	return absolute(std::filesystem::path{ relativePath }).string();
+    return relativePath;
+    //return absolute(std::filesystem::path{ relativePath }).string();
 }
 
 TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::string path) {

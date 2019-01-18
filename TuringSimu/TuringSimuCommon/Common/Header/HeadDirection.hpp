@@ -1,6 +1,7 @@
 #ifndef TM_HEADDIRECTION
 #define TM_HEADDIRECTION
 #include <string>
+#include <stdexcept>
 namespace ts_common
 {
 	/*

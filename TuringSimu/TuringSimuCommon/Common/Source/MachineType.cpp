@@ -1,5 +1,6 @@
 #include "../Header/MachineType.hpp"
 #include <string>
+#include <stdexcept>
 using namespace ts_common;
 
 /**

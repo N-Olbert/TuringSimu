@@ -2,6 +2,8 @@
 #define TM_UTILITY
 #include <vector>
 #include <string>
+#include <algorithm>
+
 namespace ts_common 
 {
 	/**

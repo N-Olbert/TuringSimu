@@ -1,8 +1,9 @@
 #ifndef TURINGSIMUQTPRESENTER_H
 #define TURINGSIMUQTPRESENTER_H
 #include <QObject>
-#include <../../TuringSimuCommon/UI/Header/MachineExecutionController.hpp>
+#include <../TuringSimuCommon/UI/Header/MachineExecutionController.hpp>
 #include "AbstractTuringSimuQtForm.hpp"
+#include <functional>
 using namespace ts_ui;
 using namespace ts_common;
 using namespace ts_ui_business;

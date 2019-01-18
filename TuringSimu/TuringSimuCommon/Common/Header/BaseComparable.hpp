@@ -1,6 +1,7 @@
 #pragma once
 #ifndef TM_BASECOMPARABLE
 #define TM_BASECOMPARABLE
+#include <cstddef>
 namespace ts_common
 {
 	/**
