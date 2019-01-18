@@ -6,20 +6,36 @@
 #include "../TuringSimuCommon/Common/Header/BaseTransition.hpp"
 #include <QStandardItemModel>
 #include <unordered_map>
-
 using namespace ts_common;
+
+/**
+ * @brief The Qt UI class
+ */
 class TuringSimuQtUI final : public QMainWindow, public AbstractTuringSimuQtForm
 {
 	Q_OBJECT
 
 	private:
+            /**
+             * @brief The model we use for the transition table.
+             */
 			QStandardItemModel tableModel;
-			std::unordered_map<std::string, int> charMap;
+
+            /**
+             * @brief Mapping of (tape) alphabet chars to index in corresponding table.
+             */
+            std::unordered_map<std::string, int> alphabetMap;
+
+            /**
+             * @brief Mapping of states to index in corresponding table.
+             */
 			std::unordered_map<std::string, int> stateMap;
+
 	public:
 		TuringSimuQtUI(QWidget *parent = Q_NULLPTR);
-		~TuringSimuQtUI() override;
-		std::string GetFilePath() override;
+
+        ////Overrides
+        std::string GetMachineDefintionFilePath() override;
 		size_t GetAmountOfDisplayedTapeLetters() override;
 		void DisplayTapeSequence(const std::string& toDisplay) override;
 		void SetTapeHeaderVisibleAt(size_t pos) override;
@@ -39,7 +55,7 @@ class TuringSimuQtUI final : public QMainWindow, public AbstractTuringSimuQtForm
 		void DisplayMachineInfo(const std::string& toDisplay) override;
 
 	protected:
-		void closeEvent(QCloseEvent *event);
+        void closeEvent(QCloseEvent *event) override;
 
 	//"Events" for Presenter
 	public: signals:
@@ -49,7 +65,7 @@ class TuringSimuQtUI final : public QMainWindow, public AbstractTuringSimuQtForm
 		void ResetButtonClicked() override;
 		void InitialTapeContentChanged() override;
 
-	//Private signal handlers - they only raise the events for the presenter
+    //Private signal handlers - they only raise the events/signals for the notification of the presenter
 	//Bound by name, so we follow the name conventions of qt here
 	private slots:
 		void on_LoadFileButton_clicked();
@@ -59,7 +75,17 @@ class TuringSimuQtUI final : public QMainWindow, public AbstractTuringSimuQtForm
 		void on_InitialTapeContentInput_textChanged(const QString& input);
 
 	private:
+        /**
+         * @brief The Qt ui.
+         */
 		Ui::TuringSimuQtUIClass ui{};
+
+        /**
+         * @brief Ensures that a given lambda is executed synchronous within the Qt GUI thread
+         * @param lambda The lambda to execute.
+         * @return True if lambda has been invoked on the Qt GUI thread;
+         * false otherwise (= the call already came from the Qt GUI Thread)
+         */
 		bool EnsureGUIThreadCall(const std::function<void()>& lambda);
 };
 

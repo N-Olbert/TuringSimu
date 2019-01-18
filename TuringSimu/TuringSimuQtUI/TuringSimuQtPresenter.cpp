@@ -39,7 +39,7 @@ void TuringSimuQtPresenter::DisplayTapeSequence(std::string& toDisplay, size_t p
 	//AdjustTapeSize(toDisplay, pos);
 }
 
-void TuringSimuQtPresenter::AdjustTapeSize(std::string &toDisplay, size_t pos) const
+void TuringSimuQtPresenter::AdjustTapeForView(std::string &toDisplay, size_t pos) const
 {
 	auto optimalSize = this->view->GetAmountOfDisplayedTapeLetters();
 	auto blank = toDisplay[0];
@@ -99,7 +99,7 @@ void TuringSimuQtPresenter::AdjustTapeSize(std::string &toDisplay, size_t pos) c
 
 void TuringSimuQtPresenter::SetTapeHeaderVisibleAt(size_t pos, std::string& tape)
 {
-	AdjustTapeSize(tape, pos);
+    AdjustTapeForView(tape, pos);
 }
 
 std::string TuringSimuQtPresenter::GetInitialTapeContent() const
@@ -188,7 +188,7 @@ void TuringSimuQtPresenter::AwaitExceutionCompleted()
 
 void TuringSimuQtPresenter::HandleLoadFileButtonClicked()
 {
-	const auto path = this->view->GetFilePath();
+    const auto path = this->view->GetMachineDefintionFilePath();
 	auto machine = ts_business::MachineFactory::CreateMachineFromFile(MachineType::DTM, path);
 	if(machine != nullptr)
 	{

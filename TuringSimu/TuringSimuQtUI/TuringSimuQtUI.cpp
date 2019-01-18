@@ -9,19 +9,18 @@ TuringSimuQtUI::TuringSimuQtUI(QWidget *parent)
 {
 	ui.setupUi(this);
 	SetTapeHeaderVisibleAt(static_cast<size_t>(2));
+
+	QPalette p = palette();
+	p.setColor(QPalette::Highlight, Qt::red);
+	p.setColor(QPalette::HighlightedText, Qt::white);
+	this->ui.TransitionTable->setPalette(p);
 }
 
 ////Methods
-
-TuringSimuQtUI::~TuringSimuQtUI()
-{
-	QMainWindow::~QMainWindow();
-}
-
-std::string TuringSimuQtUI::GetFilePath()
+std::string TuringSimuQtUI::GetMachineDefintionFilePath()
 {
 	std::string result;
-	if (EnsureGUIThreadCall([this, &result] { result = GetFilePath(); })) return result;
+	if (EnsureGUIThreadCall([this, &result] { result = GetMachineDefintionFilePath(); })) return result;
 	return this->ui.PathTextBox->text().toStdString();
 }
 
@@ -141,12 +140,12 @@ void TuringSimuQtUI::FillTransitionTable(const std::vector<std::string>& states,
 	this->tableModel.setColumnCount(alphabet.size());
 	this->tableModel.setRowCount(states.size());
 
-	this->charMap.clear();
+    this->alphabetMap.clear();
 	this->stateMap.clear();
 	for (size_t i = 0; i < alphabet.size(); ++i)
 	{
 		this->tableModel.setHeaderData(i, Qt::Horizontal, QObject::tr(alphabet.at(i).c_str()));
-		this->charMap[alphabet.at(i)] = i;
+        this->alphabetMap[alphabet.at(i)] = i;
 	}
 
 	for (size_t i = 0; i < states.size(); ++i)
@@ -157,7 +156,7 @@ void TuringSimuQtUI::FillTransitionTable(const std::vector<std::string>& states,
 
 	for (auto transition : transitions)
 	{
-		auto index = this->tableModel.index(this->stateMap.at(transition->GetCurrentState().ToString()), this->charMap.at(transition->GetToRead()));
+        auto index = this->tableModel.index(this->stateMap.at(transition->GetCurrentState().ToString()), this->alphabetMap.at(transition->GetToRead()));
 		auto str = transition->ToString();
 		this->tableModel.setData(index, str.c_str());
 	}
@@ -168,14 +167,8 @@ void TuringSimuQtUI::FillTransitionTable(const std::vector<std::string>& states,
 void TuringSimuQtUI::HighlightTransition(const BaseTransition& transition)
 {
 	if (EnsureGUIThreadCall([this, &transition] { HighlightTransition(transition); })) return;
-	const QColor hlClr = Qt::red; // highlight color to set
-	const QColor txtClr = Qt::white; // highlighted text color to set
 
-	QPalette p = palette();
-	p.setColor(QPalette::Highlight, hlClr);
-	p.setColor(QPalette::HighlightedText, txtClr);
-	this->ui.TransitionTable->setPalette(p);
-	auto index = this->tableModel.index(this->stateMap.at(transition.GetCurrentState().ToString()), this->charMap.at(transition.GetToRead()));
+    auto index = this->tableModel.index(this->stateMap.at(transition.GetCurrentState().ToString()), this->alphabetMap.at(transition.GetToRead()));
 	this->ui.TransitionTable->selectionModel()->clearSelection();
 	this->ui.TransitionTable->selectionModel()->select(index, QItemSelectionModel::Select);
 	this->ui.TransitionTable->scrollTo(index);

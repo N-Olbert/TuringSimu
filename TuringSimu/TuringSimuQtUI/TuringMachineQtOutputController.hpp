@@ -6,6 +6,9 @@
 #include <thread>
 using namespace ts_ui_business;
 
+/**
+ * @brief A controller which handles the execution of a given machine for a Qt UI.
+ */
 class TuringMachineQtOutputController : public MachineExecutionController
 {
 	private: 
@@ -13,6 +16,8 @@ class TuringMachineQtOutputController : public MachineExecutionController
 	
 	public:
 		TuringMachineQtOutputController(AbstractMachine* machine, TuringSimuQtPresenter* presenter);
+
+        ////Overrides
 		void OnError(const std::string& errorMessage) override;
 		void OnBacktraceDifferentExecutionPathChosen() override;
 		void ShowMachineExecutionState() override;
