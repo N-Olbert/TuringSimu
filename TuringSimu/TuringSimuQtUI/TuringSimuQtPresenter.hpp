@@ -127,6 +127,12 @@ class TuringSimuQtPresenter : public QObject
          */
 		void HighlightTransition(const BaseTransition& transition);
 
+		/**
+		 * @brief Displays the given message to the user.
+		 * @param message The message
+		 */
+		virtual void DisplayMessage(const std::string& message) const;
+
     // Signals which may be raised by the view when certain actions occur -> Handle them in presenter
 	private slots:
 		void HandleLoadFileButtonClicked();
@@ -149,7 +155,7 @@ class TuringSimuQtPresenter : public QObject
          */
         void AwaitExceutionCompleted();
 
-        /**
+		/**
          * @brief Adjusts the tape we get from the model so that it fits the current view perfectly.
          * @param tape The raw tape data.
          * @param pos The raw position of the head.

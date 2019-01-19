@@ -18,10 +18,10 @@ class AbstractTuringSimuQtForm
 	//Methods
 	public:
         /**
-         * @brief Retruns the path of the file of the machine definiton which should be loded.
-         * @return The file path of the machine defintion to load.
+         * @brief Retruns the path of the file of the machine definition which should be loaded.
+         * @return The file path of the machine definition to load.
          */
-        virtual std::string GetMachineDefintionFilePath() = 0;
+        virtual std::string GetMachineDefinitionFilePath() = 0;
 
         /**
          * @brief Gets the amount of displayed tape letters
@@ -56,13 +56,13 @@ class AbstractTuringSimuQtForm
 
         /**
          * @brief Displays the given char as the char which is currently read by the machine.
-         * @param currentState The char which is currently read by the machine.
+         * @param toDisplay The char which is currently read by the machine.
          */
 		virtual void DisplayCurrentChar(char toDisplay) = 0;
 
         /**
          * @brief Display the given step.
-         * @param currentState The current step.
+         * @param step The current step.
          */
 		virtual void DisplayCurrentStep(size_t step) = 0;
 
@@ -91,7 +91,7 @@ class AbstractTuringSimuQtForm
 		virtual void SetEnableStepButton(bool enable) = 0;
 
         /**
-         * @brief Enables or disables the input control which can be used to specify the inital tape content.
+         * @brief Enables or disables the input control which can be used to specify the initial tape content.
          * @param enable  A value indicating whether the control should be enabled or disabled.
          */
 		virtual void SetEnableInitialTapeContentInput(bool enable) = 0;
@@ -118,6 +118,12 @@ class AbstractTuringSimuQtForm
          */
 		virtual void DisplayMachineInfo(const std::string& toDisplay) = 0;
 
+		/**
+		 * @brief Displays the given message to the user.
+		 * @param message The message
+		 */
+		virtual void DisplayMessage(const std::string& message) = 0;
+
 	//Signals
 	public:
 		virtual ~AbstractTuringSimuQtForm() = default;
@@ -143,7 +149,7 @@ class AbstractTuringSimuQtForm
 		virtual void ResetButtonClicked() = 0;
 
         /**
-         * @brief Raised/Emited immediately after the inital tape content has changed.
+         * @brief Raised/Emited immediately after the initial tape content has changed.
          */
 		virtual void InitialTapeContentChanged() = 0;
 };

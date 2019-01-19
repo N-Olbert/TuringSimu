@@ -1,5 +1,6 @@
 #include "TuringMachineQtOutputController.hpp"
 #include "../TuringSimuCommon/UI/Header/TuringMachineUIExecutionData.hpp"
+#include "../TuringSimuCommon/UI/Header/Localization.hpp"
 
 
 TuringMachineQtOutputController::TuringMachineQtOutputController(AbstractMachine* machine, TuringSimuQtPresenter* presenter)
@@ -11,11 +12,12 @@ TuringMachineQtOutputController::TuringMachineQtOutputController(AbstractMachine
 
 void TuringMachineQtOutputController::OnError(const std::string& errorMessage)
 {
+	this->presenter->DisplayMessage(errorMessage);
 }
 
 void TuringMachineQtOutputController::OnBacktraceDifferentExecutionPathChosen()
 {
-	//TODO, that's (and the display of the transition table) is the reason why non determinism isn't fully supported
+	this->presenter->DisplayMessage(Localization::GetString(LocId::ExecutionPathChanged));
 }
 
 void TuringMachineQtOutputController::ShowMachineExecutionState()
@@ -93,6 +95,14 @@ void TuringMachineQtOutputController::OnBeforeNextExecutionStep(bool autoRun)
 void TuringMachineQtOutputController::OnAfterMachineExecution()
 {
 	this->presenter->ExitSeparateThreadExecutionMode();
+	if (this->machine->IsFinishedSuccessfully())
+	{
+		this->presenter->DisplayMessage(Localization::GetString(LocId::TMTerminatedSuccessfully));
+	}
+	else
+	{
+		this->presenter->DisplayMessage(Localization::GetString(LocId::TMTerminatedNotSuccessfully));
+	}
 }
 
 void TuringMachineQtOutputController::CancelExecution()

@@ -2,6 +2,7 @@
 #include <QThread>
 #include <QStandardItemModel>
 #include <QDebug>
+#include <QMessageBox>
 #include "../TuringSimuCommon/Common/Header/BaseTransition.hpp"
 
 TuringSimuQtUI::TuringSimuQtUI(QWidget *parent)
@@ -17,10 +18,10 @@ TuringSimuQtUI::TuringSimuQtUI(QWidget *parent)
 }
 
 ////Methods
-std::string TuringSimuQtUI::GetMachineDefintionFilePath()
+std::string TuringSimuQtUI::GetMachineDefinitionFilePath()
 {
 	std::string result;
-	if (EnsureGUIThreadCall([this, &result] { result = GetMachineDefintionFilePath(); })) return result;
+	if (EnsureGUIThreadCall([this, &result] { result = GetMachineDefinitionFilePath(); })) return result;
 	return this->ui.PathTextBox->text().toStdString();
 }
 
@@ -183,6 +184,14 @@ void TuringSimuQtUI::DisplayMachineInfo(const std::string& toDisplay)
 {
 	this->ui.MachineInfoLabel->clear();
 	this->ui.MachineInfoLabel->append(QString::fromStdString(toDisplay));
+}
+
+void TuringSimuQtUI::DisplayMessage(const std::string& message)
+{
+	if (EnsureGUIThreadCall([this, &message] { DisplayMessage(message); })) return;
+	QMessageBox msgBox;
+	msgBox.setText(QString::fromStdString(message));
+	msgBox.exec();
 }
 
 

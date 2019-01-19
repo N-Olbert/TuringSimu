@@ -186,9 +186,14 @@ void TuringSimuQtPresenter::AwaitExceutionCompleted()
 	}
 }
 
+void TuringSimuQtPresenter::DisplayMessage(const std::string& message) const
+{
+	this->view->DisplayMessage(message);
+}
+
 void TuringSimuQtPresenter::HandleLoadFileButtonClicked()
 {
-    const auto path = this->view->GetMachineDefintionFilePath();
+    const auto path = this->view->GetMachineDefinitionFilePath();
 	auto machine = ts_business::MachineFactory::CreateMachineFromFile(path);
 	if(machine != nullptr)
 	{

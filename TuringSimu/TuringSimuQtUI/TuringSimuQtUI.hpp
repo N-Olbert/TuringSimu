@@ -35,7 +35,7 @@ class TuringSimuQtUI final : public QMainWindow, public AbstractTuringSimuQtForm
 		TuringSimuQtUI(QWidget *parent = Q_NULLPTR);
 
         ////Overrides
-        std::string GetMachineDefintionFilePath() override;
+        std::string GetMachineDefinitionFilePath() override;
 		size_t GetAmountOfDisplayedTapeLetters() override;
 		void DisplayTapeSequence(const std::string& toDisplay) override;
 		void SetTapeHeaderVisibleAt(size_t pos) override;
@@ -53,6 +53,7 @@ class TuringSimuQtUI final : public QMainWindow, public AbstractTuringSimuQtForm
 								 const std::vector<const BaseTransition*> transitions) override;
 		void HighlightTransition(const BaseTransition& transition) override;
 		void DisplayMachineInfo(const std::string& toDisplay) override;
+		void DisplayMessage(const std::string& message) override;
 
 	protected:
         void closeEvent(QCloseEvent *event) override;
