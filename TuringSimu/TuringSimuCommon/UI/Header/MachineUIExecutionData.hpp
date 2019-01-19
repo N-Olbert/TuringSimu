@@ -9,6 +9,10 @@ using namespace ts_common;
 
 namespace ts_ui
 {
+	/**
+	 * \brief A class which handles events of an observed machine to emulate the visual
+	 *  execution state of the observed machine
+	 */
 	class MachineUIExecutionData
 	{
 		public:

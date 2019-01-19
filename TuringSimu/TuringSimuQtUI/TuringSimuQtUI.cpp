@@ -29,7 +29,7 @@ size_t TuringSimuQtUI::GetAmountOfDisplayedTapeLetters()
 	size_t result = 0;
 	if (EnsureGUIThreadCall([this, &result] { result = GetAmountOfDisplayedTapeLetters(); })) return result;
 
-	auto container = this->ui.TapeLetterContainer;
+	const auto container = this->ui.TapeLetterContainer;
 	return container->count();
 }
 
@@ -50,8 +50,8 @@ void TuringSimuQtUI::SetTapeHeaderVisibleAt(size_t pos)
 	if(EnsureGUIThreadCall([this, pos] { SetTapeHeaderVisibleAt(pos); })) return;
 
 	const auto container = this->ui.TapeHeaderContainer;
-	const auto childs = container->count();
-	for (auto i = 0; i < childs; i++)
+	const auto children = container->count();
+	for (auto i = 0; i < children; i++)
 	{ 
 		auto item = qobject_cast<TapeLetter*>(container->itemAt(i)->widget());
 		item->DisplayLetter(static_cast<size_t>(i) == pos ? QString::fromUtf8("\xE2\x96\xBC") : QString{' '});
@@ -127,6 +127,7 @@ void TuringSimuQtUI::closeEvent(QCloseEvent * event)
 	//The GUI thread doesnt handle any events anymore and so we have a deadlock...
 	//Calling a normal exit solves this, as it isnt calling destructors.
 
+	//TODO: It would be better to simply disallow the cancellation of the app while an execution is till in progress
 	exit(0);
 }
 
@@ -168,10 +169,14 @@ void TuringSimuQtUI::HighlightTransition(const BaseTransition& transition)
 {
 	if (EnsureGUIThreadCall([this, &transition] { HighlightTransition(transition); })) return;
 
-    auto index = this->tableModel.index(this->stateMap.at(transition.GetCurrentState().ToString()), this->alphabetMap.at(transition.GetToRead()));
-	this->ui.TransitionTable->selectionModel()->clearSelection();
-	this->ui.TransitionTable->selectionModel()->select(index, QItemSelectionModel::Select);
-	this->ui.TransitionTable->scrollTo(index);
+	if(this->stateMap.count(transition.GetCurrentState().ToString()) > 0 && 
+	   this->alphabetMap.count(transition.GetToRead()) > 0)
+	{
+	    auto index = this->tableModel.index(this->stateMap.at(transition.GetCurrentState().ToString()), this->alphabetMap.at(transition.GetToRead()));
+		this->ui.TransitionTable->selectionModel()->clearSelection();
+		this->ui.TransitionTable->selectionModel()->select(index, QItemSelectionModel::Select);
+		this->ui.TransitionTable->scrollTo(index);
+	}
 }
 
 void TuringSimuQtUI::DisplayMachineInfo(const std::string& toDisplay)

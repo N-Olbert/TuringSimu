@@ -5,6 +5,7 @@
 TuringMachineQtOutputController::TuringMachineQtOutputController(AbstractMachine* machine, TuringSimuQtPresenter* presenter)
 : MachineExecutionController(machine), presenter(presenter)
 {
+	this->typedExecutionData = dynamic_cast<TuringMachineUIExecutionData*>(this->executionData.get());
 }
 
 
@@ -14,7 +15,7 @@ void TuringMachineQtOutputController::OnError(const std::string& errorMessage)
 
 void TuringMachineQtOutputController::OnBacktraceDifferentExecutionPathChosen()
 {
-	//TODO
+	//TODO, that's (and the display of the transition table) is the reason why non determinism isn't fully supported
 }
 
 void TuringMachineQtOutputController::ShowMachineExecutionState()
@@ -37,13 +38,12 @@ void TuringMachineQtOutputController::InitAndExecuteMachine()
 void TuringMachineQtOutputController::OnInitialized()
 {
 	this->executionData->HandleInitialized(this->machine);
-	const auto execData = dynamic_cast<TuringMachineUIExecutionData*>(this->executionData.get());
-	auto& tape = execData->GetTape();
+	auto& tape = this->typedExecutionData->GetTape();
 	auto tapeStr = std::string{ tape.begin(), tape.end() };
-	this->presenter->DisplayTapeSequence(tapeStr, execData->GetPosition());
-	this->presenter->SetTapeHeaderVisibleAt(execData->GetPosition(), tapeStr);
-	this->presenter->DisplayCurrentState(execData->GetCurrentState().ToString());
-	this->presenter->DisplayCurrentChar(execData->GetTape()[execData->GetPosition()]);
+	this->presenter->DisplayTapeSequence(tapeStr, this->typedExecutionData->GetPosition());
+	this->presenter->SetTapeHeaderVisibleAt(this->typedExecutionData->GetPosition(), tapeStr);
+	this->presenter->DisplayCurrentState(this->typedExecutionData->GetCurrentState().ToString());
+	this->presenter->DisplayCurrentChar(this->typedExecutionData->GetTape()[this->typedExecutionData->GetPosition()]);
 	this->presenter->DisplayCurrentStep(0);
 }
 
@@ -55,20 +55,18 @@ void TuringMachineQtOutputController::OnTransitionChoosen(const BaseTransition& 
 void TuringMachineQtOutputController::OnTapeWritten(char written)
 {
 	this->executionData->HandleTapeWritten(written);
-	const auto execData = dynamic_cast<TuringMachineUIExecutionData*>(this->executionData.get());
-	auto& tape = execData->GetTape();
+	auto& tape = this->typedExecutionData->GetTape();
 	auto tapeStr = std::string{ tape.begin(), tape.end() };
-	this->presenter->DisplayTapeSequence(tapeStr, execData->GetPosition());
+	this->presenter->DisplayTapeSequence(tapeStr, this->typedExecutionData->GetPosition());
 }
 
 void TuringMachineQtOutputController::OnHeadMoved(HeadDirection direction)
 {
 	this->executionData->HandleHeadMoved(direction);
-	const auto execData = dynamic_cast<TuringMachineUIExecutionData*>(this->executionData.get());
-	auto& tape = execData->GetTape();
+	auto& tape = this->typedExecutionData->GetTape();
 	auto tapeStr = std::string{ tape.begin(), tape.end() };
-	this->presenter->SetTapeHeaderVisibleAt(execData->GetPosition(), tapeStr);
-	this->presenter->DisplayCurrentChar(execData->GetTape()[execData->GetPosition()]);
+	this->presenter->SetTapeHeaderVisibleAt(this->typedExecutionData->GetPosition(), tapeStr);
+	this->presenter->DisplayCurrentChar(this->typedExecutionData->GetTape()[this->typedExecutionData->GetPosition()]);
 }
 
 void TuringMachineQtOutputController::OnStateChanged(const State& newState)
@@ -89,8 +87,7 @@ void TuringMachineQtOutputController::OnBeforeNextExecutionStep(bool autoRun)
 		this->presenter->AwaitClickOnStepButton();
 	}
 
-	const auto execData = dynamic_cast<TuringMachineUIExecutionData*>(this->executionData.get());
-	this->presenter->DisplayCurrentStep(execData->GetStepsCounter());
+	this->presenter->DisplayCurrentStep(this->typedExecutionData->GetStepsCounter());
 }
 
 void TuringMachineQtOutputController::OnAfterMachineExecution()

@@ -189,7 +189,7 @@ void TuringSimuQtPresenter::AwaitExceutionCompleted()
 void TuringSimuQtPresenter::HandleLoadFileButtonClicked()
 {
     const auto path = this->view->GetMachineDefintionFilePath();
-	auto machine = ts_business::MachineFactory::CreateMachineFromFile(MachineType::DTM, path);
+	auto machine = ts_business::MachineFactory::CreateMachineFromFile(path);
 	if(machine != nullptr)
 	{
 		this->currentMachine = std::move(machine);

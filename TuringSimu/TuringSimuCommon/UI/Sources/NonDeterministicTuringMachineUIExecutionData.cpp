@@ -1,4 +1,6 @@
-#include "../Header/NonDeterministicTuringMachineUIExecutionData.hpp"
+#include "../Header/NonDeterministicTuringMachineUIExecutionData.hpp" 
+
+//Const casts here are ugly but ok, as the variable we access itself isn't const.
 
 const std::deque<char>& ts_ui::NonDeterministicTuringMachineUIExecutionData::GetTape() const
 {

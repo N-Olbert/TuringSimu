@@ -73,7 +73,7 @@ void BaseConsoleController::ReadInMachine()
 	Console::Print(Localization::GetString(LocId::TMFilePathRequest));
 	std::unique_ptr<AbstractMachine> machine;
 	auto path = Console::GetStringInput();
-	while ((machine = ts_business::MachineFactory::CreateMachineFromFile(MachineType::DTM, path)) == nullptr)
+	while ((machine = ts_business::MachineFactory::CreateMachineFromFile(path)) == nullptr)
 	{
 		Console::Print(Localization::GetString(LocId::TryAgain));
 		path = Console::GetStringInput();

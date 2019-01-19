@@ -4,6 +4,7 @@
 #include "../TuringSimuCommon/UI/Header/MachineExecutionController.hpp"
 #include "TuringSimuQtPresenter.hpp"
 #include <thread>
+#include "../TuringSimuCommon/UI/Header/TuringMachineUIExecutionData.hpp"
 using namespace ts_ui_business;
 
 /**
@@ -13,6 +14,7 @@ class TuringMachineQtOutputController : public MachineExecutionController
 {
 	private: 
 		TuringSimuQtPresenter* presenter;
+		const TuringMachineUIExecutionData* typedExecutionData;
 	
 	public:
 		TuringMachineQtOutputController(AbstractMachine* machine, TuringSimuQtPresenter* presenter);

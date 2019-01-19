@@ -17,20 +17,18 @@ namespace ts_business
 		public:
 			/**
 			 * \brief Creates a turing machine (if possible) from the given file with no observing UI.
-			 * \param requestedMachineType The type of the requested machine.
 			 * \param path The path of the file from which a turing machine should be created.
 			 * \return The created turing machine
 			 */
-			static std::unique_ptr<AbstractMachine> CreateMachineFromFile(MachineType requestedMachineType, const std::string& path);
+			static std::unique_ptr<AbstractMachine> CreateMachineFromFile(const std::string& path);
 
 			/**
 			 * \brief Creates a turing machine (if possible) from the given file.
-			 * \param requestedMachineType The type of the requested machine.
 			 * \param path The path of the file from which a turing machine should be created. 
 			 * \param observingUI The UI which will observe the machine which will be created.
 			 * \return The created turing machine
 			 */
-			static std::unique_ptr<AbstractMachine> CreateMachineFromFile(MachineType requestedMachineType, const std::string& path,
+			static std::unique_ptr<AbstractMachine> CreateMachineFromFile(const std::string& path,
 																		  AbstractMachineUserinterface* observingUI);
 		private:
 			/**
@@ -38,7 +36,7 @@ namespace ts_business
 			 * \param definition The definition to check
 			 * \return true if machine is valid, false otherwise
 			 */
-			static bool IsValidTuringMachineDefinition(TuringMachineDefinition& definition);
+			static bool IsValidTuringMachineDefinition(TuringMachineDefinition& definition, std::string& errorMessage);
 	};
 }
 #endif // TM_MACHINEFACTORY

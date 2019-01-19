@@ -11,7 +11,7 @@ BOOST_AUTO_TEST_CASE(TestPalindromGeratorTuringMachine) {
 	auto dummy = Transition::Empty;
 	auto path = std::string{"./IO/TestFiles/parseTest1.csv"};
 	auto ui = std::make_unique<DummyMachineUserInterface>();
-	auto machine = MachineFactory::CreateMachineFromFile(DTM, path, ui.get());
+	auto machine = MachineFactory::CreateMachineFromFile(path, ui.get());
 	BOOST_REQUIRE(machine != nullptr);
 	AbstractMachine* val = machine.get();
 	auto tm = dynamic_cast<TuringMachine*>(val);

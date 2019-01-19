@@ -13,13 +13,24 @@ TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string pa
 	//then just returns the entire string
 	auto const index = path.find_last_of('.');
 	auto const fileExtension = path.substr(index + 1, path.length() - index);
+	auto fileName = path;
+	int fileNameIndex;
+	if((fileNameIndex = path.find_last_of('/')) > 0)
+	{
+		fileName = path.substr(fileNameIndex + 1);
+	}
+	else if ((fileNameIndex = path.find_last_of('\\')) > 0)
+	{
+		fileName = path.substr(fileNameIndex + 1);
+	}
+
 	if (fileExtension == "csv") {
 		auto machineDefinition = ts_io_intern::GetTuringMachineDefinitionFromCSV(path);
-        machineDefinition.fileName =  path;
+        machineDefinition.fileName = fileName;
 		return machineDefinition;
 	} else if (fileExtension == "tmsim") {
 		auto machineDefinition = ts_io_intern::GetTuringMachineDefinitionFromBinary(path);
-        machineDefinition.fileName = path;
+        machineDefinition.fileName = fileName;
 		return machineDefinition;
 	}
 	TuringMachineDefinition dummy;
@@ -30,7 +41,7 @@ TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string pa
 std::string ts_io::GetAbsolutePath(const std::string & relativePath)
 {
     return relativePath;
-    //return absolute(std::filesystem::path{ relativePath }).string();
+    //return absolute(std::filesystem::path{ relativePath }).string(); cpp17 isnt supported well 
 }
 
 TuringMachineDefinition ts_io_intern::GetTuringMachineDefinitionFromCSV(std::string path) {

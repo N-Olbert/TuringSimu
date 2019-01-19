@@ -351,3 +351,4 @@ ASALocalRun/
 *.o
 TuringSimu/TuringSimuCLI/TuringSimu
 TuringSimu/TuringSimuTests/TuringSimuTests
+/TuringSimu/TuringSimuQtUI/GeneratedFiles
