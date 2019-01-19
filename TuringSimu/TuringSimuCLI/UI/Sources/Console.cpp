@@ -94,7 +94,7 @@ void Console::Flush()
 
 void Console::LineBack()
 {
-	Print(ESC + "A\r");
+        Print(CSI + "F\r");
 }
 
 void Console::ClearLine()
