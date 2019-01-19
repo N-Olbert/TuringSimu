@@ -18,7 +18,7 @@ namespace ts_io
 	TuringMachineDefinition GetTuringMachineDefinitionFromFile(std::string path);
 
 	/**
-	 * \brief Retruns the absolute path of a given relative path;
+	 * \brief Returns the absolute path of a given relative path;
 	 * \param relativePath The relative path;
 	 * \return The absolute path;
 	 */

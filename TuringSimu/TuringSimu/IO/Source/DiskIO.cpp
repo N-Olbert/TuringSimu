@@ -7,7 +7,6 @@ using namespace ts_common;
 using namespace ts_io;
 
 
-//Todo: we probably should return a pointer here
 TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string path) {
 	//needs to be last of since the path may contain ".."/"." 
 	//if the path doesn't contain a '.' there are no problems because the substr method 
