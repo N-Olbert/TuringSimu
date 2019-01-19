@@ -16,7 +16,6 @@ namespace ts_common
 	class AbstractMachineUserinterface : public ErrorDisplayableUserinterface
 	{
 		public:
-		virtual ~AbstractMachineUserinterface() = default;
 
 		/**
 		 * \brief Called after the observed machine has been initialized.
@@ -36,13 +35,13 @@ namespace ts_common
 
 		/**
 		 * \brief Called after the observed machine has moved its head.
-		 * \param written The direction into which the head has been moved.
+		 * \param direction The direction into which the head has been moved.
 		 */
 		virtual void OnHeadMoved(HeadDirection direction) = 0; 
 
 		/**
 		 * \brief Called after the observed machine has changed its state.
-		 * \param written The ne state of the machine.
+		 * \param newState The ne state of the machine.
 		 */
 		virtual void OnStateChanged(const State& newState) = 0;
 
@@ -73,7 +72,7 @@ namespace ts_common
 		/**
 		 * \brief Notifies the given AMU that the associated machine has moved its head.
 		 * \param toNotify The AMU which should be notified. May be nullptr.
-		 * \param written The direction into which the machine moved its head.
+		 * \param direction The direction into which the machine moved its head.
 		 */
 		static void NotifyHeadMoved(AbstractMachineUserinterface* toNotify, HeadDirection direction);
 

@@ -31,7 +31,7 @@ namespace ts_common
 	 * \param line the glorified char (string of length 1) which we want as enum
 	 * \return the HeadDirection corresponding to this string
 	 */
-	inline HeadDirection getDirection(std::string &line) 
+	inline HeadDirection getDirection(const std::string &line) 
 	{
 		if (line == "R") {
 			return Right;

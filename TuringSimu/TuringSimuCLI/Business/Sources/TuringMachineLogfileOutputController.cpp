@@ -13,7 +13,7 @@ using namespace ts_ui_business;
 TuringMachineLogfileOutputController::TuringMachineLogfileOutputController(AbstractMachine* machine) : MachineExecutionController(machine)
 {
 	auto machineFileName = machine->GetSpecificValue(SpecificMachineValue::FileName)->As<std::string>();
-	this->logFilePath = "TuringSimuExecutionLog_" + machineFileName + "_" + std::to_string(time(NULL)) + ".log";
+	this->logFilePath = "TuringSimuExecutionLog_" + machineFileName + "_" + std::to_string(time(nullptr)) + ".log";
 	this->stringBuilder.append(Localization::GetString(LocId::LogFileHeading));
 	this->stringBuilder.append(machineFileName);
 	this->stringBuilder.push_back(LineFeed);
@@ -39,7 +39,7 @@ void TuringMachineLogfileOutputController::ShowMachineExecutionState()
 		stringBuilder.push_back(TapeHeaderChar);
 		this->stringBuilder.push_back(LineFeed);
 
-		for (char c : execData->GetTape())
+		for (const char c : execData->GetTape())
 		{
 			stringBuilder.push_back(c);
 		}

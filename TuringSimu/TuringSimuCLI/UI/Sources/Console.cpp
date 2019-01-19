@@ -129,7 +129,7 @@ void Console::AwaitEnter()
 Result<int16_t> Console::GetIntInput()
 {
 	auto in = GetInput<std::string>();
-	for (char c : in)
+	for (const char c : in)
 	{
 		if(!std::isdigit(c))
 		{
