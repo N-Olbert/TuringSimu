@@ -25,6 +25,3 @@ To build the "TuringSimuQtUI"-project choose one of the following methods:
         - GUI
         - Widgets
  One small benefit of using the more complex Visual Studio approach is the fact that libarys are used (whereas the .pro-approach compiles everything into one large exe).
-
-## TuringSimuCLI
-To build this project either use Visual Studio 17 and make it build the corresponding project or use the makefile on any linux based system. The makefile was proven to work on a machine running Ubuntu 18.10.
