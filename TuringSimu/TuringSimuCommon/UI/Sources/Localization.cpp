@@ -82,8 +82,9 @@ const std::string& Localization::GetString(LocId toLookup)
 			{
 				return locDE.at(toLookup);
 			}
-
+                        /* FALLTHRU */
 		case Language::English:
+                        /* FALLTHRU */
 		default:
 			return locEN.at(toLookup);
 	}
