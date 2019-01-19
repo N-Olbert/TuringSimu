@@ -3,7 +3,13 @@ A turing simulator created as part of the cpp course at the DHBW Stuttgart Campu
 
 # Building
 
+##### A note for Linux
+The makefiles we provide were proven to work on a machine running Ubuntu 18.10 with latest gcc + build-essential installed. 
+Working Qt versions were 4.8 and 5.12.
+
 ## TuringSimuTests
+NOTE: This part is only required if you want to use Visual Studio. On Linux you may simply install boost and use the provided makefile.
+
 To build the "TuringSimuTests"-project the following enviornment variables must be set:
 
 * #### BOOST_ROOT_DIR
@@ -27,4 +33,4 @@ To build the "TuringSimuQtUI"-project choose one of the following methods:
  One small benefit of using the more complex Visual Studio approach is the fact that libarys are used (whereas the .pro-approach compiles everything into one large exe).
 
 ## TuringSimuCLI
-To build this project either use Visual Studio 17 and make it build the corresponding project or use the makefile on any linux based system. The makefile was proven to work on a machine running Ubuntu 18.10.
+To build this project either use Visual Studio 17 and build the corresponding project or use the makefile on any linux based system.
