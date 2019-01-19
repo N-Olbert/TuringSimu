@@ -14,7 +14,7 @@ TuringMachineDefinition ts_io::GetTuringMachineDefinitionFromFile(std::string pa
 	auto const index = path.find_last_of('.');
 	auto const fileExtension = path.substr(index + 1, path.length() - index);
 	auto fileName = path;
-	size_t fileNameIndex;
+	int fileNameIndex;
 	if((fileNameIndex = path.find_last_of('/')) > 0)
 	{
 		fileName = path.substr(fileNameIndex + 1);
