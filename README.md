@@ -6,6 +6,8 @@ A turing simulator created as part of the cpp course at the DHBW Stuttgart Campu
 ##### A note for Linux
 The makefiles we provide were proven to work on a machine running Ubuntu 18.10 with latest gcc + build-essential installed. 
 Working Qt versions were 4.8 and 5.12.
+##### A note for Visual Studio
+When checking out this repository it is possible that the starting project is TuringSimu. Since that project ultimately compiles into a static library VS cannot start it. Thus it is necessary to change the starting project to TuringSimuCLI by right-clicking on it and setting it as such.
 
 ## TuringSimuTests
 NOTE: This part is only required if you want to use Visual Studio. On Linux you may simply install boost and use the provided makefile.
